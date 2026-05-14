@@ -75,21 +75,28 @@ function FadeIn({ children, delay = 0 }: { children: React.ReactNode; delay?: nu
 
 function ExploreButton() {
   return (
-    <motion.button
-      whileHover={{ scale: 1.04, backgroundColor: "#c92e2e" }}
-      whileTap={{ scale: 0.97 }}
-      className="flex items-center gap-[8px] bg-[#e03a3a] text-white rounded-full border-none cursor-pointer shadow-[0_8px_28px_rgba(224,58,58,0.3)]"
-      style={{
-        padding: "clamp(10px,1.4vh,14px) clamp(18px,2vw,26px) clamp(10px,1.4vh,14px) clamp(14px,1.6vw,20px)",
-        fontFamily: "'Outfit', sans-serif",
-        fontSize: "clamp(12px, 1vw, 14px)",
-        fontWeight: 600,
-        letterSpacing: "0.02em",
-        transition: "background 0.2s",
-      }}
+    <a
+      href="https://www.ateion.com/"
+      target="_blank"
+      rel="noopener noreferrer"
     >
-      Explore more
-    </motion.button>
+      <motion.button
+        whileHover={{ scale: 1.04, backgroundColor: "#c92e2e" }}
+        whileTap={{ scale: 0.97 }}
+        className="flex items-center gap-[8px] bg-[#e03a3a] text-white rounded-full border-none cursor-pointer shadow-[0_8px_28px_rgba(224,58,58,0.3)]"
+        style={{
+          padding:
+            "clamp(10px,1.4vh,14px) clamp(18px,2vw,26px) clamp(10px,1.4vh,14px) clamp(14px,1.6vw,20px)",
+          fontFamily: "'Outfit', sans-serif",
+          fontSize: "clamp(12px, 1vw, 14px)",
+          fontWeight: 600,
+          letterSpacing: "0.02em",
+          transition: "background 0.2s",
+        }}
+      >
+        Explore more →
+      </motion.button>
+    </a>
   );
 }
 
@@ -102,14 +109,7 @@ function HeroTextBlock() {
       >
         Reimagining Education
       </p>
-      <a
-  href="https://www.ateion.com/"
-  target="_blank"
-  rel="noopener noreferrer"
-  className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-red-500 text-white px-4 py-2 rounded-full"
->
-  Explore More →
-</a>
+    <ExploreButton />
     </div>
   );
 }
