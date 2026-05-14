@@ -102,7 +102,14 @@ function HeroTextBlock() {
       >
         Reimagining Education
       </p>
-      <ExploreButton />
+      <a
+  href="https://www.ateion.com/"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-red-500 text-white px-4 py-2 rounded-full"
+>
+  Explore More →
+</a>
     </div>
   );
 }
