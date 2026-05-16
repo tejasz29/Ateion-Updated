@@ -160,7 +160,6 @@ function PurpleCapabilityCardOuter() {
 
     <video
       autoPlay
-      muted
       loop
       playsInline
       controls
