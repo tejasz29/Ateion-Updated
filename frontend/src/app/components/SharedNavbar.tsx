@@ -167,7 +167,7 @@ function ResourcesBtn({ onClick }: { onClick?: () => void }) {
       variant="muted"
       onClick={() => {
         if (onClick) onClick();
-        navigate("/#resources");
+        navigate("/resources");
       }}
     >
       <p className={`${navTextClass} text-[#292929]`}>Resources</p>
