@@ -36,6 +36,9 @@ public class User {
     @Column(nullable = false)
     private String password;
 
+     @Column(name = "age_segment", nullable = false)
+    private String ageSegment;
+
     @CreationTimestamp
     private LocalDateTime createdAt;
 }
