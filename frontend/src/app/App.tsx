@@ -13,7 +13,7 @@ import RegisterPage from "../imports/RegisterPage";
 import LoginPage from "../imports/LoginPage";
 import PoliciesPage from "../imports/PoliciesPage";
 import PolicyDetailPage from "../imports/PolicyDetailPage";
-
+import ThemeProvider from "./components/ThemeProvider";
 
 export default function App() {
 
@@ -57,84 +57,86 @@ export default function App() {
 
   return (
 
-    <BrowserRouter>
+    <ThemeProvider>
+      <BrowserRouter>
 
-      <Routes>
+        <Routes>
 
-        {/* HOMEPAGE */}
-        <Route
-          path="/"
-          element={<Homepage />}
-        />
+          {/* HOMEPAGE */}
+          <Route
+            path="/"
+            element={<Homepage />}
+          />
 
-        {/* GCO PAGE */}
-        <Route
-          path="/gco"
-          element={<GCOPage />}
-        />
+          {/* GCO PAGE */}
+          <Route
+            path="/gco"
+            element={<GCOPage />}
+          />
 
-        {/* CONTACT PAGE */}
-        <Route
-          path="/contact"
-          element={<ContactPage />}
-        />
+          {/* CONTACT PAGE */}
+          <Route
+            path="/contact"
+            element={<ContactPage />}
+          />
 
-        {/* PLAYGROUND PAGE */}
-        <Route
-          path="/PlayGround"
-          element={<ResourcesPage />}
-        />
+          {/* PLAYGROUND PAGE */}
+          <Route
+            path="/PlayGround"
+            element={<ResourcesPage />}
+          />
 
-        {/* CERTIFICATE PAGE */}
-        <Route
-          path="/certificate"
-          element={<CertificatePage />}
-        />
+          {/* CERTIFICATE PAGE */}
+          <Route
+            path="/certificate"
+            element={<CertificatePage />}
+          />
 
-        {/* ASSESSMENT DEMO PAGE */}
-        <Route
-          path="/assessment-demo"
-          element={<AssessmentDemoPage />}
-        />
+          {/* ASSESSMENT DEMO PAGE */}
+          <Route
+            path="/assessment-demo"
+            element={<AssessmentDemoPage />}
+          />
 
-        {/* DASHBOARD PAGE */}
-        <Route
-          path="/dashboard"
-          element={<DashboardPage />}
-        />
+          {/* DASHBOARD PAGE */}
+          <Route
+            path="/dashboard"
+            element={<DashboardPage />}
+          />
 
-        {/* ALL POLICIES PAGE */}
-        <Route
-          path="/policies"
-          element={<PoliciesPage />}
-        />
+          {/* ALL POLICIES PAGE */}
+          <Route
+            path="/policies"
+            element={<PoliciesPage />}
+          />
 
-        {/* POLICY DETAIL PAGE */}
-        <Route
-          path="/policy/:id"
-          element={<PolicyDetailPage />}
-        />
+          {/* POLICY DETAIL PAGE */}
+          <Route
+            path="/policy/:id"
+            element={<PolicyDetailPage />}
+          />
 
-      </Routes>
+        </Routes>
 
-      {/* REGISTER POPUP */}
-      {showRegister && (
-        <RegisterPage
-          closeRegister={() =>
-            setShowRegister(false)
-          }
-        />
-      )}
+        {/* REGISTER POPUP */}
+        {showRegister && (
+          <RegisterPage
+            closeRegister={() =>
+              setShowRegister(false)
+            }
+          />
+        )}
 
-      {/* LOGIN POPUP */}
-      {showLogin && (
-        <LoginPage
-          closeLogin={() =>
-            setShowLogin(false)
-          }
-        />
-      )}
+        {/* LOGIN POPUP */}
+        {showLogin && (
+          <LoginPage
+            closeLogin={() =>
+              setShowLogin(false)
+            }
+          />
+        )}
 
-    </BrowserRouter>
+      </BrowserRouter>
+    </ThemeProvider>
   );
 }
