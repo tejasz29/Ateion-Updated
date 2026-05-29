@@ -7,6 +7,7 @@ import ContactPage from "../imports/ContactPage";
 import ResourcesPage from "../imports/ResourcesPage";
 import CertificatePage from "../imports/CertificatePage";
 import AssessmentDemoPage from "../imports/AssessmentDemoPage";
+import DashboardPage from "../imports/DashboardPage";
 
 import RegisterPage from "../imports/RegisterPage";
 import LoginPage from "../imports/LoginPage";
@@ -91,6 +92,12 @@ export default function App() {
         <Route
           path="/assessment-demo"
           element={<AssessmentDemoPage />}
+        />
+
+        {/* DASHBOARD PAGE */}
+        <Route
+          path="/dashboard"
+          element={<DashboardPage />}
         />
 
       </Routes>
