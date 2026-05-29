@@ -25,6 +25,7 @@ import SharedFooter from "../app/components/SharedFooter";
 import SharedNavbar from "../app/components/SharedNavbar";
 import RedIntelligenceCard from "./home/RedIntelligenceCard";
 import EcosystemSection from "./home/EcosystemSection";
+import HomePolicySection from "./home/HomePolicySection";
 
 /* ─────────────────────────────────────────────
    UTILITY COMPONENTS
@@ -84,7 +85,7 @@ function HeroTextBlock() {
       >
         Reimagining Education
       </p>
-      
+
     </div>
   );
 }
@@ -128,51 +129,54 @@ function PurpleCapabilityCardInner() {
 function PurpleCapabilityCardOuter() {
   const videoRef = useRef<HTMLVideoElement>(null);
 
-useEffect(() => {
-  const enableSound = () => {
-    if (videoRef.current) {
-      videoRef.current.muted = false;
-      videoRef.current.play();
-    }
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
 
-    window.removeEventListener("click", enableSound);
-  };
+    // Start muted so autoplay is allowed by the browser
+    video.muted = true;
+    video.play().catch(() => { });
 
-  window.addEventListener("click", enableSound);
+    // Unmute on first click anywhere on the page
+    const handleFirstClick = () => {
+      if (videoRef.current) {
+        videoRef.current.muted = false;
+      }
+      window.removeEventListener("click", handleFirstClick);
+    };
 
-  return () => {
-    window.removeEventListener("click", enableSound);
-  };
-}, []);
+    window.addEventListener("click", handleFirstClick);
+    return () => window.removeEventListener("click", handleFirstClick);
+  }, []);
   return (
-   <div className="flex flex-col items-start justify-start relative shrink-0 w-full px-[16px] sm:px-[24px] md:px-0">
-  <div className="content-stretch flex flex-col md:flex-row items-stretch relative shrink-0 w-full gap-[16px] sm:gap-[24px]">
+    <div className="flex flex-col items-start justify-start relative shrink-0 w-full px-[16px] sm:px-[24px] md:px-0">
+      <div className="content-stretch flex flex-col md:flex-row items-stretch relative shrink-0 w-full gap-[16px] sm:gap-[24px]">
 
-   <div className="w-full flex justify-center">
-  <div className="w-full max-w-[900px] h-[300px] sm:h-[400px] md:h-[500px] bg-[#000000] rounded-[20px] overflow-hidden">
+        <div className="w-full flex justify-center">
+          <div className="w-full max-w-[900px] h-[300px] sm:h-[400px] md:h-[500px] bg-black rounded-[20px] overflow-hidden">
 
-    <video
-      ref={videoRef}
-      autoPlay
-      muted
-      loop
-      controls
-      playsInline
-      className="w-full h-full"
-      style={{ objectFit: "cover" }}
-      onLoadedMetadata={(e) => {
-        e.currentTarget.playbackRate = 1.5;
-      }}
-    >
-      <source src="/video.mp4" type="video/mp4" />
-    </video>
+            <video
+              ref={videoRef}
+              autoPlay
+              muted
+              loop
+              controls
+              playsInline
+              className="w-full h-full"
+              style={{ objectFit: "cover" }}
+              onLoadedMetadata={(e) => {
+                e.currentTarget.playbackRate = 1.5;
+              }}
+            >
+              <source src="/video.mp4" type="video/mp4" />
+            </video>
 
-  </div>
-</div>
-    <PurpleCapabilityCardInner />
+          </div>
+        </div>
+        <PurpleCapabilityCardInner />
 
-  </div>
-</div>
+      </div>
+    </div>
   );
 }
 
@@ -181,7 +185,7 @@ function HeroMetricsRow() {
   return (
     <div className="flex flex-col items-start justify-start relative shrink-0 w-full px-[16px] sm:px-[24px] md:px-0">
       <div className="flex flex-col md:flex-row gap-[16px] sm:gap-[24px] items-stretch relative shrink-0 w-full">
-        
+
         <RedIntelligenceCard />
       </div>
     </div>
@@ -492,12 +496,17 @@ export default function Homepage() {
         <EducationStatusWrapper />
       </section>
 
-      {/* 5. Ecosystem — redesigned */}
+      {/* 5. Global Policy Alignment */}
+      <section>
+        <HomePolicySection />
+      </section>
+
+      {/* 6. Ecosystem — redesigned */}
       <section>
         <EcosystemSection />
       </section>
 
-      {/* 6. FAQ */}
+      {/* 7. FAQ */}
       <section>
         <FAQSectionContainer />
       </section>

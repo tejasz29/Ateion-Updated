@@ -5,12 +5,16 @@ import Homepage from "../imports/Homepage";
 import GCOPage from "../imports/GCOPage";
 import ContactPage from "../imports/ContactPage";
 import ResourcesPage from "../imports/ResourcesPage";
+import CertificatePage from "../imports/CertificatePage";
 import AssessmentDemoPage from "../imports/AssessmentDemoPage";
 import DashboardPage from "../imports/DashboardPage";
 
 import RegisterPage from "../imports/RegisterPage";
 import LoginPage from "../imports/LoginPage";
+import PoliciesPage from "../imports/PoliciesPage";
+import PolicyDetailPage from "../imports/PolicyDetailPage";
 import ThemeProvider from "./components/ThemeProvider";
+
 export default function App() {
 
   const [showRegister, setShowRegister] = useState(false);
@@ -54,68 +58,85 @@ export default function App() {
   return (
 
     <ThemeProvider>
-    <BrowserRouter>
+      <BrowserRouter>
 
-      <Routes>
+        <Routes>
 
-        {/* HOMEPAGE */}
-        <Route
-          path="/"
-          element={<Homepage />}
-        />
+          {/* HOMEPAGE */}
+          <Route
+            path="/"
+            element={<Homepage />}
+          />
 
-        {/* GCO PAGE */}
-        <Route
-          path="/gco"
-          element={<GCOPage />}
-        />
+          {/* GCO PAGE */}
+          <Route
+            path="/gco"
+            element={<GCOPage />}
+          />
 
-        {/* CONTACT PAGE */}
-        <Route
-          path="/contact"
-          element={<ContactPage />}
-        />
+          {/* CONTACT PAGE */}
+          <Route
+            path="/contact"
+            element={<ContactPage />}
+          />
 
-        {/* PLAYGROUND PAGE */}
-        <Route
-          path="/PlayGround"
-          element={<ResourcesPage />}
-        />
+          {/* PLAYGROUND PAGE */}
+          <Route
+            path="/PlayGround"
+            element={<ResourcesPage />}
+          />
 
+          {/* CERTIFICATE PAGE */}
+          <Route
+            path="/certificate"
+            element={<CertificatePage />}
+          />
 
-        {/* ASSESSMENT DEMO PAGE */}
-        <Route
-          path="/assessment-demo"
-          element={<AssessmentDemoPage />}
-        />
+          {/* ASSESSMENT DEMO PAGE */}
+          <Route
+            path="/assessment-demo"
+            element={<AssessmentDemoPage />}
+          />
 
-        {/* DASHBOARD PAGE */}
-        <Route
-          path="/dashboard"
-          element={<DashboardPage />}
-        />
+          {/* DASHBOARD PAGE */}
+          <Route
+            path="/dashboard"
+            element={<DashboardPage />}
+          />
 
-      </Routes>
+          {/* ALL POLICIES PAGE */}
+          <Route
+            path="/policies"
+            element={<PoliciesPage />}
+          />
 
-      {/* REGISTER POPUP */}
-      {showRegister && (
-        <RegisterPage
-          closeRegister={() =>
-            setShowRegister(false)
-          }
-        />
-      )}
+          {/* POLICY DETAIL PAGE */}
+          <Route
+            path="/policy/:id"
+            element={<PolicyDetailPage />}
+          />
 
-      {/* LOGIN POPUP */}
-      {showLogin && (
-        <LoginPage
-          closeLogin={() =>
-            setShowLogin(false)
-          }
-        />
-      )}
+        </Routes>
 
-    </BrowserRouter>
+        {/* REGISTER POPUP */}
+        {showRegister && (
+          <RegisterPage
+            closeRegister={() =>
+              setShowRegister(false)
+            }
+          />
+        )}
+
+        {/* LOGIN POPUP */}
+        {showLogin && (
+          <LoginPage
+            closeLogin={() =>
+              setShowLogin(false)
+            }
+          />
+        )}
+
+      </BrowserRouter>
     </ThemeProvider>
   );
 }

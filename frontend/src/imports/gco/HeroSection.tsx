@@ -1,8 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 import { ImageTrail } from "../../app/components/ui/image-trail";
-import logoEducation from "../../assets/gco/logo-education.png";
-import logoPolicy from "../../assets/gco/education-ministry-logo.jpg";
+
 import trail2 from "../../assets/gco/trail-images/olympiad-students-2.png";
 import trail4 from "../../assets/gco/trail-images/olympiad-students-4.png";
 import trail5 from "../../assets/gco/trail-images/olympiad-students-5.png";
@@ -38,10 +37,7 @@ function HeroSection() {
   const isMouseInSection = useIsMouseInSection(heroRef);
   const [disableTrail, setDisableTrail] = useState(false);
 
-  const alignedLogos = [
-    { src: logoEducation, alt: "Education Logo" },
-    { src: logoPolicy, alt: "Education Policy 2020 Logo" },
-  ];
+
 
   const images = [trail2, trail4, trail5];
 
@@ -65,14 +61,7 @@ function HeroSection() {
             <button type="button" className="btn-black" onClick={() => navigate('/gco')} onMouseEnter={() => setDisableTrail(true)} onMouseLeave={() => setDisableTrail(false)}>Explore more</button>
           </div>
 
-          <div className="aligned-with pt-4 md:pt-8 bg-transparent">
-            <h3 className="aligned-title">Aligned with:</h3>
-            <div className="logos">
-              {alignedLogos.map((logo, index) => (
-                <img key={index} src={logo.src} alt={logo.alt} />
-              ))}
-            </div>
-          </div>
+
         </div>
       </div>
 
