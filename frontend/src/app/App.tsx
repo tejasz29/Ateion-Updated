@@ -11,6 +11,9 @@ import DashboardPage from "../imports/DashboardPage";
 
 import RegisterPage from "../imports/RegisterPage";
 import LoginPage from "../imports/LoginPage";
+import PoliciesPage from "../imports/PoliciesPage";
+import PolicyDetailPage from "../imports/PolicyDetailPage";
+
 
 export default function App() {
 
@@ -98,6 +101,18 @@ export default function App() {
         <Route
           path="/dashboard"
           element={<DashboardPage />}
+        />
+
+        {/* ALL POLICIES PAGE */}
+        <Route
+          path="/policies"
+          element={<PoliciesPage />}
+        />
+
+        {/* POLICY DETAIL PAGE */}
+        <Route
+          path="/policy/:id"
+          element={<PolicyDetailPage />}
         />
 
       </Routes>
