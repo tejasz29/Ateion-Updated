@@ -9,6 +9,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+// FIXED: Added Map and HashMap imports for JSON conversion!
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -20,7 +23,7 @@ public class AuthController {
 
     // 1. Handles the Sign Up Modal
     @PostMapping("/signup")
-    public ResponseEntity<String> signUp(@RequestBody SignUpRequestDTO signUpRequest) {
+    public ResponseEntity<?> signUp(@RequestBody SignUpRequestDTO signUpRequest) {
         
         // Check if the email is already in the database
         if (userRepository.existsByEmail(signUpRequest.getEmail())) {
@@ -32,6 +35,7 @@ public class AuthController {
                 .fullName(signUpRequest.getFullName())
                 .email(signUpRequest.getEmail())
                 .password(signUpRequest.getPassword()) // Note: We will encrypt this later!
+                .ageSegment(signUpRequest.getAgeSegment()) 
                 .build();
 
         // Save to Supabase
@@ -41,7 +45,7 @@ public class AuthController {
 
     // 2. Handles the Log In Modal
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody LoginRequestDTO loginRequest) {
+    public ResponseEntity<?> login(@RequestBody LoginRequestDTO loginRequest) {
         
         // Find the user by their email
         Optional<User> optionalUser = userRepository.findByEmail(loginRequest.getEmail());
@@ -51,7 +55,14 @@ public class AuthController {
             
             // Check if the password matches
             if (user.getPassword().equals(loginRequest.getPassword())) {
-                return ResponseEntity.ok("Login successful! Welcome, " + user.getFullName());
+                
+                // FIXED: Create a JSON object to send back to the React frontend!
+                Map<String, Object> userData = new HashMap<>();
+                userData.put("fullName", user.getFullName());
+                userData.put("email", user.getEmail());
+                userData.put("ageSegment", user.getAgeSegment()); // Sends the segment to the Playground!
+                
+                return ResponseEntity.ok(userData);
             } else {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Error: Incorrect password!");
             }

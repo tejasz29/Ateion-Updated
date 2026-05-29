@@ -1,156 +1,123 @@
+import React, { useState } from "react";
 import "../styles/login.css";
 
 export default function LoginPage({ closeLogin }: any) {
+  // 1. State to capture what the user types
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-  // SIGN IN
-  const handleLogin = () => {
+  // 2. SIGN IN HANDLER
+  const handleLogin = async (e?: any) => {
+    // Stop the page from refreshing when you click the button!
+    if (e) e.preventDefault(); 
 
-    const email =
-      (
-        document.querySelector(
-          'input[placeholder="Email Address"]'
-        ) as HTMLInputElement
-      ).value;
+    try {
+      // Dynamically pull the API URL. Falls back to localhost for local testing
+      const apiUrl = import.meta.env.VITE_API_BASE_URL || "http://localhost:8080/api";
 
-    const password =
-      (
-        document.querySelector(
-          'input[placeholder="Password"]'
-        ) as HTMLInputElement
-      ).value;
+      // Send the login request to the Spring Boot backend
+      const response = await fetch(`${apiUrl}/auth/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
 
-    // VALIDATION
+      if (response.ok) {
+        // Grab the JSON user object from our Spring Boot backend
+        const userData = await response.json();
+        
+        // Save it to localStorage so the Playground can read it [1]!
+        //localStorage.setItem("user", JSON.stringify(userData));
 
-    if (!email || !password) {
-      alert("Please fill all fields");
-      return;
+        alert("Login successful!");
+        if (closeLogin) closeLogin();
+        
+        // Redirect the user straight to the Playground!
+        
+      } else {
+        const errorMsg = await response.text();
+        alert("Login Failed: " + errorMsg);
+      }
+    } catch (error) {
+      console.error("Login error:", error);
+      alert("Could not connect to the server. Please try again.");
     }
-
-    // SUCCESS
-
-    alert("Login Successful 🚀");
-
-    closeLogin();
   };
 
-  // GOOGLE LOGIN
+  // 3. SOCIAL LOGIN HANDLERS
+  const backendUrl = import.meta.env.VITE_BACKEND_URL || "http://localhost:8080";
+
   const handleGoogleLogin = () => {
-    window.open(
-      "https://accounts.google.com/",
-      "_blank"
-    );
+    window.location.href = `${backendUrl}/oauth2/authorization/google`;
   };
 
-  // LINKEDIN LOGIN
   const handleLinkedinLogin = () => {
-    window.open(
-      "https://linkedin.com/login",
-      "_blank"
-    );
+    window.location.href = `${backendUrl}/oauth2/authorization/linkedin`;
   };
 
-  // GITHUB LOGIN
   const handleGithubLogin = () => {
-    window.open(
-      "https://github.com/login",
-      "_blank"
-    );
+    window.location.href = `${backendUrl}/oauth2/authorization/github`;
   };
 
   return (
-
     <div className="login-container">
-
       <div className="login-card">
-
+        
         {/* CLOSE BUTTON */}
-
-        <button
-          className="close-btn"
-          onClick={closeLogin}
-        >
+        <button className="close-btn" onClick={closeLogin}>
           ✕
         </button>
 
         {/* LEFT SIDE */}
-
         <div className="left-side">
-
-          <h1>
-            Welcome
-            <br />
-            Back
-          </h1>
-
-          <p>
-            Sign in and continue your journey
-            with Ateion modern learning.
-          </p>
-
+          <h1>Welcome Back</h1>
+          <p>Log in to continue measuring your true capabilities and exploring your dashboard.</p>
         </div>
 
         {/* RIGHT SIDE */}
-
         <div className="right-side">
-
           <h2>Sign In</h2>
 
+          {/* Wired up Email Input with name/id to prevent warnings */}
           <input
             type="email"
+            id="email"
+            name="email"
             placeholder="Email Address"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
 
+          {/* Wired up Password Input with name/id to prevent warnings */}
           <input
             type="password"
+            id="password"
+            name="password"
             placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
           />
 
-          {/* SIGN IN BUTTON */}
-
-          <button
-            className="login-btn"
-            onClick={handleLogin}
-          >
-            Sign In
+          <button className="login-btn" onClick={handleLogin}>
+            Login
           </button>
 
-          {/* DIVIDER */}
+          <div className="divider">OR CONTINUE WITH</div>
 
-          <div className="divider">
-            OR CONTINUE WITH
-          </div>
-
-          {/* GOOGLE */}
-
-          <button
-            className="google-btn"
-            onClick={handleGoogleLogin}
-          >
+          <button className="google-btn" onClick={handleGoogleLogin}>
             Continue with Google
           </button>
 
-          {/* LINKEDIN */}
-
-          <button
-            className="linkedin-btn"
-            onClick={handleLinkedinLogin}
-          >
+          <button className="linkedin-btn" onClick={handleLinkedinLogin}>
             Continue with LinkedIn
           </button>
 
-          {/* GITHUB */}
-
-          <button
-            className="github-btn"
-            onClick={handleGithubLogin}
-          >
+          <button className="github-btn" onClick={handleGithubLogin}>
             Continue with GitHub
           </button>
 
         </div>
-
       </div>
-
     </div>
   );
 }
