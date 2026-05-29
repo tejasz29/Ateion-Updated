@@ -188,8 +188,8 @@ function EcosystemBubble({
               stroke: isHovered
                 ? hoverColor
                 : defaultColor !== "transparent"
-                ? defaultColor
-                : "rgba(0,0,0,0.15)",
+                  ? defaultColor
+                  : "rgba(0,0,0,0.15)",
               strokeWidth: isHovered ? 3 : 0.8,
               scale: isHovered ? 1.12 : 1,
             }}
@@ -290,52 +290,7 @@ function EcosystemCluster({
         </defs>
       </svg>
 
-      {/* Curved connector arrows */}
-      <div
-        className="absolute pointer-events-none opacity-20"
-        style={{
-          left: "259.28px",
-          top: "79.07px",
-          width: "212.218px",
-          height: "336.118px",
-        }}
-      >
-        <svg
-          className="block size-full"
-          fill="none"
-          preserveAspectRatio="none"
-          viewBox="0 0 212.806 336.735"
-        >
-          <path
-            d={svgPaths.p242fe600}
-            id="Vector 467"
-            stroke="var(--color-text-primary)"
-            strokeWidth="0.88"
-          />
-        </svg>
-      </div>
-      <div
-        className="absolute pointer-events-none opacity-20"
-        style={{
-          left: "337.64px",
-          top: "390.74px",
-          width: "71.754px",
-          height: "125.899px",
-        }}
-      >
-        <svg
-          className="block size-full"
-          fill="none"
-          preserveAspectRatio="none"
-          viewBox="0 0 72.7077 126.898"
-        >
-          <path
-            d={svgPaths.p3505a800}
-            fill="var(--color-text-primary)"
-            id="Vector 465"
-          />
-        </svg>
-      </div>
+      {/* Curved connector arrows — Kronos lines removed */}
       <div
         className="absolute pointer-events-none opacity-20"
         style={{
@@ -393,7 +348,7 @@ function EcosystemCluster({
         isDark={true}
         gradientId="ateionGrad"
         title="Ateion"
-        description="Ateion is building the infrastructure for a capability-based future by integrating early AI workshops with standard-setting competitions."
+        description="Ateion is building the infrastructure for a capability-based future by integrating early AI PlayGround with standard-setting competitions."
         titleSize="24px"
         titleClass="font-['Outfit:Semi_Bold',sans-serif]"
         onClick={() => onBubbleClick("ateion")}
@@ -409,23 +364,11 @@ function EcosystemCluster({
         isDark={true}
         gradientId="gcoGrad"
         title="GCO"
-        description="From early AI workshops to the Global Capability Olympiad, and emerging initiatives like KRONOS and VOUCH."
+        description="From early AI PlayGround to the Global Capability Olympiad, and emerging initiatives like VOUCH."
         titleSize="32px"
         onClick={() => onBubbleClick("gco")}
       />
 
-      <EcosystemBubble
-        ml="162.88px"
-        mt="414.51px"
-        size="248.27px"
-        hoverColor="#FF595B"
-        isDark={true}
-        gradientId="gcoGrad"
-        title="Kronos"
-        description="A system that shows your real abilities, not just certificates."
-        titleSize="20px"
-        onClick={() => onBubbleClick("kronos")}
-      />
 
       <EcosystemBubble
         ml="468.38px"
@@ -447,10 +390,10 @@ function EcosystemCluster({
         hoverColor="#FF595B"
         isDark={true}
         gradientId="gcoGrad"
-        title="Workshops"
+        title="PlayGround"
         description="Engaging, hands-on learning experiences designed to bridge theory with practical AI execution."
         titleSize="20px"
-        onClick={() => onBubbleClick("workshops")}
+        onClick={() => onBubbleClick("playground")}
       />
     </div>
   );
@@ -480,7 +423,7 @@ export default function EcosystemSection() {
       number: "01",
       title: "Global Capability Olympiad (GCO)",
       description:
-        "From early AI workshops to the Global Capability Olympiad, and emerging initiatives like KRONOS and VOUCH.",
+        "From early AI PlayGround to the Global Capability Olympiad, and emerging initiatives like VOUCH.",
       hasTags: true,
     },
     ateion: {
@@ -488,15 +431,14 @@ export default function EcosystemSection() {
       number: "02",
       title: "Ateion",
       description:
-        "Ateion is building the infrastructure for a capability-based future by integrating early AI workshops with standard-setting competitions.",
+        "Ateion is building the infrastructure for a capability-based future by integrating early AI PlayGround with standard-setting competitions.",
       hasTags: false,
     },
     kronos: {
       id: "kronos",
       number: "03",
-      title: "Kronos",
-      description:
-        "A system that shows your real abilities, not just certificates.",
+      title: "",
+      description: "",
       hasTags: false,
     },
     vouch: {
@@ -507,10 +449,10 @@ export default function EcosystemSection() {
         "A way to get trusted proof of what you’ve accomplished.",
       hasTags: false,
     },
-    workshops: {
-      id: "workshops",
+    playground: {
+      id: "playground",
       number: "05",
-      title: "Workshops",
+      title: "PlayGround",
       description:
         "Engaging, hands-on learning experiences designed to bridge theory with practical AI execution.",
       hasTags: false,
