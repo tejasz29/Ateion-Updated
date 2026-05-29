@@ -5,11 +5,12 @@ import Homepage from "../imports/Homepage";
 import GCOPage from "../imports/GCOPage";
 import ContactPage from "../imports/ContactPage";
 import ResourcesPage from "../imports/ResourcesPage";
+import CertificatePage from "../imports/CertificatePage";
 import AssessmentDemoPage from "../imports/AssessmentDemoPage";
+import DashboardPage from "../imports/DashboardPage";
 
 import RegisterPage from "../imports/RegisterPage";
 import LoginPage from "../imports/LoginPage";
-import ThemeProvider from "./components/ThemeProvider";
 
 export default function App() {
 
@@ -53,7 +54,6 @@ export default function App() {
 
   return (
 
-    <ThemeProvider>
     <BrowserRouter>
 
       <Routes>
@@ -82,11 +82,22 @@ export default function App() {
           element={<ResourcesPage />}
         />
 
+        {/* CERTIFICATE PAGE */}
+        <Route
+          path="/certificate"
+          element={<CertificatePage />}
+        />
 
         {/* ASSESSMENT DEMO PAGE */}
         <Route
           path="/assessment-demo"
           element={<AssessmentDemoPage />}
+        />
+
+        {/* DASHBOARD PAGE */}
+        <Route
+          path="/dashboard"
+          element={<DashboardPage />}
         />
 
       </Routes>
@@ -110,6 +121,5 @@ export default function App() {
       )}
 
     </BrowserRouter>
-    </ThemeProvider>
   );
 }
