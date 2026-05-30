@@ -11,11 +11,11 @@
    ────────────────────────────────────────────────────────────────────────── */
 :root {
   /* Primary Brand - Red (Ateion Brand Color) */
-  --color-primary: #fb4444;
+  --color-primary: var(--color-primary);
   --color-primary-hover: #ff5555;
   --color-primary_active: #e03e3e;
-  --color-primary_light: rgba(251, 68, 68, 0.08);
-  --color-primary_lighter: rgba(251, 68, 68, 0.04);
+  --color-primary_light: rgba(37, 99, 235, 0.08);
+  --color-primary_lighter: rgba(37, 99, 235, 0.04);
 
   /* Neutral Grays */
   --color-white: #ffffff;
@@ -32,7 +32,7 @@
   --color-black: #0a0a0a;
 
   /* Backgrounds */
-  --color-background-primary: #f7f3eb;
+  --color-background-primary: var(--color-background-primary);
   --color-background-secondary: #ffffff;
   --color-background-tertiary: #faf9f7;
   --color-background-dark: #1e1632;
@@ -44,13 +44,13 @@
   --color-nav-button-active: rgba(200, 200, 200, 0.85);
 
   /* Text Colors */
-  --color-text-primary: #1a1a1a;
+  --color-text-primary: var(--color-text-primary);
   --color-text-secondary: #292929;
   --color-text-tertiary: #525252;
   --color-text-muted: rgba(0, 0, 0, 0.60);
   --color-text-subtle: rgba(0, 0, 0, 0.40);
   --color-text-inverse: #ffffff;
-  --color-text-link: #fb4444;
+  --color-text-link: var(--color-primary);
   --color-text-link-hover: #ff5555;
 
   /* Border Colors */
@@ -58,7 +58,7 @@
   --color-border-medium: rgba(0, 0, 0, 0.12);
   --color-border-dark: rgba(0, 0, 0, 0.20);
   --color-border-input: rgba(0, 0, 0, 0.15);
-  --color-border-focus: rgba(251, 68, 68, 0.50);
+  --color-border-focus: rgba(37, 99, 235, 0.50);
 
   /* Semantic Colors */
   --color-success: #16a34a;
@@ -184,7 +184,7 @@ body > * {
    GCO HERO SECTION
    ────────────────────────────────────────────────────────────────────────── */
 .hero {
-  background-color: #f7f3eb;
+  background-color: var(--color-background-primary);
   padding: 2.5vw 5%;
   text-align: center;
   min-height: 100vh;
@@ -516,7 +516,7 @@ body > * {
    ────────────────────────────────────────────────────────────────────────── */
 .timeline-section {
   padding: 5rem 5%;
-  background-color: #f7f3eb;
+  background-color: var(--color-background-primary);
   font-family: 'SF Pro Display', sans-serif;
 }
 
@@ -637,7 +637,7 @@ body > * {
    ────────────────────────────────────────────────────────────────────────── */
 .faq-container {
   padding: 5rem 5%;
-  background-color: #f7f3eb;
+  background-color: var(--color-background-primary);
   font-family: 'SF Pro Display', sans-serif;
 }
 
@@ -655,7 +655,7 @@ body > * {
 }
 
 .faq-item {
-  background-color: #f7f3eb;
+  background-color: var(--color-background-primary);
   margin-bottom: 12px;
   border-radius: 20px;
   box-shadow: 0px 4px 20px 0px rgba(25,33,61,0.04);
@@ -686,14 +686,14 @@ body > * {
   max-width: 700px;
   font-size: 22px;
   font-weight: 600;
-  color: #1a1a1a;
+  color: var(--color-text-primary);
   font-family: 'SF Pro Display', sans-serif;
   line-height: 1.35;
   transition: color 0.3s;
 }
 
 .faq-question-btn:hover .faq-question {
-  color: #fb4444;
+  color: var(--color-primary);
 }
 
 .faq-arrow {

@@ -338,7 +338,7 @@ function EducationStatusWrapper() {
                 key={i}
                 className="bg-[var(--color-background-secondary)] hover:shadow-[0_12px_40px_rgba(0,0,0,0.06)] transition-all duration-300 min-h-[200px] sm:min-h-[240px] md:min-h-[260px] rounded-[20px] p-[28px] sm:p-[32px] flex flex-col justify-between border border-black/5 group"
               >
-                <p className="text-[22px] sm:text-[26px] md:text-[30px] font-medium text-[var(--color-text-primary)] leading-[1.05] group-hover:text-[#e03a3a] transition-colors" style={{ fontFamily: "'OV Soge', sans-serif", letterSpacing: "-0.01em" }}>
+                <p className="text-[22px] sm:text-[26px] md:text-[30px] font-medium text-[var(--color-text-primary)] leading-[1.05] group-hover:text-[var(--color-primary-hover)] transition-colors" style={{ fontFamily: "'OV Soge', sans-serif", letterSpacing: "-0.01em" }}>
                   {item.title}
                 </p>
                 <div className="mt-[20px] sm:mt-[24px] flex flex-col gap-[6px]">
@@ -403,7 +403,7 @@ function FAQItem({ question, answer, isOpen, toggle }: { question: string; answe
         aria-controls={answerId}
         className="w-full content-stretch flex items-center justify-between px-[20px] sm:px-[32px] py-[20px] sm:py-[28px] relative text-left group"
       >
-        <span className="flex-[1_0_0] font-semibold leading-[1.35] max-w-[700px] not-italic relative text-[var(--color-text-primary)] text-[18px] sm:text-[20px] md:text-[22px] transition-colors group-hover:text-[#fb4444]" style={{ fontFamily: "'SF Pro Display', sans-serif" }}>
+        <span className="flex-[1_0_0] font-semibold leading-[1.35] max-w-[700px] not-italic relative text-[var(--color-text-primary)] text-[18px] sm:text-[20px] md:text-[22px] transition-colors group-hover:text-[var(--color-primary)]" style={{ fontFamily: "'SF Pro Display', sans-serif" }}>
           {question}
         </span>
         <div className={`bg-[#e7e3dd] content-stretch flex items-center p-[6px] sm:p-[8px] relative rounded-[100px] shadow-[0px_1px_2px_0px_rgba(25,33,61,0.07)] shrink-0 transition-transform duration-500 ${isOpen ? "rotate-90" : ""}`} aria-hidden="true">

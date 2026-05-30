@@ -197,7 +197,7 @@
   left: -50%;
   width: 200%;
   height: 200%;
-  background: radial-gradient(circle, rgba(255, 74, 90, 0.1) 0%, transparent 60%);
+  background: radial-gradient(circle, var(--color-primary_light) 0%, transparent 60%);
   opacity: 0;
   transition: opacity 0.5s ease;
   pointer-events: none;
@@ -208,8 +208,8 @@
 }
 
 .card:hover {
-  border-color: rgba(255, 74, 90, 0.4);
-  box-shadow: 0 20px 50px rgba(255, 74, 90, 0.15);
+  border-color: var(--color-border-focus);
+  box-shadow: 0 20px 50px var(--color-primary_light);
 }
 
 .card-icon-container {
@@ -258,7 +258,7 @@
   background: var(--color-primary);
   border-color: var(--color-primary);
   color: #fff;
-  box-shadow: 0 0 20px rgba(255, 74, 90, 0.4);
+  box-shadow: 0 0 20px var(--color-primary_light);
 }
 
 .disabled-card {
@@ -384,11 +384,11 @@
    DARK MODE OVERRIDES
    ========================================================================== */
 [data-theme="dark"] .dashboard {
-  background: radial-gradient(circle at 50% 0%, #17102e 0%, #0a0514 100%);
+  background: radial-gradient(circle at 50% 0%, #141e30 0%, #0e1320 100%);
 }
 
 [data-theme="dark"] .sidebar {
-  background: rgba(10, 5, 20, 0.4);
+  background: rgba(26, 34, 53, 0.4);
   border-right: 1px solid rgba(255, 255, 255, 0.05);
 }
 

@@ -1,7 +1,7 @@
 /* contact-styles.css — page-specific only; shared vars live in design-tokens.css */
 /* Design tokens from design-tokens.css */
 :root {
-  --color-error: #ff4757;
+  --color-error: var(--color-error);
   --color-border: #333;
   --color-black: #000;
   --color-white: #fff;
@@ -579,7 +579,7 @@
 
 /* ===== DARK MODE OVERRIDES ===== */
 [data-theme="dark"] {
-  --color-error: #ff4757;
+  --color-error: var(--color-error);
   --color-border: rgba(255, 255, 255, 0.15);
   --color-black: var(--color-text-primary);
   --color-white: var(--color-background-primary);

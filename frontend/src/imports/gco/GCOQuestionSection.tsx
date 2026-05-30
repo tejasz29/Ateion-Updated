@@ -213,7 +213,7 @@ export default function GCOQuestionSection() {
               fontWeight: "600",
               cursor: "pointer",
               boxShadow:
-                "0 8px 25px rgba(250, 79, 84, 0.4)",
+                "0 8px 25px var(--color-border-focus)",
               transition:
                 "transform 0.2s ease, boxShadow 0.2s ease",
               fontFamily:

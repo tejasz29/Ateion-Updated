@@ -1,6 +1,6 @@
 .resources-page{
   min-height:100vh;
-  background:#f7f3eb;
+  background:var(--color-background-primary);
   padding:120px 60px;
 }
 
@@ -56,7 +56,7 @@
 }
 
 .video-card button{
-  background:#ff5a4f;
+  background:var(--color-primary);
   color:white;
   border:none;
   padding:12px 20px;

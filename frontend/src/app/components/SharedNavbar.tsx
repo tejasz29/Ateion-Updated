@@ -34,13 +34,13 @@ function NavButton({
 
   const variantClasses = {
     default:
-      "bg-[var(--color-nav-button)] hover:bg-[var(--color-nav-button-hover)] text-[var(--color-text-secondary)]",
-    muted:
-      "bg-[var(--color-nav-button)] hover:bg-[var(--color-nav-button-hover)] text-[var(--color-text-secondary)]",
+      "bg-[var(--color-background-secondary)] border border-[#bfdbfe] text-[var(--color-primary)] hover:bg-[#eff6ff] hover:border-[var(--color-primary)]",
     primary:
-      "bg-[var(--color-primary)] hover:bg-[var(--color-primary-hover)] text-[#ffffff] shadow-[var(--shadow-button)] hover:shadow-[var(--shadow-button-hover)]",
+      "bg-[var(--color-primary)] hover:bg-[var(--color-primary-hover)] text-[#ffffff] shadow-[var(--shadow-button)]",
     white:
-      "bg-[var(--color-background-secondary)] hover:bg-[var(--color-background-tertiary)] text-[var(--color-text-secondary)] shadow-[0_4px_12px_rgba(0,0,0,0.05)] hover:shadow-[0_6px_20px_rgba(0,0,0,0.1)]",
+      "bg-[var(--color-background-secondary)] hover:bg-[var(--color-background-tertiary)] text-[var(--color-text-secondary)] shadow-sm",
+    "outline-dark":
+      "bg-[var(--color-background-secondary)] border border-[var(--color-text-primary)] text-[var(--color-text-primary)] hover:bg-[var(--color-text-primary)] hover:text-[var(--color-background-primary)]",
   };
 
   const handleClick = () => {
@@ -135,7 +135,7 @@ function HomeBtn({ onClick }: { onClick?: () => void }) {
         navigate("/");
       }}
     >
-      <p className={`${navTextClass} ${isActive ? "text-[#ffffff]" : "text-[var(--color-text-secondary)]"}`}>Home</p>
+      <p className={`${navTextClass} ${isActive ? "text-[#ffffff]" : "text-[var(--color-primary)]"}`}>Home</p>
     </NavButton>
   );
 }
@@ -156,7 +156,7 @@ function GlobalOlympiadBtn({ onClick }: { onClick?: () => void }) {
         navigate("/gco");
       }}
     >
-      <p className={`${navTextClass} ${isActive ? "text-[#ffffff]" : "text-[var(--color-text-secondary)]"}`}>
+      <p className={`${navTextClass} ${isActive ? "text-[#ffffff]" : "text-[var(--color-primary)]"}`}>
         Global Olympiad
       </p>
     </NavButton>
@@ -179,7 +179,7 @@ function ResourcesBtn({ onClick }: { onClick?: () => void }) {
         navigate("/playground");
       }}
     >
-      <p className={`${navTextClass} ${isActive ? "text-[#ffffff]" : "text-[var(--color-text-secondary)]"}`}>
+      <p className={`${navTextClass} ${isActive ? "text-[#ffffff]" : "text-[var(--color-primary)]"}`}>
         PlayGround
       </p>
     </NavButton>
@@ -206,7 +206,7 @@ function DashboardBtn({
         navigate("/dashboard");
       }}
     >
-      <p className={`${navTextClass} ${isActive ? "text-[#ffffff]" : "text-[var(--color-text-secondary)]"}`}>
+      <p className={`${navTextClass} ${isActive ? "text-[#ffffff]" : "text-[var(--color-primary)]"}`}>
         Dashboard
       </p>
     </NavButton>
@@ -234,15 +234,18 @@ function GetConnectedBtn({ onClick }: { onClick?: () => void }) {
 
   return (
     <NavButton
-      variant={isActive ? "primary" : "white"}
+      variant="primary"
       onClick={() => {
         if (onClick) onClick();
         navigate("/contact");
       }}
     >
-      <p className={`${navTextClass} ${isActive ? "text-[#ffffff]" : "text-[var(--color-text-secondary)]"}`}>
-        Get Connected
-      </p>
+      <div className="flex items-center gap-2">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+        <p className={`${navTextClass} text-[#ffffff]`}>
+          Get Connected
+        </p>
+      </div>
     </NavButton>
   );
 }
@@ -266,15 +269,18 @@ function SignInBtn({ onClick }: { onClick?: () => void }) {
 
   return (
     <NavButton
-      variant={isActive ? "primary" : "white"}
+      variant="outline-dark"
       onClick={() => {
         if (onClick) onClick();
         window.dispatchEvent(new CustomEvent("open-login"));
       }}
     >
-      <p className={`${navTextClass} ${isActive ? "text-[#ffffff]" : "text-[var(--color-text-secondary)]"}`}>
-        Sign In
-      </p>
+      <div className="flex items-center gap-2 group">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="group-hover:text-[var(--color-background-primary)]"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+        <p className={`${navTextClass} group-hover:text-[var(--color-background-primary)] text-[var(--color-text-primary)]`}>
+          Sign In
+        </p>
+      </div>
     </NavButton>
   );
 }
@@ -298,15 +304,18 @@ function SignUpBtn({ onClick }: { onClick?: () => void }) {
 
   return (
     <NavButton
-      variant={isActive ? "primary" : "white"}
+      variant="primary"
       onClick={() => {
         if (onClick) onClick();
         window.dispatchEvent(new CustomEvent("open-register"));
       }}
     >
-      <p className={`${navTextClass} ${isActive ? "text-[#ffffff]" : "text-[var(--color-text-secondary)]"}`}>
-        Sign Up
-      </p>
+      <div className="flex items-center gap-2">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><line x1="20" y1="8" x2="20" y2="14"></line><line x1="23" y1="11" x2="17" y2="11"></line></svg>
+        <p className={`${navTextClass} text-[#ffffff]`}>
+          Sign Up
+        </p>
+      </div>
     </NavButton>
   );
 }

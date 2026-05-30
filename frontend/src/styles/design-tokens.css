@@ -24,33 +24,33 @@
    * COLOR PALETTE
    * ────────────────────────────────────────────────────────────────────────── */
   
-  /* Primary Brand - Red (Ateion Brand Color) */
-  --color-primary: #fb4444;
-  --color-primary-hover: #ff5555;
-  --color-primary_active: #e03e3e;
-  --color-primary_light: rgba(251, 68, 68, 0.08);
-  --color-primary_lighter: rgba(251, 68, 68, 0.04);
+  /* Primary Brand - Electric Blue */
+  --color-primary: #2563eb;
+  --color-primary-hover: #1d55d4;
+  --color-primary_active: #1e40af;
+  --color-primary_light: rgba(37, 99, 235, 0.08);
+  --color-primary_lighter: rgba(37, 99, 235, 0.04);
   
-  /* Neutral Grays - Cool Gray Scale */
+  /* Neutral Grays */
   --color-white: #ffffff;
-  --color-gray-50: #fafafa;
-  --color-gray-100: #f5f5f5;
-  --color-gray-200: #e5e5e5;
-  --color-gray-300: #d4d4d4;
-  --color-gray-400: #a3a3a3;
-  --color-gray-500: #737373;
-  --color-gray-600: #525252;
-  --color-gray-700: #404040;
-  --color-gray-800: #262626;
-  --color-gray-900: #171717;
-  --color-black: #0a0a0a;
+  --color-gray-50: #f2f4f8;
+  --color-gray-100: #e4e9f4;
+  --color-gray-200: #d4d9e6;
+  --color-gray-300: #aab5cc;
+  --color-gray-400: #6a7a9a;
+  --color-gray-500: #4a5570;
+  --color-gray-600: #334060;
+  --color-gray-700: #1a2235;
+  --color-gray-800: #141e30;
+  --color-gray-900: #0e1320;
+  --color-black: #080d18;
   
   /* Brand Backgrounds */
-  --color-background-primary: #f7f3eb;
+  --color-background-primary: #f2f4f8;
   --color-background-secondary: #ffffff;
-  --color-background-tertiary: #faf9f7;
-  --color-background-dark: #1e1632;
-  --color-background-black: #202020;
+  --color-background-tertiary: #e4e9f4;
+  --color-background-dark: #1a2235;
+  --color-background-black: #0e1320;
   
   /* Navigation */
   --color-nav-button: rgba(235, 235, 235, 0.8);
@@ -58,21 +58,21 @@
   --color-nav-button-active: rgba(200, 200, 200, 0.85);
   
   /* Text Colors */
-  --color-text-primary: #1a1a1a;
-  --color-text-secondary: #292929;
-  --color-text-tertiary: #525252;
-  --color-text-muted: rgba(0, 0, 0, 0.60);
-  --color-text-subtle: rgba(0, 0, 0, 0.40);
+  --color-text-primary: #1a2235;
+  --color-text-secondary: #334060;
+  --color-text-tertiary: #4a5570;
+  --color-text-muted: rgba(26, 34, 53, 0.55);
+  --color-text-subtle: rgba(26, 34, 53, 0.35);
   --color-text-inverse: #ffffff;
-  --color-text-link: #fb4444;
-  --color-text-link-hover: #ff5555;
+  --color-text-link: #2563eb;
+  --color-text-link-hover: #1d55d4;
   
   /* Border Colors */
-  --color-border-light: rgba(0, 0, 0, 0.08);
-  --color-border-medium: rgba(0, 0, 0, 0.12);
-  --color-border-dark: rgba(0, 0, 0, 0.20);
-  --color-border-input: rgba(0, 0, 0, 0.15);
-  --color-border-focus: rgba(251, 68, 68, 0.50);
+  --color-border-light: rgba(26, 34, 53, 0.08);
+  --color-border-medium: rgba(26, 34, 53, 0.14);
+  --color-border-dark: rgba(26, 34, 53, 0.22);
+  --color-border-input: rgba(26, 34, 53, 0.14);
+  --color-border-focus: rgba(37, 99, 235, 0.50);
   
   /* Semantic Colors */
   --color-success: #16a34a;
@@ -91,13 +91,13 @@
   --color-info_light: #dbeafe;
   --color-info_dark: #1d4ed8;
   
-  /* Special Brand Colors */
-  --color-purple-card: #aa9dff;
-  --color-purple-card_dark: #8b7dff;
-  --color-red-card: #ff6b6b;
-  --color-red-card_dark: #ff5252;
-  --color-grey-card: #dadada;
-  --color-grey-card_dark: #c9c9c9;
+  /* Product Colors */
+  --color-gco: #2563eb;
+  --color-gco_dark: #3b82f6;
+  --color-playground: #0891b2;
+  --color-playground_dark: #22d3ee;
+  --color-vouch: #64748b;
+  --color-vouch_dark: #94a3b8;
   
   /* ──────────────────────────────────────────────────────────────────────────
    * TYPOGRAPHY - EVEN NUMBERS ONLY
@@ -220,8 +220,8 @@
   --shadow-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
   
   /* Custom Shadows (Premium Diffused) */
-  --shadow-button: 0 4px 14px rgba(251, 68, 68, 0.15);
-  --shadow-button-hover: 0 8px 24px rgba(251, 68, 68, 0.25);
+  --shadow-button: 0 4px 14px rgba(37, 99, 235, 0.25);
+  --shadow-button-hover: 0 8px 24px rgba(37, 99, 235, 0.40);
   --shadow-card: 0 8px 30px rgba(0, 0, 0, 0.04);
   --shadow-card-hover: 0 12px 40px rgba(0, 0, 0, 0.08);
   --shadow-nav: 0 2px 20px rgba(0, 0, 0, 0.04);
@@ -327,7 +327,7 @@
   /* Focus Ring - EVEN NUMBERS */
   --focus-ring-width: 2px;
   --focus-ring-offset: 2px;
-  --focus-ring-color: rgba(251, 68, 68, 0.50);
+  --focus-ring-color: rgba(37, 99, 235, 0.50);
   --focus-ring: var(--focus-ring-width) solid var(--focus-ring-color);
   --focus-ring-offset-style: var(--focus-ring-offset) solid var(--color-background-primary);
   
@@ -357,33 +357,33 @@
  * ============================================================================ */
 
 [data-theme="dark"] {
-  /* Primary Brand - Neon Coral (Glowing) */
-  --color-primary: #ff4a5a;
-  --color-primary-hover: #ff6b78;
-  --color-primary_active: #ff3344;
-  --color-primary_light: rgba(255, 74, 90, 0.15);
-  --color-primary_lighter: rgba(255, 74, 90, 0.08);
+  /* Primary Brand - Electric Blue */
+  --color-primary: #3b82f6;
+  --color-primary-hover: #60a5fa;
+  --color-primary_active: #2563eb;
+  --color-primary_light: rgba(59, 130, 246, 0.15);
+  --color-primary_lighter: rgba(59, 130, 246, 0.08);
 
-  /* Neutral Grays - Soft Indigo-Tinted */
-  --color-white: #0a0514;
-  --color-gray-50: #0d0b14;
-  --color-gray-100: #120d1e;
-  --color-gray-200: #1c152e;
-  --color-gray-300: #292042;
-  --color-gray-400: #463b63;
-  --color-gray-500: #685b8c;
-  --color-gray-600: #a39fbd;
-  --color-gray-700: #d0cce6;
-  --color-gray-800: #e8e6f5;
-  --color-gray-900: #f4f2fa;
+  /* Neutral Grays */
+  --color-white: #080d18;
+  --color-gray-50: #0e1320;
+  --color-gray-100: #141e30;
+  --color-gray-200: #1a2235;
+  --color-gray-300: #334060;
+  --color-gray-400: #4a5570;
+  --color-gray-500: #6a7a9a;
+  --color-gray-600: #aab5cc;
+  --color-gray-700: #c8d4ec;
+  --color-gray-800: #e4e9f4;
+  --color-gray-900: #f2f4f8;
   --color-black: #ffffff;
 
-  /* Brand Backgrounds - Deep Indigo to Space Black */
-  --color-background-primary: #0a0514;
-  --color-background-secondary: rgba(255, 255, 255, 0.03); /* Glassmorphic base */
-  --color-background-tertiary: rgba(255, 255, 255, 0.05);
-  --color-background-dark: #05020a;
-  --color-background-black: #000000;
+  /* Brand Backgrounds - Deep Slate */
+  --color-background-primary: #0e1320;
+  --color-background-secondary: #141e30;
+  --color-background-tertiary: rgba(255, 255, 255, 0.07);
+  --color-background-dark: #1a2235;
+  --color-background-black: #080d18;
 
   /* Navigation */
   --color-nav-button: rgba(255, 255, 255, 0.05);
@@ -391,43 +391,46 @@
   --color-nav-button-active: rgba(255, 255, 255, 0.15);
 
   /* Text Colors */
-  --color-text-primary: #f4f2fa;
-  --color-text-secondary: #d0cce6;
-  --color-text-tertiary: #a39fbd;
-  --color-text-muted: rgba(244, 242, 250, 0.50);
-  --color-text-subtle: rgba(244, 242, 250, 0.30);
-  --color-text-inverse: #0a0514;
-  --color-text-link: #ff4a5a;
-  --color-text-link-hover: #ff6b78;
+  --color-text-primary: #e0e8f8;
+  --color-text-secondary: #c8d4ec;
+  --color-text-tertiary: #aab5cc;
+  --color-text-muted: rgba(200, 212, 236, 0.50);
+  --color-text-subtle: rgba(200, 212, 236, 0.30);
+  --color-text-inverse: #0e1320;
+  --color-text-link: #3b82f6;
+  --color-text-link-hover: #60a5fa;
 
   /* Border Colors */
-  --color-border-light: rgba(255, 255, 255, 0.05);
+  --color-border-light: rgba(255, 255, 255, 0.06);
   --color-border-medium: rgba(255, 255, 255, 0.10);
-  --color-border-dark: rgba(255, 255, 255, 0.15);
-  --color-border-input: rgba(255, 255, 255, 0.12);
-  --color-border-focus: rgba(255, 74, 90, 0.60);
+  --color-border-dark: rgba(255, 255, 255, 0.16);
+  --color-border-input: rgba(255, 255, 255, 0.10);
+  --color-border-focus: rgba(59, 130, 246, 0.60);
 
   /* Semantic Colors */
-  --color-success: #2dd4bf; /* Teal/Cyan for success on dark */
-  --color-success_light: rgba(45, 212, 191, 0.15);
-  --color-success_dark: #14b8a6;
+  --color-success: #16a34a;
+  --color-success_light: rgba(22, 163, 74, 0.15);
+  --color-success_dark: #15803d;
 
-  --color-warning: #fbbf24;
-  --color-warning_light: rgba(251, 191, 36, 0.15);
-  --color-warning_dark: #f59e0b;
+  --color-warning: #ca8a04;
+  --color-warning_light: rgba(202, 138, 4, 0.15);
+  --color-warning_dark: #a16207;
 
-  --color-error: #fb7185;
-  --color-error_light: rgba(251, 113, 133, 0.15);
-  --color-error_dark: #e11d48;
+  --color-error: #dc2626;
+  --color-error_light: rgba(220, 38, 38, 0.15);
+  --color-error_dark: #b91c1c;
 
-  --color-info: #60a5fa;
-  --color-info_light: rgba(96, 165, 250, 0.15);
-  --color-info_dark: #3b82f6;
-
-  /* Special Brand Colors */
-  --color-purple-card: #9381ff;
-  --color-purple-card_dark: #7b66ff;
-  --color-red-card: #ff4a5a;
+  --color-info: #3b82f6;
+  --color-info_light: rgba(59, 130, 246, 0.15);
+  --color-info_dark: #2563eb;
+  
+  /* Product Colors */
+  --color-gco: #3b82f6;
+  --color-gco_dark: #3b82f6;
+  --color-playground: #22d3ee;
+  --color-playground_dark: #22d3ee;
+  --color-vouch: #94a3b8;
+  --color-vouch_dark: #94a3b8;
   --color-red-card_dark: #ff2a3a;
   --color-grey-card: rgba(255, 255, 255, 0.03);
   --color-grey-card_dark: rgba(255, 255, 255, 0.05);
@@ -442,8 +445,8 @@
   --shadow-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.20);
 
   /* Custom Shadows (Premium Diffused Dark) */
-  --shadow-button: 0 4px 20px rgba(255, 74, 90, 0.25);
-  --shadow-button-hover: 0 8px 32px rgba(255, 74, 90, 0.4);
+  --shadow-button: 0 4px 20px rgba(56, 189, 248, 0.25);
+  --shadow-button-hover: 0 8px 32px rgba(56, 189, 248, 0.4);
   --shadow-card: 0 12px 40px rgba(0, 0, 0, 0.4);
   --shadow-card-hover: 0 16px 50px rgba(0, 0, 0, 0.6);
   --shadow-nav: 0 4px 30px rgba(0, 0, 0, 0.4);
@@ -463,7 +466,7 @@ html[data-theme="dark"] .bg-\[var\(--color-background-secondary\)\] {
 
 /* Make body background a rich radial gradient in dark mode */
 html[data-theme="dark"] body {
-  background: radial-gradient(circle at 50% 0%, #17102e 0%, #0a0514 100%);
+  background: radial-gradient(circle at 50% 0%, #141e30 0%, #0e1320 100%);
   background-attachment: fixed;
 }
 

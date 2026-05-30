@@ -253,10 +253,10 @@ export default function BeyondScoreClone() {
               flexDirection: "column"
             }}>
               <div style={{ display: "flex", justifyContent: "flex-end", gap: "8px", marginBottom: "10px", color: "#888" }}>
-                <div style={{ width: "20px", height: "20px", borderRadius: "50%", background: "#1a1a1a", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                <div style={{ width: "20px", height: "20px", borderRadius: "50%", background: "var(--color-background-dark)", display: "flex", alignItems: "center", justifyContent: "center" }}>
                   <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" /></svg>
                 </div>
-                <div style={{ width: "20px", height: "20px", borderRadius: "50%", background: "#1a1a1a", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                <div style={{ width: "20px", height: "20px", borderRadius: "50%", background: "var(--color-background-dark)", display: "flex", alignItems: "center", justifyContent: "center" }}>
                   <svg width="12" height="10" viewBox="0 0 10 8" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M1 1H9M1 4H9M1 7H9" /></svg>
                 </div>
               </div>
@@ -298,10 +298,10 @@ export default function BeyondScoreClone() {
               flexDirection: "column"
             }}>
               <div style={{ display: "flex", justifyContent: "flex-end", gap: "8px", marginBottom: "15px", color: "#888" }}>
-                <div style={{ width: "20px", height: "20px", borderRadius: "50%", background: "#1a1a1a", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                <div style={{ width: "20px", height: "20px", borderRadius: "50%", background: "var(--color-background-dark)", display: "flex", alignItems: "center", justifyContent: "center" }}>
                   <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" /></svg>
                 </div>
-                <div style={{ width: "20px", height: "20px", borderRadius: "50%", background: "#1a1a1a", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                <div style={{ width: "20px", height: "20px", borderRadius: "50%", background: "var(--color-background-dark)", display: "flex", alignItems: "center", justifyContent: "center" }}>
                   <svg width="12" height="10" viewBox="0 0 10 8" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M1 1H9M1 4H9M1 7H9" /></svg>
                 </div>
               </div>
@@ -337,10 +337,10 @@ export default function BeyondScoreClone() {
               flexDirection: "column"
             }}>
               <div style={{ display: "flex", justifyContent: "flex-start", gap: "8px", marginBottom: "20px", color: "#888" }}>
-                <div style={{ width: "22px", height: "22px", borderRadius: "50%", background: "#1a1a1a", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                <div style={{ width: "22px", height: "22px", borderRadius: "50%", background: "var(--color-background-dark)", display: "flex", alignItems: "center", justifyContent: "center" }}>
                   <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" /></svg>
                 </div>
-                <div style={{ width: "22px", height: "22px", borderRadius: "50%", background: "#1a1a1a", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                <div style={{ width: "22px", height: "22px", borderRadius: "50%", background: "var(--color-background-dark)", display: "flex", alignItems: "center", justifyContent: "center" }}>
                   <svg width="12" height="10" viewBox="0 0 10 8" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M1 1H9M1 4H9M1 7H9" /></svg>
                 </div>
               </div>

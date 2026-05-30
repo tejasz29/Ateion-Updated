@@ -215,12 +215,12 @@ export default function PoliciesPage() {
         {/* ── Hero header ── */}
         <section className="py-20 px-[5%] pb-16 text-center relative overflow-hidden">
           <div style={{
-            background: "radial-gradient(circle, rgba(251,68,68,0.06) 0%, transparent 70%)",
+            background: "radial-gradient(circle, var(--color-primary_light) 0%, transparent 70%)",
           }} className="absolute -top-[100px] left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full pointer-events-none" />
 
           <motion.span
             initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}
-            className="block font-['Manrope',sans-serif] text-[0.68rem] font-extrabold tracking-[0.22em] uppercase text-[#fb4444] mb-[18px]"
+            className="block font-['Manrope',sans-serif] text-[0.68rem] font-extrabold tracking-[0.22em] uppercase text-[var(--color-primary)] mb-[18px]"
           >
             GLOBAL POLICY ALIGNMENT
           </motion.span>
@@ -274,7 +274,7 @@ export default function PoliciesPage() {
                 placeholder="Search countries, frameworks, or tags…"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="w-full py-[15px] pr-[18px] pl-[48px] bg-[var(--color-background-secondary)] border border-[var(--color-border-light)] rounded-[14px] font-['Manrope',sans-serif] text-[0.92rem] text-[var(--color-text-primary)] outline-none shadow-[0_2px_12px_rgba(0,0,0,0.04)] transition-all duration-200 box-border focus:border-[#fb4444] focus:shadow-[0_0_0_3px_rgba(251,68,68,0.10)]"
+                className="w-full py-[15px] pr-[18px] pl-[48px] bg-[var(--color-background-secondary)] border border-[var(--color-border-light)] rounded-[14px] font-['Manrope',sans-serif] text-[0.92rem] text-[var(--color-text-primary)] outline-none shadow-[0_2px_12px_rgba(0,0,0,0.04)] transition-all duration-200 box-border focus:border-[var(--color-primary)] focus:shadow-[0_0_0_3px_var(--color-primary_light)]"
               />
             </div>
 
@@ -304,7 +304,7 @@ export default function PoliciesPage() {
             {filtered.length === 0 ? (
               <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-center py-20">
                 <p className="text-[3rem] mb-4">🌍</p>
-                <p className="font-['OV_Soge',sans-serif] text-[1.4rem] font-bold text-[#1a1a1a] mb-2">No policies found</p>
+                <p className="font-['OV_Soge',sans-serif] text-[1.4rem] font-bold text-[var(--color-text-primary)] mb-2">No policies found</p>
                 <p className="font-['Manrope',sans-serif] text-[0.88rem] text-[#999]">Try a different search term or region filter.</p>
               </motion.div>
             ) : (
