@@ -89,7 +89,7 @@
 .gco {
   width: clamp(100px, 12vw, 140px);
   height: clamp(100px, 12vw, 140px);
-  background: #ff5a5a;
+  background: var(--color-primary);
   top: 10px;
   left: 50px;
   color: var(--color-background-primary);
@@ -98,7 +98,7 @@
 .playground {
   width: clamp(120px, 15vw, 180px);
   height: clamp(120px, 15vw, 180px);
-  background: #ff5a5a;
+  background: var(--color-primary);
   color: var(--color-background-primary);
   top: 40px;
   right: 50px;

@@ -118,7 +118,7 @@ export default function AssessmentDemoPage() {
 
             </div>
 
-            <div className="bg-[#fb4444] text-white px-5 py-3 rounded-full font-semibold">
+            <div className="bg-[var(--color-primary)] text-white px-5 py-3 rounded-full font-semibold">
               15:00
             </div>
 
@@ -162,8 +162,8 @@ export default function AssessmentDemoPage() {
                     selectedAnswers[
                       currentQuestion
                     ] === option
-                      ? "border-[#fb4444] bg-[#fb4444]/10 text-[#fb4444]"
-                      : "border-[var(--color-border-medium)] hover:border-[#fb4444] hover:bg-[#fb4444]/5 text-[var(--color-text-secondary)]"
+                      ? "border-[var(--color-primary)] bg-[var(--color-primary_light)] text-[var(--color-primary)]"
+                      : "border-[var(--color-border-medium)] hover:border-[var(--color-primary)] hover:bg-[var(--color-primary_lighter)] text-[var(--color-text-secondary)]"
                   }
                   `}
                 >
@@ -192,7 +192,7 @@ export default function AssessmentDemoPage() {
                 currentQuestion ===
                 questions.length - 1
               }
-              className="bg-[#fb4444] hover:bg-[#ff5a5a] text-white px-8 py-3 rounded-full font-semibold transition disabled:opacity-40"
+              className="bg-[var(--color-primary)] hover:bg-[var(--color-primary-hover)] text-white px-8 py-3 rounded-full font-semibold transition disabled:opacity-40"
             >
               Next Question
             </button>

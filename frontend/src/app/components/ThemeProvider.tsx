@@ -48,7 +48,7 @@ export default function ThemeProvider({
     // Update meta theme-color
     const meta = document.querySelector('meta[name="theme-color"]');
     if (meta) {
-      meta.setAttribute("content", theme === "dark" ? "#0f0f11" : "#f7f3eb");
+      meta.setAttribute("content", theme === "dark" ? "#0e1320" : "#f2f4f8");
     }
   }, [theme]);
 

@@ -110,7 +110,7 @@
 }
 
 .right-side input:focus{
-  border:1px solid #ff5a4f;
+  border:1px solid var(--color-primary);
 }
 
 .register-btn{
@@ -123,7 +123,7 @@
   border:none;
   border-radius:14px;
 
-  background:#ff5a4f;
+  background:var(--color-primary);
   color: var(--color-background-primary);
 
   font-size:16px;
@@ -250,7 +250,7 @@
 }
 
 [data-theme="dark"] .register-card .right-side input:focus{
-  border: 1px solid #ff5a4f;
+  border: 1px solid var(--color-primary);
 }
 
 [data-theme="dark"] .register-card .right-side input::placeholder{

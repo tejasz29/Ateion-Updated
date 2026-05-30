@@ -215,7 +215,7 @@ export default function HomePolicySection() {
       <div style={{
         position: "absolute", top: -80, right: -150,
         width: 500, height: 500, borderRadius: "50%",
-        background: "radial-gradient(circle, rgba(251,68,68,0.05) 0%, transparent 70%)",
+        background: "radial-gradient(circle, var(--color-primary_light) 0%, transparent 70%)",
         pointerEvents: "none",
       }} />
 
@@ -230,7 +230,7 @@ export default function HomePolicySection() {
             display: "block",
             fontFamily: "'Manrope', sans-serif",
             fontSize: "0.68rem", fontWeight: 800, letterSpacing: "0.22em",
-            textTransform: "uppercase", color: "#fb4444", marginBottom: 18,
+            textTransform: "uppercase", color: "var(--color-primary)", marginBottom: 18,
           }}
         >
           GLOBAL POLICY ALIGNMENT
@@ -302,8 +302,8 @@ export default function HomePolicySection() {
             transition: "background 0.28s ease, color 0.28s ease",
           }}
           onMouseEnter={(e) => {
-            (e.currentTarget as HTMLButtonElement).style.background = "#fb4444";
-            (e.currentTarget as HTMLButtonElement).style.borderColor = "#fb4444";
+            (e.currentTarget as HTMLButtonElement).style.background = "var(--color-primary)";
+            (e.currentTarget as HTMLButtonElement).style.borderColor = "var(--color-primary)";
           }}
           onMouseLeave={(e) => {
             (e.currentTarget as HTMLButtonElement).style.background = "var(--color-text-primary)";

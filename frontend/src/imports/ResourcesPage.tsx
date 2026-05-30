@@ -193,7 +193,7 @@ export default function ResourcesPage() {
           onClick={() => setActiveView("Dashboard")}
         >
           <div className="flex items-center gap-3">
-            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#FB4444] text-[#ffffff]">
+            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[var(--color-primary)] text-[#ffffff]">
               <Rocket size={24} />
             </div>
             <div className="flex flex-col">
@@ -273,7 +273,7 @@ export default function ResourcesPage() {
          <div className="flex items-center gap-3">
             <SidebarTrigger className="md:hidden" /> 
             <h1 
-              className="text-xl sm:text-2xl font-bold text-[var(--color-text-primary)] cursor-pointer hover:text-[#fb4444] transition-colors" 
+              className="text-xl sm:text-2xl font-bold text-[var(--color-text-primary)] cursor-pointer hover:text-[var(--color-primary)] transition-colors" 
               style={{ fontFamily: "'OV Soge', sans-serif" }}
               onClick={() => setActiveView("Dashboard")}
             >
@@ -284,7 +284,7 @@ export default function ResourcesPage() {
           
           <div className="flex items-center gap-4 sm:gap-6">
             {/* DYNAMIC GATEKEEPER BADGE */}
-            <div className="hidden sm:flex items-center gap-2 bg-[#fb4444] text-[#ffffff] px-4 py-1.5 rounded-full text-xs font-bold shadow-[0_2px_10px_rgba(251,68,68,0.2)]">
+            <div className="hidden sm:flex items-center gap-2 bg-[var(--color-primary)] text-[#ffffff] px-4 py-1.5 rounded-full text-xs font-bold shadow-[0_2px_10px_var(--color-primary_light)]">
               <User size={14} />
               <span>{userProfile.segmentText}</span>
             </div>
@@ -406,7 +406,7 @@ export default function ResourcesPage() {
                 <div className="flex flex-col gap-4 mt-6">
                   <div className="flex items-center justify-between">
                     <h3 className="text-xl font-bold text-[var(--color-text-primary)]" style={{ fontFamily: "'OV Soge', sans-serif" }}>My Courses</h3>
-                    <span className="text-sm font-bold text-[var(--color-text-tertiary)] cursor-pointer hover:text-[#fb4444]">View All</span>
+                    <span className="text-sm font-bold text-[var(--color-text-tertiary)] cursor-pointer hover:text-[var(--color-primary)]">View All</span>
                   </div>
 
                   {/* Course Grid */}
@@ -416,7 +416,7 @@ export default function ResourcesPage() {
                     <div className="bg-[var(--color-background-secondary)] rounded-[20px] overflow-hidden shadow-sm border border-[var(--color-border-light)] flex flex-col group hover:shadow-md transition-all cursor-pointer">
                       <div className="relative h-[160px] w-full overflow-hidden">
                         <img src="https://images.unsplash.com/photo-1633356122544-f134324a6cee?q=80&w=600&auto=format&fit=crop" alt="React Course" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                        <div className="absolute top-3 left-3 bg-[#fb4444] text-[#ffffff] px-3 py-1 rounded-md text-[10px] font-bold flex items-center gap-1.5 shadow-md">
+                        <div className="absolute top-3 left-3 bg-[var(--color-primary)] text-[#ffffff] px-3 py-1 rounded-md text-[10px] font-bold flex items-center gap-1.5 shadow-md">
                           <ListVideo size={12} />
                           3 VIDEOS FREE
                         </div>
@@ -444,7 +444,7 @@ export default function ResourcesPage() {
                     <div className="bg-[var(--color-background-secondary)] rounded-[20px] overflow-hidden shadow-sm border border-[var(--color-border-light)] flex flex-col group hover:shadow-md transition-all cursor-pointer">
                       <div className="relative h-[160px] w-full overflow-hidden">
                         <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=600&auto=format&fit=crop" alt="Data Science" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                        <div className="absolute top-3 left-3 bg-[#fb4444] text-[#ffffff] px-3 py-1 rounded-md text-[10px] font-bold flex items-center gap-1.5 shadow-md">
+                        <div className="absolute top-3 left-3 bg-[var(--color-primary)] text-[#ffffff] px-3 py-1 rounded-md text-[10px] font-bold flex items-center gap-1.5 shadow-md">
                           <ListVideo size={12} />
                           3 VIDEOS FREE
                         </div>
@@ -472,7 +472,7 @@ export default function ResourcesPage() {
                     <div className="bg-[var(--color-background-secondary)] rounded-[20px] overflow-hidden shadow-sm border border-[var(--color-border-light)] flex flex-col group hover:shadow-md transition-all cursor-pointer">
                       <div className="relative h-[160px] w-full overflow-hidden">
                         <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=600&auto=format&fit=crop" alt="Web Development" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                        <div className="absolute top-3 left-3 bg-[#fb4444] text-[#ffffff] px-3 py-1 rounded-md text-[10px] font-bold flex items-center gap-1.5 shadow-md">
+                        <div className="absolute top-3 left-3 bg-[var(--color-primary)] text-[#ffffff] px-3 py-1 rounded-md text-[10px] font-bold flex items-center gap-1.5 shadow-md">
                           <ListVideo size={12} />
                           3 VIDEOS FREE
                         </div>
@@ -489,7 +489,7 @@ export default function ResourcesPage() {
                             <div className="bg-[#1e1632] h-1.5 rounded-full" style={{ width: '0%' }}></div>
                           </div>
                           <p className="text-xs text-[var(--color-text-secondary)] font-medium mb-4">0 of 28 lessons completed</p>
-                          <button className="w-full bg-[#fb4444] hover:bg-[#e03a3a] text-[#ffffff] py-2.5 rounded-xl text-sm font-bold transition-colors">
+                          <button className="w-full bg-[var(--color-primary)] hover:bg-[var(--color-primary-hover)] text-[#ffffff] py-2.5 rounded-xl text-sm font-bold transition-colors">
                             Start Course
                           </button>
                         </div>
@@ -518,7 +518,7 @@ export default function ResourcesPage() {
 
       <button
         onClick={() => setShowAddTask(true)}
-        className="bg-[#fb4444] text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-red-600 transition shadow-sm"
+        className="bg-[var(--color-primary)] text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-[var(--color-primary-hover)] transition shadow-sm"
       >
         + Add Task
       </button>
@@ -550,10 +550,10 @@ export default function ResourcesPage() {
               <div
                 className={`w-5 h-5 rounded mt-0.5 flex items-center justify-center transition-all ${
                   task.completed
-                    ? "bg-[#fb4444] text-white scale-105"
+                    ? "bg-[var(--color-primary)] text-white scale-105"
                     : task.priority === "medium"
                     ? "border-2 border-orange-300 group-hover:border-orange-500"
-                    : "border-2 border-gray-300 group-hover:border-[#fb4444]"
+                    : "border-2 border-gray-300 group-hover:border-[var(--color-primary)]"
                 }`}
               >
                 {task.completed && <CheckSquare size={14} />}
@@ -579,7 +579,7 @@ export default function ResourcesPage() {
                   <span
                     className={`text-[10px] font-bold px-2 py-0.5 rounded-md ${
                       task.priority === "high"
-                        ? "text-[#fb4444] bg-red-50"
+                        ? "text-[var(--color-primary)] bg-[var(--color-background-tertiary)]"
                         : "text-orange-500 bg-orange-100"
                     }`}
                   >
@@ -608,7 +608,7 @@ export default function ResourcesPage() {
             onChange={(e) =>
               setNewTask({ ...newTask, title: e.target.value })
             }
-            className="w-full border p-2 rounded mb-3 outline-none focus:ring-2 focus:ring-[#fb4444]"
+            className="w-full border p-2 rounded mb-3 outline-none focus:ring-2 focus:ring-[var(--color-primary)]"
           />
 
           <input
@@ -642,7 +642,7 @@ export default function ResourcesPage() {
 
             <button
               onClick={handleAddTask}
-              className="px-3 py-1 bg-[#fb4444] text-white rounded hover:bg-red-600"
+              className="px-3 py-1 bg-[var(--color-primary)] text-white rounded hover:bg-[var(--color-primary-hover)]"
             >
               Add
             </button>
@@ -678,7 +678,7 @@ export default function ResourcesPage() {
                         <div>10</div><div>11</div><div>12</div><div>13</div><div>14</div><div>15</div><div>16</div>
                         <div>17</div><div>18</div><div>19</div><div>20</div><div>21</div><div>22</div><div>23</div>
                         <div>24</div><div>25</div><div>26</div>
-                        <div className="bg-[#fb4444] text-[#ffffff] rounded-full w-7 h-7 flex items-center justify-center mx-auto shadow-md font-bold">27</div>
+                        <div className="bg-[var(--color-primary)] text-[#ffffff] rounded-full w-7 h-7 flex items-center justify-center mx-auto shadow-md font-bold">27</div>
                         <div>28</div><div>29</div><div>30</div>
                         <div>31</div><div className="text-[var(--color-text-tertiary)]">1</div><div className="text-[var(--color-text-tertiary)]">2</div><div className="text-[var(--color-text-tertiary)]">3</div><div className="text-[var(--color-text-tertiary)]">4</div><div className="text-[var(--color-text-tertiary)]">5</div><div className="text-[var(--color-text-tertiary)]">6</div>
                       </div>
@@ -757,11 +757,11 @@ export default function ResourcesPage() {
                       
                       {/* Active Highlighted Day */}
                       <div className="relative z-10 flex flex-col items-center w-full group cursor-pointer">
-                        <div className="h-2.5 w-2.5 rounded-full bg-[#fb4444] mb-[95px] scale-125 shadow-[0_0_10px_rgba(251,68,68,0.5)]"></div>
+                        <div className="h-2.5 w-2.5 rounded-full bg-[var(--color-primary)] mb-[95px] scale-125 shadow-[0_0_10px_var(--color-border-focus)]"></div>
                         <span className="absolute bottom-[-24px] text-[10px] font-bold text-[var(--color-text-primary)]">Thu</span>
                         {/* Interactive Tooltip */}
                         <div className="absolute -top-[55px] bg-[var(--color-background-secondary)] border border-[var(--color-border-light)] shadow-lg text-[10px] py-1.5 px-3 rounded-lg font-bold text-[var(--color-text-primary)] whitespace-nowrap z-20">
-                          Thu <br/><span className="text-[#fb4444]">hours: 5.2</span>
+                          Thu <br/><span className="text-[var(--color-primary)]">hours: 5.2</span>
                         </div>
                       </div>
 
@@ -788,14 +788,14 @@ export default function ResourcesPage() {
 
                       {/* Activity 1 */}
                       <div className="relative">
-                        <div className="absolute -left-[27px] top-1 w-3 h-3 rounded-full bg-[#fb4444] border-[3px] border-[#ffffff] shadow-sm box-content"></div>
+                        <div className="absolute -left-[27px] top-1 w-3 h-3 rounded-full bg-[var(--color-primary)] border-[3px] border-[#ffffff] shadow-sm box-content"></div>
                         <p className="text-sm font-bold text-[var(--color-text-primary)]">Daily Reflection</p>
                         <p className="text-xs text-emerald-500 font-medium mt-0.5">Completed Today</p>
                       </div>
 
                       {/* Activity 2 */}
                       <div className="relative">
-                        <div className="absolute -left-[27px] top-1 w-3 h-3 rounded-full bg-[#fb4444] border-[3px] border-[#ffffff] shadow-sm box-content"></div>
+                        <div className="absolute -left-[27px] top-1 w-3 h-3 rounded-full bg-[var(--color-primary)] border-[3px] border-[#ffffff] shadow-sm box-content"></div>
                         <p className="text-sm font-bold text-[var(--color-text-primary)]">Mindfulness Practice</p>
                         <p className="text-xs text-[var(--color-text-tertiary)] font-medium mt-0.5">5 min session</p>
                       </div>
@@ -820,8 +820,8 @@ export default function ResourcesPage() {
                   <div className="bg-[var(--color-background-secondary)] p-6 rounded-[20px] shadow-sm border border-[var(--color-border-light)] flex flex-col h-full lg:col-span-2">
                     <h4 className="text-[16px] font-bold text-[var(--color-text-primary)] mb-4">Achievements</h4>
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                      <div className="flex flex-col items-center justify-center p-5 rounded-xl border border-[var(--color-border-light)] bg-gray-50/50 hover:bg-gray-50 hover:border-red-200 transition-colors cursor-pointer group">
-                        <Award className="text-[#fb4444] mb-3 group-hover:scale-110 transition-transform" size={32} />
+                      <div className="flex flex-col items-center justify-center p-5 rounded-xl border border-[var(--color-border-light)] bg-gray-50/50 hover:bg-gray-50 hover:border-[var(--color-primary_light)] transition-colors cursor-pointer group">
+                        <Award className="text-[var(--color-primary)] mb-3 group-hover:scale-110 transition-transform" size={32} />
                         <p className="text-sm font-bold text-[var(--color-text-primary)] text-center">Course Master</p>
                       </div>
                       <div className="flex flex-col items-center justify-center p-5 rounded-xl border border-[var(--color-border-light)] bg-gray-50/50 hover:bg-gray-50 hover:border-orange-200 transition-colors cursor-pointer group">

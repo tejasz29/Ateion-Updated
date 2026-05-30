@@ -1,13 +1,13 @@
 :root {
-  --primary-color: #1a1a1a;
-  --bg-color: #f7f3eb;
-  --accent-color: #fb4444;
-  --text-color: #1a1a1a;
+  --primary-color: #1a2235;
+  --bg-color: #f2f4f8;
+  --accent-color: #2563eb;
+  --text-color: #1a2235;
 }
 
 [data-theme="dark"] {
-  --primary-color: var(--color-text-primary);
-  --bg-color: var(--color-background-primary);
-  --accent-color: #fb4444;
-  --text-color: var(--color-text-primary);
+  --primary-color: #e0e8f8;
+  --bg-color: #0e1320;
+  --accent-color: #3b82f6;
+  --text-color: #e0e8f8;
 }

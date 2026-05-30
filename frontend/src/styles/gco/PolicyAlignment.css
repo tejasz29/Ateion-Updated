@@ -18,7 +18,7 @@
   width: 560px;
   height: 560px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(251,68,68,0.05) 0%, transparent 70%);
+  background: radial-gradient(circle, var(--color-primary_light) 0%, transparent 70%);
   pointer-events: none;
 }
 
@@ -274,7 +274,7 @@
   font-weight: 700;
   color: var(--color-text-primary);
   background: transparent;
-  border: 2px solid #1a1a1a;
+  border: 2px solid var(--color-text-primary);
   border-radius: 100px;
   padding: 14px 38px;
   cursor: pointer;
@@ -282,8 +282,8 @@
 }
 
 .explore-all-btn:hover {
-  background: #1a1a1a;
-  color: #f7f3eb;
+  background: var(--color-text-primary);
+  color: var(--color-background-primary);
 }
 
 /* ─── Responsive ────────────────────────────────────────────── */

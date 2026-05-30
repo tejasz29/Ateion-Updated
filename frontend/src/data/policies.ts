@@ -133,7 +133,7 @@ export const policies: PolicyEntry[] = [
     code: "IND",
     flag: "🇮🇳",
     region: "Asia",
-    accentColor: "#FF6B00",
+    accentColor: "var(--color-primary)",
     featured: true,
     frameworks: [
       {
