@@ -1,5 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router";
 import svgPaths from "../svg-paths";
 
 function Tag({ text, className = "" }: { text: string; className?: string }) {
@@ -38,6 +39,8 @@ function GcoFeatureBadge({
     hasTags: boolean;
   };
 }) {
+  const navigate = useNavigate();
+
   return (
     // On mobile: full width, centered text. On desktop: fixed 392px, left-aligned.
     <div className={`flex flex-col ${activeData.id === "gco" ? "" : "gap-[32px]"} items-start w-full md:w-[392px] md:shrink-0`}>
@@ -75,7 +78,15 @@ function GcoFeatureBadge({
         role="button"
         tabIndex={0}
         aria-label="View more details"
-        onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); /* future: navigate or expand */ } }}
+        onClick={() => {
+          if (activeData.id === "gco") navigate("/gco");
+        }}
+        onKeyDown={(e) => { 
+          if (e.key === 'Enter' || e.key === ' ') { 
+            e.preventDefault(); 
+            if (activeData.id === "gco") navigate("/gco"); 
+          } 
+        }}
       >
         <p className="font-['Outfit',sans-serif] leading-none text-[17px] text-[#ffffff] tracking-[0.16px] whitespace-nowrap pt-0.5">
           View More
