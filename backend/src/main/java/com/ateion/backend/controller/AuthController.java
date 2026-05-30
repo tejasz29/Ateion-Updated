@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+import com.ateion.backend.util.JwtUtil;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -21,7 +22,7 @@ public class AuthController {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder; // <--- INJECTED ENCODER
-
+    private final JwtUtil jwtUtil;
     @PostMapping("/signup")
     public ResponseEntity<?> signUp(@RequestBody SignUpRequestDTO signUpRequest) {
 
@@ -51,11 +52,14 @@ public class AuthController {
 
             // VERIFY using BCrypt's .matches()
             if (passwordEncoder.matches(loginRequest.getPassword(), user.getPassword())) {
+                
+                String token = jwtUtil.generateToken(user.getEmail());
 
                 Map<String, Object> userData = new HashMap<>();
                 userData.put("fullName", user.getFullName());
                 userData.put("email", user.getEmail());
                 userData.put("ageSegment", user.getAgeSegment());
+                userData.put("token", token);
 
                 return ResponseEntity.ok(userData);
             } else {
