@@ -5,6 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4922eddd-8846-4e24-8b5c-28784c4c7add" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/ateion/backend/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/ateion/backend/config/SecurityConfig.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -103,7 +104,7 @@
       <workItem from="1780036702497" duration="8881000" />
       <workItem from="1780046487815" duration="892000" />
       <workItem from="1780123024847" duration="4690000" />
-      <workItem from="1780214040814" duration="714000" />
+      <workItem from="1780214040814" duration="4056000" />
     </task>
     <servers />
   </component>
