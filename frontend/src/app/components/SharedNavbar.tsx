@@ -187,6 +187,29 @@ function ResourcesBtn({ onClick }: { onClick?: () => void }) {
 }
 
 /**
+ * PSYCHOMETRIC TEST BUTTON
+ */
+function PsychometricTestBtn({ onClick }: { onClick?: () => void }) {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const isActive = location.pathname.startsWith("/assessment-demo");
+
+  return (
+    <NavButton
+      variant={isActive ? "primary" : "default"}
+      onClick={() => {
+        if (onClick) onClick();
+        navigate("/assessment-demo");
+      }}
+    >
+      <p className={`${navTextClass} ${isActive ? "text-[#ffffff]" : "text-[var(--color-primary)]"}`}>
+        Psychometric Test
+      </p>
+    </NavButton>
+  );
+}
+
+/**
  * DASHBOARD BUTTON
  */
 function DashboardBtn({
@@ -219,6 +242,7 @@ function NavLinks({ onCloseMobile }: { onCloseMobile?: () => void }) {
       <HomeBtn onClick={onCloseMobile} />
       <DashboardBtn onClick={onCloseMobile} />
       <GlobalOlympiadBtn onClick={onCloseMobile} />
+      <PsychometricTestBtn onClick={onCloseMobile} />
       <ResourcesBtn onClick={onCloseMobile} />
     </div>
   );
@@ -432,7 +456,7 @@ export default function SharedNavbar() {
       role="navigation"
       aria-label="Main navigation"
     >
-      <div className="flex items-center justify-between px-[16px] lg:px-[24px] py-[12px] lg:py-[20px] w-full max-w-[1280px] mx-auto">
+      <div className="flex items-center justify-between px-[16px] md:px-[32px] xl:px-[48px] py-[12px] lg:py-[20px] w-full gap-[24px]">
         
         {/* LEFT SIDE */}
         <div className="flex items-center justify-start">
@@ -483,9 +507,15 @@ export default function SharedNavbar() {
                 onClick={() => handleNavClick("/gco")}
               />
 
+              <PsychometricTestBtn
+                onClick={() => handleNavClick("/assessment-demo")}
+              />
+
               <ResourcesBtn
                 onClick={() => handleNavClick("/playground")}
               />
+
+              <div className="h-[1px] bg-[var(--color-border-light)] my-[4px]" />
 
               <GetConnectedBtn
                 onClick={() => handleNavClick("/contact")}
