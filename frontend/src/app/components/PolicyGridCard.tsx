@@ -141,7 +141,7 @@ export default function PolicyGridCard({ policy, index }: { policy: PolicyEntry;
                       background: policy.accentColor,
                       border: "1px solid rgba(255,255,255,0.15)",
                     }}
-                    onClick={(e) => handleOpen(e, fw.policyLink)
+                    onClick={(e) => handleOpen(e, fw.policyLink)}
                   >
                     Open →
                   </button>

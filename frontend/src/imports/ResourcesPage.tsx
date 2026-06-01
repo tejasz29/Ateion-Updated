@@ -27,6 +27,7 @@ import {
   LogOut,
   ChevronRight,
   ChevronLeft,
+  Milestone
 } from "lucide-react";
 import React, { useState, useEffect } from "react";
 import {
@@ -95,6 +96,16 @@ const navigationSections = [
       { title: "Notes", icon: FileText },
       { title: "Goal Planning", icon: Target },
       { title: "Resources", icon: FolderOpen },
+    ],
+  },
+  {
+    title: "Pillar",
+    icon: Milestone,
+    items: [
+      { title: "Sproutlings (5–7)", icon: Sprout },
+      { title: "Saplings (7–14)", icon: Sprout },
+      { title: "Pathfinders (14–18)", icon: Compass },
+      { title: "Dreamers (18+)", icon: Sparkles },
     ],
   },
 ];
@@ -226,7 +237,7 @@ export default function ResourcesPage() {
       <div className="flex h-screen w-full bg-[var(--color-background-primary)]">
         {/* SIDEBAR */}
         <Sidebar variant="sidebar" collapsible="icon" className="border-r-0">
-          <div className="flex h-screen flex-col bg-[#1E1632] text-[#ffffff]">
+          <div className="flex h-full flex-col bg-[#1E1632] text-[#ffffff]">
             {/* LOGO */}
             <SidebarHeader
               className="px-4 py-6 cursor-pointer hover:opacity-80 transition-opacity"
