@@ -192,14 +192,14 @@ function ResourcesBtn({ onClick }: { onClick?: () => void }) {
 function PsychometricTestBtn({ onClick }: { onClick?: () => void }) {
   const navigate = useNavigate();
   const location = useLocation();
-  const isActive = location.pathname.startsWith("/assessment-demo");
+  const isActive = location.pathname.startsWith("/psychometric-assessment");
 
   return (
     <NavButton
       variant={isActive ? "primary" : "default"}
       onClick={() => {
         if (onClick) onClick();
-        navigate("/assessment-demo");
+        navigate("/psychometric-assessment");
       }}
     >
       <p className={`${navTextClass}`}>
@@ -508,7 +508,7 @@ export default function SharedNavbar() {
               />
 
               <PsychometricTestBtn
-                onClick={() => handleNavClick("/assessment-demo")}
+                onClick={() => handleNavClick("/psychometric-assessment")}
               />
 
               <ResourcesBtn

@@ -206,71 +206,7 @@ function HeroFeatureCardsRow() {
    GLOBAL PRESENCE MAP + COUNTERS
 ───────────────────────────────────────────── */
 
-function GlobalPresenceMapSection() {
-  return (
-    <div className="content-stretch flex flex-col items-center relative shrink-0 w-full">
-      {/* Section heading */}
-      <div className="w-full flex justify-center mb-6 sm:mb-8 md:mb-10 px-4">
-        <p className="font-semibold leading-tight text-[32px] sm:text-[40px] md:text-[48px] text-[var(--color-text-primary)] text-center" style={{ fontFamily: "'OV Soge', sans-serif" }}>Global Presence</p>
-      </div>
 
-      {/* Dark stats + map block */}
-      <div className="dark-section bg-[#05020a] h-auto relative shrink-0 w-full py-[40px] sm:py-[56px] md:py-[80px]">
-        <div className="content-stretch flex flex-col items-center relative size-full px-[16px] sm:px-[24px] md:px-[40px]">
-          <div className="content-stretch flex flex-col items-center relative shrink-0 w-full">
-            <div className="content-stretch flex flex-col gap-[32px] sm:gap-[48px] md:gap-[64px] items-center relative shrink-0 w-full max-w-[1280px] mx-auto">
-
-              {/* Counters */}
-              <div className="content-stretch flex flex-col items-center relative shrink-0 w-full mb-[32px] sm:mb-[48px] md:mb-[64px]">
-                <div className="content-stretch flex flex-col gap-[28px] sm:gap-[40px] md:gap-[48px] items-center relative shrink-0 w-full max-w-[1200px]">
-                  <FadeIn>
-                    <div className="flex items-center justify-center relative shrink-0 mb-6 sm:mb-8 px-4">
-                      <p className="font-semibold not-italic opacity-90 relative text-[28px] sm:text-[32px] md:text-[36px] text-center text-[#ffffff] tracking-wide" style={{ fontFamily: "'OV Soge', sans-serif" }}>
-                        Powered by Proven Numbers
-                      </p>
-                    </div>
-                    <div className="content-stretch flex flex-col sm:flex-row items-center justify-center sm:justify-around relative shrink-0 w-full gap-[28px] sm:gap-[12px] py-[12px] sm:py-[24px]">
-                      {[
-                        { value: 200, suffix: "+", label: "Partner Institutions" },
-                        { value: 50000, suffix: "+", label: "Students Empowered" },
-                        { value: 193, suffix: "+", label: "Global Alliances" },
-                      ].map(({ value, suffix, label }) => (
-                        <motion.div
-                          key={label}
-                          whileHover={{ y: -8, transition: { duration: 0.3 } }}
-                          className="content-stretch flex flex-col items-center justify-center relative shrink-0 px-4"
-                        >
-                          <p className="font-['DM Sans',sans-serif] font-bold leading-none relative shrink-0 text-[#f3ecff] text-[42px] sm:text-[48px] md:text-[54px]">
-                            <Counter value={value} suffix={suffix} />
-                          </p>
-                          <p className="font-['Inter',sans-serif] leading-normal not-italic relative shrink-0 text-[#a78bfa] text-[16px] sm:text-[18px] mt-[8px] sm:mt-[12px] text-center">{label}</p>
-                        </motion.div>
-                      ))}
-                    </div>
-                  </FadeIn>
-                </div>
-              </div>
-
-              {/* Dot map */}
-              <div
-                className="relative shrink-0 w-full overflow-x-auto md:overflow-hidden rounded-[24px] sm:rounded-[28px] md:rounded-[32px] bg-[#050505] min-h-[260px] sm:min-h-[360px] md:min-h-[500px]"
-                style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-              >
-                <style>{`
-                  .map-scroll::-webkit-scrollbar { width: 0; height: 0; }
-                `}</style>
-                <div className="map-scroll absolute inset-0 scale-[1.08] sm:scale-[1] origin-center flex items-center justify-center">
-                  <DotMap />
-                </div>
-              </div>
-
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
 
 /* ─────────────────────────────────────────────
    EDUCATION STATUS GRID
@@ -475,11 +411,7 @@ export default function Homepage() {
         <HeroHeaderSection />
       </section>
 
-      {/* 3. Global presence stats + map */}
-      <section>
-        <GlobalPresenceMapSection />
-      </section>
-
+     
       {/* 4. Education is not broken */}
       <section>
         <EducationStatusWrapper />
