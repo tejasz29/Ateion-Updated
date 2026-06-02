@@ -1,4 +1,4 @@
-import { BookOpen } from "lucide-react";
+import { ShieldCheck, BookOpen } from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import "../../../imports/admin/styles/adminstyle.css";
@@ -28,12 +28,12 @@ export default function TeacherLoginPage() {
         lg:px-8
         relative
         overflow-hidden
-        bg-[#f2f4f8]
+        animated-gradient
       "
     >
-      {/* Background Orbs for Light Mode */}
-      <div className="absolute top-0 left-0 w-96 h-96 bg-cyan-400/20 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-0 right-0 w-96 h-96 bg-blue-400/20 rounded-full blur-3xl pointer-events-none" />
+      {/* Background Blur Effects */}
+      <div className="absolute top-0 left-0 w-72 h-72 bg-white/20 rounded-full blur-3xl" />
+      <div className="absolute bottom-0 right-0 w-72 h-72 bg-white/20 rounded-full blur-3xl" />
 
       {/* Login Card */}
       <div
@@ -41,11 +41,11 @@ export default function TeacherLoginPage() {
           w-full
           max-w-md
           md:max-w-lg
-          bg-white/90
-          backdrop-blur-xl
+          bg-white/10
+          backdrop-blur-[30px]
           border
-          border-white
-          shadow-[0_8px_30px_rgb(0,0,0,0.08)]
+          border-white/20
+          shadow-xl
           rounded-[32px]
           p-6
           sm:p-8
@@ -55,16 +55,20 @@ export default function TeacherLoginPage() {
           overflow-hidden
         "
       >
+        {/* Glass Reflection */}
+        <div className="absolute top-0 left-0 w-full h-24 bg-[var(--color-white)]/10 blur-xl"></div>
+
         {/* Logo */}
         <div className="flex justify-center mb-4">
           <div
             className="
               p-4
               rounded-full
-              bg-white
+              bg-white/15
+              backdrop-blur-md
               border-2
               border-[#3B82F6]
-              shadow-[0_0_15px_rgba(59,130,246,0.2)]
+              shadow-[0_0_20px_rgba(59,130,246,0.4)]
             "
           >
             <BookOpen size={42} className="text-[#3B82F6]" />
@@ -78,21 +82,20 @@ export default function TeacherLoginPage() {
             text-3xl
             sm:text-4xl
             font-bold
-            text-[#1a2235]
+            text-white
+            drop-shadow-[0_0_15px_rgba(255,255,255,0.7)]
           "
         >
           Ateion
         </h1>
 
-        <p className="text-center text-gray-500 mt-2 mb-8 font-medium">
-          Instructor Portal
-        </p>
+        <p className="text-center text-white/90 mt-2 mb-8">Instructor Portal</p>
 
         {/* Form */}
         <form onSubmit={handleLogin} className="space-y-5">
           {/* Email */}
           <div>
-            <label className="block text-[#1a2235] mb-2 text-sm sm:text-base font-bold">
+            <label className="block text-white mb-2 text-sm sm:text-base font-medium">
               Email Address
             </label>
 
@@ -104,15 +107,16 @@ export default function TeacherLoginPage() {
                 px-4
                 py-3
                 rounded-xl
-                bg-[#f8fafc]
+                bg-white/10
+                backdrop-blur-md
                 border-2
-                border-gray-200
-                text-[#1a2235]
-                placeholder-gray-400
+                border-[#3B82F6]/80
+                text-white
+                placeholder-white/60
                 outline-none
-                focus:bg-white
-                focus:border-[#3B82F6]
-                focus:shadow-[0_0_15px_rgba(59,130,246,0.15)]
+                shadow-[0_0_10px_rgba(59,130,246,0.15)]
+                focus:border-[#60A5FA]
+                focus:shadow-[0_0_20px_rgba(59,130,246,0.4)]
                 transition-all
               "
               value={email}
@@ -123,7 +127,7 @@ export default function TeacherLoginPage() {
 
           {/* Password */}
           <div>
-            <label className="block text-[#1a2235] mb-2 text-sm sm:text-base font-bold">
+            <label className="block text-white mb-2 text-sm sm:text-base font-medium">
               Password
             </label>
 
@@ -135,15 +139,16 @@ export default function TeacherLoginPage() {
                 px-4
                 py-3
                 rounded-xl
-                bg-[#f8fafc]
+                bg-white/10
+                backdrop-blur-md
                 border-2
-                border-gray-200
-                text-[#1a2235]
-                placeholder-gray-400
+                border-[#3B82F6]/80
+                text-white
+                placeholder-white/60
                 outline-none
-                focus:bg-white
-                focus:border-[#3B82F6]
-                focus:shadow-[0_0_15px_rgba(59,130,246,0.15)]
+                shadow-[0_0_10px_rgba(59,130,246,0.15)]
+                focus:border-[#60A5FA]
+                focus:shadow-[0_0_20px_rgba(59,130,246,0.4)]
                 transition-all
               "
               value={password}
@@ -157,26 +162,27 @@ export default function TeacherLoginPage() {
             type="submit"
             className="
               w-full
-              py-3.5
-              mt-2
+              py-3
               rounded-xl
               bg-gradient-to-r
               from-[#2563EB]
               to-[#60A5FA]
               text-white
-              font-bold
-              shadow-[0_8px_20px_rgba(59,130,246,0.3)]
-              hover:shadow-[0_10px_25px_rgba(59,130,246,0.4)]
+              font-semibold
+              border-2
+              border-[#3B82F6]
+              shadow-[0_0_15px_rgba(59,130,246,0.35)]
+              hover:shadow-[0_0_25px_rgba(59,130,246,0.6)]
               hover:scale-[1.02]
               transition-all
               duration-300
             "
           >
-            Access Portal
+            Login
           </button>
         </form>
 
-        <p className="mt-6 text-center text-xs sm:text-sm text-gray-400 font-medium">
+        <p className="mt-6 text-center text-xs sm:text-sm text-white/80">
           Instructor Access Only
         </p>
       </div>
