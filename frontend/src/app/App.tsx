@@ -25,6 +25,11 @@ import ThemeProvider from "./components/ThemeProvider";
 import PageTransition from "./components/PageTransition";
 
 import AdminLoginPage from "../imports/admin/pages/AdminLoginPage";
+import TeacherLoginPage from "../imports/teacher/pages/TeacherLoginPage";
+import TeacherLayout from "../imports/teacher/layouts/TeacherLayout";
+import TeacherDashboardPage from "../imports/teacher/pages/TeacherDashboardPage";
+import TeacherStudentsPage from "../imports/teacher/pages/TeacherStudentsPage";
+import TeacherSettingsPage from "../imports/teacher/pages/TeacherSettingsPage";
 
 function AnimatedRoutes() {
   const location = useLocation();
@@ -174,6 +179,65 @@ function AnimatedRoutes() {
             element={
               <PageTransition>
                 <SettingsPage />
+              </PageTransition>
+            }
+          />
+        </Route>
+
+        {/* TEACHER PORTAL */}
+        <Route
+          path="/teacher"
+          element={
+            <PageTransition>
+              <TeacherLoginPage />
+            </PageTransition>
+          }
+        />
+
+        <Route element={<TeacherLayout />}>
+          <Route
+            path="/teacher/dashboard"
+            element={
+              <PageTransition>
+                <TeacherDashboardPage />
+              </PageTransition>
+            }
+          />
+          {/* Reusing Admin components for Teacher features as requested */}
+          <Route
+            path="/teacher/courses"
+            element={
+              <PageTransition>
+                <CourseListView />
+              </PageTransition>
+            }
+          />
+          <Route
+            path="/teacher/upload"
+            element={
+              <PageTransition>
+                <CourseUploadView
+                  onUploadSuccess={() =>
+                    (window.location.href = "/teacher/courses")
+                  }
+                />
+              </PageTransition>
+            }
+          />
+          {/* Restricted Teacher Pages */}
+          <Route
+            path="/teacher/students"
+            element={
+              <PageTransition>
+                <TeacherStudentsPage />
+              </PageTransition>
+            }
+          />
+          <Route
+            path="/teacher/settings"
+            element={
+              <PageTransition>
+                <TeacherSettingsPage />
               </PageTransition>
             }
           />
