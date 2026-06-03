@@ -270,6 +270,21 @@ function HeroMetricsRow() {
 function HeroFeatureCardsRow() {
   return (
     <div className="content-stretch flex flex-col gap-[24px] items-start relative shrink-0 w-full">
+      {/* Section heading */}
+      <div className="w-full flex flex-col items-center gap-3 pt-8 sm:pt-12">
+        <p
+          className="font-bold leading-[0.95] tracking-[-0.04em] text-center"
+          style={{
+            fontFamily: "var(--font-display)",
+            fontSize: "clamp(32px, 5vw, 52px)",
+            color: "var(--color-text-primary)",
+          }}
+        >
+          Reimagining{" "}
+          <span style={{ color: "var(--color-accent)" }}>Education</span>
+        </p>
+        <div className="w-[60px] h-[3px] rounded-full" style={{ background: "var(--color-accent)" }} />
+      </div>
       <PurpleCapabilityCardOuter />
       <HeroMetricsRow />
     </div>
