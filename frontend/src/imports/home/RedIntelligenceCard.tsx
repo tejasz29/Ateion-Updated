@@ -55,7 +55,7 @@ function VerticalTicker() {
                 fontFamily: "'OV Soge', sans-serif",
                 fontWeight: 600,
                 whiteSpace: "nowrap",
-                color: isActive ? "#ffffff" : "var(--color-text-primary)",
+                color: isActive ? "#ffffff" : "#E5E7EB",
                 flexShrink: 0,
                 margin: 0,
                 padding: 0,
@@ -73,12 +73,12 @@ function VerticalTicker() {
 
 export default function RedIntelligenceCard() {
   return (
-    <div className="clay-card bg-[var(--color-primary)] content-stretch flex flex-col items-center justify-center pb-[32px] sm:pb-[48px] pl-[24px] sm:pl-[64px] pr-[16px] sm:pr-[48px] pt-[32px] sm:pt-[48px] relative rounded-[13px] sm:rounded-[20px] shrink-0 md:shrink flex-1 w-full">
+    <div className="clay-card content-stretch flex flex-col items-center justify-center pb-[32px] sm:pb-[48px] pl-[24px] sm:pl-[64px] pr-[16px] sm:pr-[48px] pt-[32px] sm:pt-[48px] relative rounded-[13px] sm:rounded-[20px] shrink-0 md:shrink flex-1 w-full bg-[#FFD9C9] dark:bg-[#4A86E8] shadow-[0_8px_40px_rgba(0,0,0,0.15)] dark:shadow-[0_0_40px_rgba(74,134,232,0.45)]">
       <div className="content-stretch flex flex-col gap-[24px] sm:gap-[32px] items-start relative shrink-0 w-full max-w-[800px]">
         {/* Desktop layout */}
         <div className="hidden lg:flex items-center justify-between relative shrink-0 w-full gap-[24px]">
           <div className="relative shrink-0 w-[50%]">
-            <p className="font-bold relative leading-[1.15] not-italic text-[28px] lg:text-[36px] xl:text-[42px] text-[var(--color-text-primary)] w-full" style={{ fontFamily: "'OV Soge', sans-serif", letterSpacing: "-0.01em" }}>
+            <p className="font-bold relative leading-[1.15] not-italic text-[28px] lg:text-[36px] xl:text-[42px] text-slate-900 dark:text-white w-full" style={{ fontFamily: "'OV Soge', sans-serif", letterSpacing: "-0.01em" }}>
               Education is<br />
               Not broken.<br />
               Its measurement<br />
@@ -91,7 +91,13 @@ export default function RedIntelligenceCard() {
         </div>
         {/* Mobile & Tablet layout */}
         <div className="lg:hidden flex flex-col gap-[16px] items-start w-full">
-          <p className="font-bold relative leading-[1.25] not-italic text-[28px] sm:text-[32px] md:text-[36px] text-[var(--color-text-primary)]" style={{ fontFamily: "'OV Soge', sans-serif", letterSpacing: "-0.01em" }}>
+          <p
+  className="font-bold relative leading-[1.25] not-italic text-[28px] sm:text-[32px] md:text-[36px] text-slate-900 dark:text-white"
+  style={{
+    fontFamily: "'OV Soge', sans-serif",
+    letterSpacing: "-0.01em",
+  }}
+>
             Education is<br />
             Not broken.<br />
             Its measurement<br />
@@ -102,7 +108,7 @@ export default function RedIntelligenceCard() {
           </div>
         </div>
         <div className="w-full mt-[12px] sm:mt-[20px]">
-          <p className="font-['Manrope',sans-serif] h-auto leading-[1.3] not-italic relative shrink-0 text-[var(--color-text-primary)] w-full flex-1">
+          <p className="font-['Manrope',sans-serif] h-auto leading-[1.3] not-italic relative shrink-0 text-slate-900 dark:text-white w-full flex-1">
             <span className="text-[20px] sm:text-[24px] md:text-[26px]">{`Ateion replaces memory-based validation with `}</span>
             <br className="hidden sm:block" />
             <span className="font-['Manrope',sans-serif] italic text-[32px] sm:text-[42px] md:text-[48px]">Capability-based intelligence.</span>
