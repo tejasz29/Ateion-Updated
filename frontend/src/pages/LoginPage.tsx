@@ -75,6 +75,29 @@ export default function LoginPage({ closeLogin }: LoginPageProps) {
         } catch (err) {}
 
         localStorage.setItem("token", token);
+        
+        // Store user info if available in response
+        try {
+          const jsonData = JSON.parse(responseText);
+          if (jsonData.user) {
+            localStorage.setItem("user", JSON.stringify(jsonData.user));
+          } else {
+            // Fallback for demo if user object isn't directly in response
+            localStorage.setItem("user", JSON.stringify({
+              firstName: "Test",
+              fullName: "Test User",
+              email: data.email
+            }));
+          }
+        } catch (err) {
+          // Fallback if not JSON
+          localStorage.setItem("user", JSON.stringify({
+            firstName: "User",
+            fullName: "Ateion User",
+            email: data.email
+          }));
+        }
+
         alert("Logged in successfully!");
         if (closeLogin) closeLogin();
       } else {

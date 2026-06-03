@@ -14,6 +14,8 @@ import PolicyAlignmentSection from "../features/gco/PolicyAlignmentSection";
 import "../styles/gco/index.css";
 import "../styles/gco/fonts.css";
 import "../styles/gco/theme.css";
+import { useInView } from "framer-motion";
+import { useRef } from "react";
 
 const GCOPage = () => {
   useEffect(() => {
@@ -122,11 +124,51 @@ const GCOPage = () => {
               </div>
             </div>
           </section>
-          <PolicyAlignmentSection />
-          <Slide />
-          <GCOComparison />
-          <TimelineSection />
-          <GCOQuestionSection />
+          
+          <motion.section
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+          >
+            <PolicyAlignmentSection />
+          </motion.section>
+          
+          <motion.section
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+          >
+            <Slide />
+          </motion.section>
+          
+          <motion.section
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+          >
+            <GCOComparison />
+          </motion.section>
+          
+          <motion.section
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+          >
+            <TimelineSection />
+          </motion.section>
+          
+          <motion.section
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+          >
+            <GCOQuestionSection />
+          </motion.section>
 
         </main>
       </div>

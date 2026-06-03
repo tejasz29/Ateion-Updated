@@ -72,24 +72,6 @@ function HeroHeaderSection() {
   );
 }
 
-/** Fade-in + slide-up on scroll */
-function FadeIn({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-10% 0px -10% 0px" });
-
-  return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 30 }}
-      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-      transition={{ duration: 0.8, delay, ease: [0.21, 0.45, 0.32, 0.9] }}
-      className="w-full"
-    >
-      {children}
-    </motion.div>
-  );
-}
-
 /* ─────────────────────────────────────────────
    FEATURE CARDS (capability + global + red)
 ───────────────────────────────────────────── */
@@ -270,6 +252,21 @@ function HeroMetricsRow() {
 function HeroFeatureCardsRow() {
   return (
     <div className="content-stretch flex flex-col gap-[24px] items-start relative shrink-0 w-full">
+      {/* Section heading */}
+      <div className="w-full flex flex-col items-center gap-3 pt-8 sm:pt-12">
+        <p
+          className="font-bold leading-[0.95] tracking-[-0.04em] text-center"
+          style={{
+            fontFamily: "var(--font-display)",
+            fontSize: "clamp(32px, 5vw, 52px)",
+            color: "var(--color-text-primary)",
+          }}
+        >
+          Reimagining{" "}
+          <span style={{ color: "var(--color-accent)" }}>Education</span>
+        </p>
+        <div className="w-[60px] h-[3px] rounded-full" style={{ background: "var(--color-accent)" }} />
+      </div>
       <PurpleCapabilityCardOuter />
       <HeroMetricsRow />
     </div>
@@ -281,12 +278,29 @@ function HeroFeatureCardsRow() {
 ───────────────────────────────────────────── */
 function GlobalPresenceMapSection() {
   return (
-    <div className="w-full flex flex-col items-center justify-center relative bg-[var(--color-background-secondary)] border border-[var(--color-border-light)] pt-10 sm:pt-14 pb-0 overflow-hidden rounded-[32px] mx-[16px] sm:mx-[24px] md:mx-[64px] max-w-[calc(100%-32px)] md:max-w-[calc(100%-128px)] mx-auto my-12 shadow-sm">
+    <div className="w-full flex flex-col items-center justify-center relative bg-[var(--color-background-secondary)] border border-[var(--color-border-light)] pt-12 sm:pt-16 pb-0 overflow-hidden rounded-[32px] mx-[16px] sm:mx-[24px] md:mx-[64px] max-w-[calc(100%-32px)] md:max-w-[calc(100%-128px)] mx-auto my-12 shadow-sm">
+      {/* Decorative top accent */}
+      <div
+        className="absolute top-0 left-[10%] right-[10%] h-[3px] rounded-full"
+        style={{ background: "linear-gradient(90deg, transparent, var(--color-accent), transparent)" }}
+      />
+
       <div className="z-10 text-center mb-8 sm:mb-12 px-4 relative">
-        <h2 className="text-[32px] sm:text-[40px] md:text-[48px] font-bold text-[var(--color-text-primary)] mb-4 tracking-[-0.03em] leading-[1.1]" style={{ fontFamily: "var(--font-display)" }}>
-          Our Global Reach
+        <div className="flex items-center justify-center gap-3 mb-5">
+          <div className="w-[40px] sm:w-[60px] h-[2px] rounded-full" style={{ background: "var(--color-accent)" }} />
+          <span
+            className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.2em]"
+            style={{ color: "var(--color-accent)", fontFamily: "var(--font-body)" }}
+          >
+            Global Footprint
+          </span>
+          <div className="w-[40px] sm:w-[60px] h-[2px] rounded-full" style={{ background: "var(--color-accent)" }} />
+        </div>
+        <h2 className="font-bold text-[var(--color-text-primary)] mb-4 tracking-[-0.03em] leading-[1.1]" style={{ fontFamily: "var(--font-display)", fontSize: "clamp(32px, 5vw, 52px)" }}>
+          Our{" "}
+          <span style={{ color: "var(--color-accent)" }}>Global</span> Reach
         </h2>
-        <p className="text-[var(--color-text-secondary)] max-w-2xl mx-auto text-lg font-medium">
+        <p className="text-[var(--color-text-muted)] max-w-2xl mx-auto text-[15px] sm:text-[17px] font-medium leading-relaxed" style={{ fontFamily: "var(--font-body)" }}>
           Connecting capability-based education ecosystems across multiple continents.
         </p>
       </div>
@@ -556,7 +570,12 @@ export function EducationStatusWrapper() {
       </div>
 
       {/* ─── ONE-LINER + DESCRIPTION ─── */}
-      <FadeIn>
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+      >
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between w-full mt-[32px] sm:mt-[48px] gap-[20px] sm:gap-[64px] pb-[24px] sm:pb-[32px]">
           <div className="flex items-start gap-4 flex-1">
             <div className="w-1 h-12 rounded-full shrink-0 mt-1" style={{ backgroundColor: "var(--color-accent)" }} />
@@ -571,7 +590,7 @@ export function EducationStatusWrapper() {
             <span className="font-bold italic" style={{ color: "var(--color-accent)" }}>capability-based intelligence.</span>
           </p>
         </div>
-      </FadeIn>
+      </motion.div>
 
       {/* ─── QUOTE CARDS ─── */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-[16px] sm:gap-[24px] w-full mt-[32px] sm:mt-[48px]">
@@ -785,34 +804,64 @@ export default function Homepage() {
       </Helmet>
 
       {/* 1 & 2. Unified Hero Branding + Capability Cards */}
-      <section>
+      <motion.section
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.1 }}
+        transition={{ duration: 1, ease: "easeOut" }}
+      >
         <HeroHeaderSection />
-      </section>
+      </motion.section>
 
       {/* 3. Education is not broken — clay card + ticker */}
-      <section>
+      <motion.section
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
+      >
         <EducationStatusWrapper />
-      </section>
+      </motion.section>
 
       {/* 4. Global Presence Map */}
-      <section>
+      <motion.section
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+      >
         <GlobalPresenceMapSection />
-      </section>
+      </motion.section>
 
       {/* 5. Global Policy Alignment */}
-      <section>
+      <motion.section
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+      >
         <HomePolicySection />
-      </section>
+      </motion.section>
 
       {/* 6. Ecosystem — redesigned */}
-      <section>
+      <motion.section
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+      >
         <EcosystemSection />
-      </section>
+      </motion.section>
 
       {/* 7. FAQ */}
-      <section>
+      <motion.section
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+      >
         <FAQSectionContainer />
-      </section>
+      </motion.section>
 
       {/* 7. Footer */}
       <SharedFooter />
