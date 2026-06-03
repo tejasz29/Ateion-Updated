@@ -9,6 +9,8 @@ import SharedFooter from "../app/components/SharedFooter";
 import { contactSchema } from "../lib/schemas";
 import { Send, CheckCircle2, ArrowRight } from "lucide-react";
 import "../styles/contact-styles.css";
+import { useInView } from "framer-motion";
+import { useRef } from "react";
 
 const extendedContactSchema = contactSchema.extend({
   agreed: z.boolean().refine((v) => v === true, "You must accept the privacy policy"),
@@ -119,16 +121,23 @@ export default function ContactPage() {
                 </motion.button>
               </motion.div>
             ) : (
-              <motion.div
-                className="contact-form-wrap"
-                variants={containerVariants}
-                initial="hidden"
-                animate="show"
+              <motion.section
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.1 }}
+                transition={{ duration: 0.8, ease: "easeOut" }}
+                className="w-full"
               >
-                <motion.div className="contact-header" variants={itemVariants}>
-                  <AccentBars />
-                  <h1 className="contact-title">Contact Us</h1>
-                </motion.div>
+                <motion.div
+                  className="contact-form-wrap"
+                  variants={containerVariants}
+                  initial="hidden"
+                  animate="show"
+                >
+                  <motion.div className="contact-header" variants={itemVariants}>
+                    <AccentBars />
+                    <h1 className="contact-title">Contact Us</h1>
+                  </motion.div>
 
                 <motion.p className="contact-description" variants={itemVariants}>
                   The Global Capability Olympiad is the world's first
@@ -240,8 +249,10 @@ export default function ContactPage() {
                   </div>
                 </motion.form>
               </motion.div>
-            )}
-          </div>
+              </motion.section>
+              )}
+              </div>
+
         </main>
 
         <div className="contact-footer-spacer" />

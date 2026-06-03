@@ -9,12 +9,98 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate, Link, useLocation } from "react-router";
-import { Sun, Moon, LogOut } from "lucide-react";
+import { Sun, Moon, LogOut, User as UserIcon, Settings, ChevronDown } from "lucide-react";
 import { useTheme } from "./ThemeProvider";
 
 import logo from "../../assets/logo.png";
+import "../../styles/shared-nav.css";
 
 const navTextClass = "font-bold text-[13px] whitespace-nowrap font-manrope m-0 leading-none";
+
+/**
+ * USER PROFILE DROPDOWN
+ */
+function UserProfileDropdown({ user, onLogout }: { user: any; onLogout: () => void }) {
+  const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const firstName = user.firstName || user.fullName?.split(" ")[0] || "User";
+
+  return (
+    <div className="relative" ref={dropdownRef}>
+      <motion.button
+        whileHover={{ scale: 1.02 }}
+        whileTap={{ scale: 0.98 }}
+        onClick={() => setIsOpen(!isOpen)}
+        className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-[var(--color-background-secondary)] border border-[var(--color-border-medium)] hover:border-[var(--color-accent)] transition-all cursor-pointer"
+      >
+        <div className="w-7 h-7 rounded-full bg-[var(--color-accent)] flex items-center justify-center text-white text-xs font-bold overflow-hidden">
+          {user.profilePic ? (
+            <img src={user.profilePic} alt={firstName} className="w-full h-full object-cover" />
+          ) : (
+            <span>{firstName[0].toUpperCase()}</span>
+          )}
+        </div>
+        <span className="text-sm font-bold text-[var(--color-text-primary)] hidden sm:inline">
+          {firstName}
+        </span>
+        <ChevronDown size={14} className={`text-[var(--color-text-tertiary)] transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`} />
+      </motion.button>
+
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: 10, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 10, scale: 0.95 }}
+            transition={{ duration: 0.2 }}
+            className="absolute right-0 mt-2 w-48 rounded-2xl bg-[var(--color-background-secondary)] border border-[var(--color-border-light)] shadow-xl overflow-hidden z-[110]"
+          >
+            <div className="p-3 border-b border-[var(--color-border-light)] bg-[var(--color-background-primary)]/50">
+              <p className="text-xs font-bold text-[var(--color-text-tertiary)] uppercase tracking-wider">Account</p>
+              <p className="text-sm font-bold text-[var(--color-text-primary)] truncate">{user.email}</p>
+            </div>
+            <div className="p-1">
+              <button
+                onClick={() => { setIsOpen(false); navigate("/profile"); }}
+                className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold text-[var(--color-text-primary)] hover:bg-[var(--color-accent-light)] hover:text-[var(--color-accent)] transition-colors text-left"
+              >
+                <UserIcon size={16} />
+                Profile
+              </button>
+              <button
+                onClick={() => { setIsOpen(false); navigate("/dashboard"); }}
+                className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold text-[var(--color-text-primary)] hover:bg-[var(--color-accent-light)] hover:text-[var(--color-accent)] transition-colors text-left"
+              >
+                <Settings size={16} />
+                Dashboard
+              </button>
+              <div className="h-[1px] bg-[var(--color-border-light)] my-1" />
+              <button
+                onClick={() => { setIsOpen(false); onLogout(); }}
+                className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold text-[var(--color-error)] hover:bg-[var(--color-error_light)] transition-colors text-left"
+              >
+                <LogOut size={16} />
+                Logout
+              </button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
 
 /**
  * Unified NavButton component with 3 variants
@@ -24,11 +110,13 @@ function NavButton({
   variant = "default" as "default" | "muted" | "primary" | "accent" | "white" | "outline-dark",
   onClick,
   href,
+  isActive = false,
 }: {
   children: React.ReactNode;
   variant?: "default" | "muted" | "primary" | "accent" | "white" | "outline-dark";
   onClick?: () => void;
   href?: string;
+  isActive?: boolean;
 }) {
   const navigate = useNavigate();
 
@@ -56,7 +144,8 @@ function NavButton({
       whileTap={{ scale: 0.95 }}
       transition={{ type: "spring", stiffness: 400, damping: 17 }}
       onClick={handleClick}
-      className={`clay-button ${variantClasses[variant]} rounded-full flex h-[36px] items-center justify-center px-[16px] xl:px-[24px] shrink-0 cursor-pointer transition-colors`}
+      data-active={isActive}
+      className={`clay-button nav-btn ${variantClasses[variant]} rounded-full flex h-[36px] items-center justify-center px-[16px] xl:px-[24px] shrink-0 cursor-pointer transition-colors relative`}
     >
       {children}
     </motion.div>
@@ -132,6 +221,7 @@ function HomeBtn({ onClick }: { onClick?: () => void }) {
   return (
     <NavButton
       variant={isActive ? "primary" : "default"}
+      isActive={isActive}
       onClick={() => {
         if (onClick) onClick();
         navigate("/");
@@ -153,6 +243,7 @@ function GlobalOlympiadBtn({ onClick }: { onClick?: () => void }) {
   return (
     <NavButton
       variant={isActive ? "primary" : "default"}
+      isActive={isActive}
       onClick={() => {
         if (onClick) onClick();
         navigate("/gco");
@@ -176,6 +267,7 @@ function ResourcesBtn({ onClick }: { onClick?: () => void }) {
   return (
     <NavButton
       variant={isActive ? "primary" : "default"}
+      isActive={isActive}
       onClick={() => {
         if (onClick) onClick();
         navigate("/playground");
@@ -199,6 +291,7 @@ function PsychometricTestBtn({ onClick }: { onClick?: () => void }) {
   return (
     <NavButton
       variant={isActive ? "primary" : "default"}
+      isActive={isActive}
       onClick={() => {
         if (onClick) onClick();
         navigate("/psychometric-assessment");
@@ -226,6 +319,7 @@ function DashboardBtn({
   return (
     <NavButton
       variant={isActive ? "primary" : "default"}
+      isActive={isActive}
       onClick={() => {
         if (onClick) onClick();
         navigate("/dashboard");
@@ -466,15 +560,61 @@ function ThemeToggleBtn() {
 export default function SharedNavbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  
+  const [user, setUser] = useState<any>(null);
+  const [scrolled, setScrolled] = useState(false);
+
   const isNavbarOnDark = useNavbarOnDark();
   const navigate = useNavigate();
   const menuRef = useRef<HTMLDivElement>(null);
 
   // Check auth state
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    setIsAuthenticated(!!token);
+    const checkAuth = () => {
+      const token = localStorage.getItem("token");
+      const userData = localStorage.getItem("user");
+      setIsAuthenticated(!!token);
+      if (userData) {
+        try {
+          setUser(JSON.parse(userData));
+        } catch (e) {
+          setUser(null);
+        }
+      } else {
+        setUser(null);
+      }
+    };
+
+    checkAuth();
+
+    // Listen for custom events that might trigger re-auth check
+    window.addEventListener("close-login", checkAuth);
+    window.addEventListener("close-register", checkAuth);
+
+    return () => {
+      window.removeEventListener("close-login", checkAuth);
+      window.removeEventListener("close-register", checkAuth);
+    };
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    setIsAuthenticated(false);
+    setUser(null);
+    window.location.href = "/"; // Redirect to home on logout
+  };
+
+  // Handle scroll for frosted glass effect
+  useEffect(() => {
+    const onScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    // Initial check
+    onScroll();
+
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   // Handle click outside to close mobile menu
@@ -484,7 +624,7 @@ export default function SharedNavbar() {
         setIsMobileMenuOpen(false);
       }
     }
-    
+
     if (isMobileMenuOpen) {
       document.addEventListener("mousedown", handleClickOutside);
     }
@@ -500,13 +640,19 @@ export default function SharedNavbar() {
 
   return (
     <nav
-      className="fixed top-0 left-0 right-0 z-[100] bg-transparent"
+      className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-300 ${
+        scrolled 
+          ? "nav-scrolled" 
+          : "bg-transparent"
+      }`}
       role="navigation"
       aria-label="Main navigation"
       ref={menuRef}
     >
-      <div className="flex items-center justify-between px-[16px] md:px-[32px] xl:px-[48px] py-[12px] lg:py-[20px] w-full gap-[24px]">
-        
+      <div className={`flex items-center justify-between px-[16px] md:px-[32px] xl:px-[48px] transition-all duration-300 w-full gap-[24px] ${
+        scrolled ? "py-[8px] lg:py-[12px]" : "py-[12px] lg:py-[20px]"
+      }`}>
+
         {/* LEFT SIDE */}
         <div className="flex items-center justify-start">
           <LogoContainer />
@@ -519,15 +665,12 @@ export default function SharedNavbar() {
         {/* RIGHT SIDE */}
         <div className="hidden lg:flex items-center justify-end ml-auto gap-[8px] xl:gap-[12px]">
           <ThemeToggleBtn />
-          <GetConnectedBtn />
-          
-          {isAuthenticated ? (
-            <>
-              <DashboardBtn />
-              <LogoutBtn />
-            </>
+
+          {isAuthenticated && user ? (
+            <UserProfileDropdown user={user} onLogout={handleLogout} />
           ) : (
             <>
+              <GetConnectedBtn />
               <SignInBtn />
               <SignUpBtn />
             </>
@@ -553,7 +696,7 @@ export default function SharedNavbar() {
             className="lg:hidden bg-[var(--color-background-primary)] border-t border-[var(--color-border-light)] overflow-hidden absolute w-full shadow-lg"
           >
             <div className="flex flex-col gap-[12px] px-[24px] py-[24px]">
-              
+
               <HomeBtn onClick={() => handleNavClick("/")} />
               <GlobalOlympiadBtn onClick={() => handleNavClick("/gco")} />
               <PsychometricTestBtn onClick={() => handleNavClick("/psychometric-assessment")} />
@@ -561,23 +704,34 @@ export default function SharedNavbar() {
 
               <div className="h-[1px] bg-[var(--color-border-light)] my-[4px]" />
 
-              <GetConnectedBtn onClick={() => handleNavClick("/contact")} />
-
-              <div className="h-[1px] bg-[var(--color-border-light)] my-[4px]" />
-
-              {isAuthenticated ? (
-                <>
-                  <DashboardBtn onClick={() => handleNavClick("/dashboard")} />
-                  <LogoutBtn />
-                </>
+              {isAuthenticated && user ? (
+                <div className="flex flex-col gap-3">
+                  <div className="flex items-center gap-3 px-4 py-3 rounded-2xl bg-[var(--color-background-secondary)] border border-[var(--color-border-light)]">
+                    <div className="w-10 h-10 rounded-full bg-[var(--color-accent)] flex items-center justify-center text-white font-bold">
+                      {user.firstName ? user.firstName[0] : user.fullName[0]}
+                    </div>
+                    <div>
+                      <p className="text-sm font-bold text-[var(--color-text-primary)]">{user.fullName}</p>
+                      <p className="text-xs text-[var(--color-text-tertiary)]">{user.email}</p>
+                    </div>
+                  </div>
+                  <NavButton variant="default" onClick={() => handleNavClick("/profile")}>Profile</NavButton>
+                  <NavButton variant="default" onClick={() => handleNavClick("/dashboard")}>Dashboard</NavButton>
+                  <NavButton variant="outline-dark" onClick={handleLogout}>Logout</NavButton>
+                </div>
               ) : (
                 <>
+                  <GetConnectedBtn onClick={() => handleNavClick("/contact")} />
+                  <div className="h-[1px] bg-[var(--color-border-light)] my-[4px]" />
                   <SignInBtn onClick={() => { setIsMobileMenuOpen(false); window.dispatchEvent(new CustomEvent("open-login")); }} />
                   <SignUpBtn onClick={() => { setIsMobileMenuOpen(false); window.dispatchEvent(new CustomEvent("open-register")); }} />
                 </>
               )}
 
-              <ThemeToggleBtn />
+              <div className="h-[1px] bg-[var(--color-border-light)] my-[4px]" />
+              <div className="flex justify-center">
+                <ThemeToggleBtn />
+              </div>
             </div>
           </motion.div>
         )}

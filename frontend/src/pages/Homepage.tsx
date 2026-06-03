@@ -72,24 +72,6 @@ function HeroHeaderSection() {
   );
 }
 
-/** Fade-in + slide-up on scroll */
-function FadeIn({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-10% 0px -10% 0px" });
-
-  return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 30 }}
-      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-      transition={{ duration: 0.8, delay, ease: [0.21, 0.45, 0.32, 0.9] }}
-      className="w-full"
-    >
-      {children}
-    </motion.div>
-  );
-}
-
 /* ─────────────────────────────────────────────
    FEATURE CARDS (capability + global + red)
 ───────────────────────────────────────────── */
@@ -588,7 +570,12 @@ export function EducationStatusWrapper() {
       </div>
 
       {/* ─── ONE-LINER + DESCRIPTION ─── */}
-      <FadeIn>
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+      >
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between w-full mt-[32px] sm:mt-[48px] gap-[20px] sm:gap-[64px] pb-[24px] sm:pb-[32px]">
           <div className="flex items-start gap-4 flex-1">
             <div className="w-1 h-12 rounded-full shrink-0 mt-1" style={{ backgroundColor: "var(--color-accent)" }} />
@@ -603,7 +590,7 @@ export function EducationStatusWrapper() {
             <span className="font-bold italic" style={{ color: "var(--color-accent)" }}>capability-based intelligence.</span>
           </p>
         </div>
-      </FadeIn>
+      </motion.div>
 
       {/* ─── QUOTE CARDS ─── */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-[16px] sm:gap-[24px] w-full mt-[32px] sm:mt-[48px]">
@@ -817,34 +804,64 @@ export default function Homepage() {
       </Helmet>
 
       {/* 1 & 2. Unified Hero Branding + Capability Cards */}
-      <section>
+      <motion.section
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.1 }}
+        transition={{ duration: 1, ease: "easeOut" }}
+      >
         <HeroHeaderSection />
-      </section>
+      </motion.section>
 
       {/* 3. Education is not broken — clay card + ticker */}
-      <section>
+      <motion.section
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
+      >
         <EducationStatusWrapper />
-      </section>
+      </motion.section>
 
       {/* 4. Global Presence Map */}
-      <section>
+      <motion.section
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+      >
         <GlobalPresenceMapSection />
-      </section>
+      </motion.section>
 
       {/* 5. Global Policy Alignment */}
-      <section>
+      <motion.section
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+      >
         <HomePolicySection />
-      </section>
+      </motion.section>
 
       {/* 6. Ecosystem — redesigned */}
-      <section>
+      <motion.section
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+      >
         <EcosystemSection />
-      </section>
+      </motion.section>
 
       {/* 7. FAQ */}
-      <section>
+      <motion.section
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+      >
         <FAQSectionContainer />
-      </section>
+      </motion.section>
 
       {/* 7. Footer */}
       <SharedFooter />
