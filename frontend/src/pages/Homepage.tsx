@@ -124,44 +124,80 @@ function PurpleCapabilityCardInner() {
   }, []);
 
   return (
-    <div className="clay-card bg-[var(--color-background-secondary)] flex h-[420px] items-start p-[32px] relative w-full overflow-hidden rounded-[24px] shadow-lg">
+    <div
+      className="clay-card flex h-[420px] items-start p-[32px] relative w-full overflow-hidden"
+      style={{
+        background: "var(--color-background-secondary)",
+        borderRadius: 20,
+        border: "1px solid var(--color-border-light)",
+        boxShadow: "var(--shadow-clay)",
+      }}
+    >
+      {/* Left accent bar */}
+      <div
+        style={{
+          position: "absolute",
+          left: 0,
+          top: 0,
+          bottom: 0,
+          width: 4,
+          background: "linear-gradient(180deg, var(--color-accent), rgba(232,133,106,0.2))",
+          borderRadius: "0 3px 3px 0",
+        }}
+      />
+
+      {/* Corner glow */}
+      <div
+        style={{
+          position: "absolute",
+          top: -80,
+          right: -80,
+          width: 250,
+          height: 250,
+          borderRadius: "50%",
+          background: "radial-gradient(circle, rgba(232,133,106,0.05) 0%, transparent 70%)",
+          pointerEvents: "none",
+        }}
+      />
 
       <AnimatePresence mode="wait">
         <motion.div
           key={current}
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -40 }}
-          transition={{ duration: 0.8 }}
-          className="flex flex-col justify-center h-full max-w-[800px]"
+          exit={{ opacity: 0, y: -30 }}
+          transition={{ duration: 0.5, ease: [0.21, 0.45, 0.32, 0.9] }}
+          className="flex flex-col justify-center h-full max-w-[800px] relative z-10"
         >
-          <p className="text-[26px] font-medium leading-[1.3] text-[var(--color-text-primary)]">
+          <p className="text-[24px] sm:text-[26px] font-medium leading-[1.35]" style={{ color: "var(--color-text-primary)" }}>
             {capabilityMessages[current].title}
 
-            <span className="block mt-3 text-[34px] font-extrabold italic text-[var(--color-primary)]">
+            <span className="block mt-3 text-[30px] sm:text-[34px] font-extrabold italic" style={{ color: "var(--color-accent)" }}>
               {capabilityMessages[current].highlight}
             </span>
           </p>
 
-          <p className="mt-8 text-[18px] leading-[1.7] text-[var(--color-text-secondary)]">
-            Ateion is the world's leading Capability-First Education ecosystem,
+          <p className="mt-8 text-[16px] sm:text-[18px] leading-[1.7]" style={{ color: "var(--color-text-secondary)" }}>
+            Ateion is the world&apos;s leading Capability-First Education ecosystem,
             integrating AI literacy, innovation, and measurable readiness into modern schooling.
           </p>
         </motion.div>
       </AnimatePresence>
 
-      {/* dots */}
-      <div className="absolute bottom-6 left-6 flex gap-2">
+      {/* Dots */}
+      <div className="absolute bottom-6 left-7 flex gap-2">
         {capabilityMessages.map((_, i) => (
           <div
             key={i}
-            className={`h-2 rounded-full transition-all ${
-              i === current ? "w-8 bg-[var(--color-accent)]" : "w-2 bg-[var(--color-border-dark)]"
-            }`}
+            className="rounded-full transition-all duration-300"
+            style={{
+              height: 8,
+              width: i === current ? 28 : 8,
+              backgroundColor: i === current ? "var(--color-accent)" : "var(--color-border-dark)",
+            }}
           />
         ))}
       </div>
-
     </div>
   );
 }
@@ -387,40 +423,84 @@ function VerticalTicker() {
 export function EducationStatusWrapper() {
   return (
     <div className="w-full px-[16px] sm:px-[24px] md:px-[64px]">
+      {/* ─── MAIN CLAY CARD ─── */}
       <div
         style={{
-          padding: "32px 16px 32px 24px",
-          background: "#FFD9C9",
-          borderRadius: 13,
-          border: "1.5px solid rgba(255,255,255,0.45)",
+          padding: "40px 28px 40px 32px",
+          background: "var(--color-background-secondary)",
+          borderRadius: 20,
+          border: "1px solid var(--color-border-light)",
+          boxShadow: "0 4px 24px rgba(0,0,0,0.04), 0 1px 4px rgba(0,0,0,0.02)",
+          position: "relative",
+          overflow: "hidden",
         }}
-        className="clay-card content-stretch flex flex-col items-center justify-center w-full dark:!bg-[#1E293B]"
+        className="clay-card content-stretch flex flex-col items-center justify-center w-full transition-shadow duration-300"
+        onMouseEnter={(e) => e.currentTarget.style.boxShadow = "0 8px 40px rgba(232,133,106,0.08), 0 2px 8px rgba(0,0,0,0.04)"}
+        onMouseLeave={(e) => e.currentTarget.style.boxShadow = "0 4px 24px rgba(0,0,0,0.04), 0 1px 4px rgba(0,0,0,0.02)"}
       >
+        {/* Coral accent bar */}
         <div
-          className="content-stretch flex flex-col gap-[24px] sm:gap-[32px] items-start relative shrink-0 w-full"
+          style={{
+            position: "absolute",
+            left: 0,
+            top: 0,
+            bottom: 0,
+            width: 5,
+            background: "linear-gradient(180deg, var(--color-accent), rgba(232,133,106,0.3))",
+            borderRadius: "0 3px 3px 0",
+          }}
+        />
+
+        {/* Top-right decorative pill */}
+        <div
+          className="hidden sm:flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider absolute top-4 right-4"
+          style={{
+            backgroundColor: "rgba(232,133,106,0.08)",
+            border: "1px solid rgba(232,133,106,0.12)",
+            color: "var(--color-accent)",
+          }}
+        >
+          <span style={{ display: "inline-block", width: 5, height: 5, borderRadius: "50%", backgroundColor: "var(--color-accent)" }} />
+          Real-time
+        </div>
+
+        {/* Subtle corner glow */}
+        <div
+          style={{
+            position: "absolute",
+            top: -100,
+            right: -100,
+            width: 300,
+            height: 300,
+            borderRadius: "50%",
+            background: "radial-gradient(circle, rgba(232,133,106,0.04) 0%, transparent 70%)",
+            pointerEvents: "none",
+          }}
+        />
+
+        <div
+          className="content-stretch flex flex-col gap-[24px] sm:gap-[28px] items-start relative shrink-0 w-full"
           style={{ maxWidth: 800 }}
         >
           {/* Desktop layout */}
           <div className="hidden lg:flex items-center justify-between relative shrink-0 w-full gap-[24px]">
             <div className="relative shrink-0" style={{ width: "50%" }}>
               <p
-                className="font-bold relative leading-[1.15] not-italic text-[28px] lg:text-[36px] xl:text-[42px]"
+                className="font-bold relative leading-[1.15] not-italic"
                 style={{
                   fontFamily: "var(--font-display)",
-                  letterSpacing: "-0.01em",
+                  fontSize: "clamp(30px, 4vw, 44px)",
+                  letterSpacing: "-0.02em",
                   color: "var(--color-text-primary)",
                 }}
               >
                 Education is<br />
                 Not broken.<br />
                 Its measurement<br />
-                System is :
+                System is <span style={{ color: "var(--color-accent)" }}>:</span>
               </p>
             </div>
-            <div
-              className="flex justify-end xl:justify-start"
-              style={{ width: "45%" }}
-            >
+            <div className="flex justify-end xl:justify-start" style={{ width: "45%" }}>
               <VerticalTicker />
             </div>
           </div>
@@ -428,17 +508,18 @@ export function EducationStatusWrapper() {
           {/* Mobile layout */}
           <div className="lg:hidden flex flex-col gap-[16px] items-start w-full">
             <p
-              className="font-bold relative leading-[1.25] not-italic text-[28px] sm:text-[32px] md:text-[36px]"
+              className="font-bold relative leading-[1.25] not-italic"
               style={{
                 fontFamily: "var(--font-display)",
-                letterSpacing: "-0.01em",
+                fontSize: "clamp(28px, 5vw, 36px)",
+                letterSpacing: "-0.02em",
                 color: "var(--color-text-primary)",
               }}
             >
               Education is<br />
               Not broken.<br />
               Its measurement<br />
-              System is :
+              System is <span style={{ color: "var(--color-accent)" }}>:</span>
             </p>
             <div className="w-full flex justify-start">
               <VerticalTicker />
@@ -446,23 +527,24 @@ export function EducationStatusWrapper() {
           </div>
 
           {/* Bottom tagline */}
-          <div className="w-full mt-[4px] sm:mt-[12px]">
+          <div className="w-full mt-[8px] sm:mt-[16px] pt-[16px] sm:pt-[20px]" style={{ borderTop: "1px solid var(--color-border-light)" }}>
             <p
-              className="h-auto leading-[1.3] not-italic relative shrink-0 w-full flex-1"
+              className="leading-[1.4] relative shrink-0 w-full flex-1"
               style={{
                 fontFamily: "var(--font-body)",
                 color: "var(--color-text-primary)",
               }}
             >
-              <span className="text-[18px] sm:text-[22px] md:text-[24px]">
+              <span className="text-[16px] sm:text-[20px] md:text-[22px] font-medium">
                 Ateion replaces memory-based validation with{" "}
               </span>
               <br className="hidden sm:block" />
               <span
-                className="italic text-[28px] sm:text-[36px] md:text-[42px]"
+                className="italic"
                 style={{
                   fontFamily: "var(--font-display)",
                   fontWeight: 700,
+                  fontSize: "clamp(26px, 4vw, 42px)",
                   color: "var(--color-accent)",
                 }}
               >
@@ -473,22 +555,25 @@ export function EducationStatusWrapper() {
         </div>
       </div>
 
-      {/* Education is not broken — one-liner + description */}
+      {/* ─── ONE-LINER + DESCRIPTION ─── */}
       <FadeIn>
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between w-full mt-[32px] sm:mt-[48px] gap-[24px] sm:gap-[64px] pb-[24px] sm:pb-[32px]">
-          <p className="font-bold leading-[0.95] tracking-[-0.05em] text-[28px] sm:text-[36px] md:text-[48px] flex-1" style={{ fontFamily: "var(--font-display)", color: "var(--color-text-primary)" }}>
-            Education is not broken.
-          </p>
-          <p className="leading-relaxed text-[16px] sm:text-[18px] text-[var(--color-text-muted)] flex-1" style={{ fontFamily: "var(--font-body)" }}>
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between w-full mt-[32px] sm:mt-[48px] gap-[20px] sm:gap-[64px] pb-[24px] sm:pb-[32px]">
+          <div className="flex items-start gap-4 flex-1">
+            <div className="w-1 h-12 rounded-full shrink-0 mt-1" style={{ backgroundColor: "var(--color-accent)" }} />
+            <p className="font-bold leading-[0.95] tracking-[-0.04em] text-[clamp(28px,5vw,48px)]" style={{ fontFamily: "var(--font-display)", color: "var(--color-text-primary)" }}>
+              Education is not broken.
+            </p>
+          </div>
+          <p className="leading-relaxed text-[15px] sm:text-[17px] text-[var(--color-text-muted)] flex-1" style={{ fontFamily: "var(--font-body)" }}>
             <span>{`Its measurement system is `}</span>
-            <span className="font-bold">outdated.</span>
+            <span className="font-bold" style={{ color: "var(--color-accent)" }}>outdated.</span>
             <span>{` Ateion replaces memory-based validation with `}</span>
-            <span className="font-bold italic">capability-based intelligence.</span>
+            <span className="font-bold italic" style={{ color: "var(--color-accent)" }}>capability-based intelligence.</span>
           </p>
         </div>
       </FadeIn>
 
-      {/* Quote cards grid */}
+      {/* ─── QUOTE CARDS ─── */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-[16px] sm:gap-[24px] w-full mt-[32px] sm:mt-[48px]">
         {gridItems.map((item, i) => (
           <motion.a
@@ -498,22 +583,27 @@ export function EducationStatusWrapper() {
             rel="noopener noreferrer"
             key={i}
             className="clay-card min-h-[200px] sm:min-h-[240px] md:min-h-[260px] p-[28px] sm:p-[32px] flex flex-col justify-between group"
-            style={{ background: i % 2 === 0 ? "var(--color-background-secondary)" : "rgba(200,197,220,0.15)" }}
+            style={{ background: "var(--color-background-secondary)", position: "relative", overflow: "hidden" }}
           >
+            {/* Top accent bar */}
+            <div
+              className="absolute top-0 left-0 right-0 h-[3px] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+              style={{ background: "var(--color-accent)" }}
+            />
             <div>
               <span className="text-[28px] sm:text-[32px] leading-[0] align-top mr-1" style={{ color: cardAccents[i] }}>&ldquo;</span>
-              <p className="inline text-[20px] sm:text-[24px] md:text-[28px] font-medium text-[var(--color-text-primary)] leading-[1.1] group-hover:text-[var(--color-accent)] transition-colors" style={{ fontFamily: "var(--font-display)", letterSpacing: "-0.01em" }}>
+              <p className="inline text-[20px] sm:text-[22px] md:text-[26px] font-medium text-[var(--color-text-primary)] leading-[1.15] group-hover:text-[var(--color-accent)] transition-colors duration-300" style={{ fontFamily: "var(--font-display)", letterSpacing: "-0.01em" }}>
                 {item.title}
               </p>
               <span className="text-[28px] sm:text-[32px] leading-[0] align-bottom ml-1" style={{ color: cardAccents[i] }}>&rdquo;</span>
             </div>
-            <div className="mt-[20px] sm:mt-[24px] flex flex-col gap-[6px]">
-              <span className="text-[11px] sm:text-[12px] font-bold opacity-40 uppercase tracking-[0.12em]" style={{ color: cardAccents[i], fontFamily: "var(--font-body)" }}>
+            <div className="mt-[20px] sm:mt-[24px] pt-[16px] sm:pt-[20px]" style={{ borderTop: "1px solid var(--color-border-light)" }}>
+              <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.15em]" style={{ color: cardAccents[i], fontFamily: "var(--font-body)" }}>
                 Source
               </span>
-              <span className="text-[14px] sm:text-[15px] font-semibold text-[var(--color-text-primary)] opacity-80" style={{ fontFamily: "var(--font-body)" }}>
+              <p className="text-[13px] sm:text-[14px] font-semibold mt-1.5" style={{ color: "var(--color-text-primary)", fontFamily: "var(--font-body)" }}>
                 {item.source}
-              </span>
+              </p>
             </div>
           </motion.a>
         ))}
