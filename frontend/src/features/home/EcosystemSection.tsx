@@ -435,9 +435,9 @@ function EcosystemCluster({
         ml="601.32px"
         mt="57.94px"
         size="333.67px"
-        defaultColor="var(--color-primary_light)"
-        staticTextColor="var(--color-primary)"
-        hoverColor="var(--color-primary_light)"
+        defaultColor="var(--color-gray-300)"
+        staticTextColor="var(--color-text-primary)"
+        hoverColor="var(--color-gray-400)"
         isDark={false}
         gradientId="gcoGrad"
         title="PlayGround"
