@@ -45,10 +45,17 @@ export default function ThemeProvider({
     document.documentElement.setAttribute("data-theme", theme);
     localStorage.setItem(STORAGE_KEY, theme);
 
-    // Update meta theme-color
+    // Update meta theme-color dynamically from CSS variables
     const meta = document.querySelector('meta[name="theme-color"]');
     if (meta) {
-      meta.setAttribute("content", theme === "dark" ? "#0F172A" : "#F4F4EE");
+      // Need a small timeout to ensure the CSS variables are applied after the data-theme attribute change
+      setTimeout(() => {
+        const rootStyles = getComputedStyle(document.documentElement);
+        const bgColor = rootStyles.getPropertyValue('--color-background-primary').trim();
+        if (bgColor) {
+          meta.setAttribute("content", bgColor);
+        }
+      }, 0);
     }
   }, [theme]);
 
