@@ -112,12 +112,12 @@ const navigationSections = [
 ];
 
 export default function ResourcesPage() {
-  const [userProfile, setUserProfile] = useState({
-    fullName: "Loading...",
-    firstName: "Student",
-    segmentText: "Universal Access",
-    isPremium: false,
-  });
+  const [userProfile, setUserProfile] = useState({ 
+    fullName: "Guest Explorer", 
+    firstName: "Student", 
+    segmentText: "Universal Access", 
+    isPremium: false 
+});
   const [activeView, setActiveView] = useState("Dashboard");
   const [tasks, setTasks] = useState([
     {
@@ -189,8 +189,8 @@ export default function ResourcesPage() {
 
     // 2. Kick them out if they have no token at all
     if (!token) {
-      window.dispatchEvent(new CustomEvent("open-login"));
-      navigate("/");
+     // window.dispatchEvent(new CustomEvent("open-login"));
+     // navigate("/");
       return;
     }
 
