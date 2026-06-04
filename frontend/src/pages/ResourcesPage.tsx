@@ -118,6 +118,7 @@ export default function ResourcesPage() {
     segmentText: "Universal Access", 
     isPremium: false 
 });
+  const [navbarHeight, setNavbarHeight] = useState(0);
   const [activeView, setActiveView] = useState("Dashboard");
   const [tasks, setTasks] = useState([
     {
@@ -173,6 +174,17 @@ export default function ResourcesPage() {
     setShowAddTask(false);
   };
   const navigate = useNavigate();
+  // Track fixed navbar height so layout clears it
+  useEffect(() => {
+    const nav = document.querySelector("nav");
+    if (!nav) return;
+    const update = () => setNavbarHeight(nav.offsetHeight);
+    update();
+    const obs = new ResizeObserver(update);
+    obs.observe(nav);
+    return () => obs.disconnect();
+  }, []);
+
   // Function to check/uncheck tasks
   const toggleTask = (id: number) => {
     setTasks(
@@ -240,10 +252,24 @@ export default function ResourcesPage() {
         <meta name="description" content="Explore Ateion's interactive learning resources, tools, and activities designed to build real-world capabilities." />
       </Helmet>
     <SidebarProvider>
-      <div className="flex h-screen w-full bg-[var(--color-background-primary)]">
+      <div
+        className="flex w-full bg-[var(--color-background-primary)]"
+        style={{
+          height: `calc(100dvh - ${navbarHeight}px)`,
+          marginTop: navbarHeight,
+        }}
+      >
         {/* SIDEBAR */}
-        <Sidebar variant="sidebar" collapsible="icon" className="border-r-0">
-          <div className="flex h-screen flex-col bg-[#1E1632] text-[var(--color-text-inverse)]">
+        <Sidebar
+          variant="sidebar"
+          collapsible="icon"
+          className="border-r-0"
+          style={{
+            top: navbarHeight,
+            height: `calc(100svh - ${navbarHeight}px)`,
+          }}
+        >
+          <div className="flex h-full flex-col bg-[#1E1632] text-[var(--color-text-inverse)]">
             {/* LOGO */}
             <SidebarHeader
               className="px-4 py-6 cursor-pointer hover:opacity-80 transition-opacity"
