@@ -1,10 +1,25 @@
 import { motion } from "framer-motion";
-import { Compass, Sparkles, ChevronRight, BookOpen, TrendingUp, Clock, Award } from "lucide-react";
+import { Compass, Sparkles, ChevronRight, BookOpen, TrendingUp, Clock, Award, Play } from "lucide-react";
 import { staggerContainer, fadeUpItem } from "../shared/types";
 import { usePlayground } from "../shared/PlaygroundContext";
+import { useCourses } from "../hooks/useCourses";
+import { useNavigate } from "react-router";
+
+function parseHours(duration: string): number {
+  const h = parseInt(duration);
+  return isNaN(h) ? 0 : h;
+}
 
 export default function DashboardPage() {
   const { userProfile, streak, xp } = usePlayground();
+  const { allCourses, lastResume } = useCourses("");
+  const navigate = useNavigate();
+
+  const activeCourses = allCourses.filter(c => c.progress > 0 && c.progress < 100).length;
+  const completedCourses = allCourses.filter(c => c.progress === 100).length;
+  const totalHours = allCourses
+    .filter(c => c.progress > 0)
+    .reduce((sum, c) => sum + parseHours(c.duration), 0);
 
   return (
     <>
@@ -45,8 +60,11 @@ export default function DashboardPage() {
             </p>
 
             <div className="flex flex-wrap gap-4">
-              <button className="bg-[var(--color-accent)] hover:bg-[var(--color-accent)]/90 text-[#ffffff] px-8 py-3.5 rounded-2xl font-bold shadow-[0_0_20px_rgba(232,133,106,0.3)] hover:shadow-[0_0_30px_rgba(232,133,106,0.5)] hover:-translate-y-1 transition-all flex items-center gap-2 border border-transparent">
-                Resume Learning <ChevronRight size={18} />
+              <button
+                onClick={() => navigate(lastResume ? `/playground/course/${lastResume.id}` : "/playground/discover")}
+                className="bg-[var(--color-accent)] hover:bg-[var(--color-accent)]/90 text-[#ffffff] px-8 py-3.5 rounded-2xl font-bold shadow-[0_0_20px_rgba(232,133,106,0.3)] hover:shadow-[0_0_30px_rgba(232,133,106,0.5)] hover:-translate-y-1 transition-all flex items-center gap-2 border border-transparent"
+              >
+                {lastResume ? <><Play size={18} /> Resume Learning</> : <><Compass size={18} /> Discover Courses</>} <ChevronRight size={18} />
               </button>
               <button className="bg-[var(--color-background-primary)]/80 backdrop-blur-md text-[var(--color-text-primary)] border border-[var(--color-border-medium)] px-6 py-3.5 rounded-2xl font-bold hover:bg-[var(--color-background-tertiary)] transition-all flex items-center gap-2 shadow-sm">
                 <span className="text-xl animate-pulse">🔥</span> {streak} Day Streak!
@@ -109,7 +127,7 @@ export default function DashboardPage() {
             <div className="flex items-end justify-between mt-2">
               <div>
                 <p className="text-3xl font-bold text-[var(--color-text-primary)] mb-1 font-['Inter',sans-serif] tracking-tight">
-                  4
+                  {activeCourses}
                 </p>
                 <p className="text-[var(--color-text-tertiary)] text-sm font-bold">
                   Active Courses
@@ -138,7 +156,7 @@ export default function DashboardPage() {
             <div className="flex items-end justify-between mt-2">
               <div>
                 <p className="text-3xl font-bold text-[var(--color-text-primary)] mb-1 font-['Inter',sans-serif] tracking-tight">
-                  127
+                  {totalHours}
                 </p>
                 <p className="text-[var(--color-text-tertiary)] text-sm font-bold">
                   Hours Learned
@@ -167,10 +185,10 @@ export default function DashboardPage() {
             <div className="flex items-end justify-between mt-2">
               <div>
                 <p className="text-3xl font-bold text-[var(--color-text-primary)] mb-1 font-['Inter',sans-serif] tracking-tight">
-                  23
+                  {completedCourses}
                 </p>
                 <p className="text-[var(--color-text-tertiary)] text-sm font-bold">
-                  Achievements
+                  Completed
                 </p>
               </div>
               {/* Sparkline */}

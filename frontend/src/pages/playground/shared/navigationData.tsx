@@ -43,6 +43,7 @@ export const navigationSections: NavSection[] = [
     icon: BookOpen,
     items: [
       { title: "My Courses", icon: BookMarked, path: "/playground/my-courses" },
+      { title: "Saved Courses", icon: Heart, path: "/playground/saved" },
       { title: "Discover Courses", icon: Compass, path: "/playground/discover" },
       { title: "Learning Paths", icon: Map, path: "/playground/learning-paths" },
       { title: "Completed Courses", icon: Award, path: "/playground/completed" },

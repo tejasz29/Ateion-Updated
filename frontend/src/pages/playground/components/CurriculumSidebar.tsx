@@ -10,12 +10,12 @@ export interface Lesson {
   isCurrent: boolean;
 }
 
-interface Section {
+export interface Section {
   title: string;
   lessons: Lesson[];
 }
 
-const SECTIONS: Section[] = [
+export const SECTIONS: Section[] = [
   {
     title: "Getting Started",
     lessons: [
@@ -41,11 +41,17 @@ const SECTIONS: Section[] = [
   },
 ];
 
-export default function CurriculumSidebar() {
+interface CurriculumSidebarProps {
+  currentLessonId: number;
+  completedIds: Set<number>;
+  onLessonSelect: (lesson: Lesson) => void;
+}
+
+export default function CurriculumSidebar({ currentLessonId, completedIds, onLessonSelect }: CurriculumSidebarProps) {
   const [expanded, setExpanded] = useState<Record<string, boolean>>(() => {
     const initial: Record<string, boolean> = {};
     for (const s of SECTIONS) {
-      if (s.lessons.some(l => l.isCurrent || !l.completed)) {
+      if (s.lessons.some(l => !completedIds.has(l.id) && !l.isLocked)) {
         initial[s.title] = true;
       } else {
         initial[s.title] = false;
@@ -71,33 +77,35 @@ export default function CurriculumSidebar() {
             >
               <span className="text-xs font-semibold text-[var(--color-text-primary)]">{section.title}</span>
               <div className="flex items-center gap-2">
-                <span className="text-[10px] text-[var(--color-text-tertiary)]">{section.lessons.filter(l => l.completed).length}/{section.lessons.length}</span>
+                <span className="text-[10px] text-[var(--color-text-tertiary)]">{section.lessons.filter(l => completedIds.has(l.id)).length}/{section.lessons.length}</span>
                 <ChevronDown size={14} className={`text-[var(--color-text-tertiary)] transition-transform duration-200 ${expanded[section.title] ? "rotate-0" : "-rotate-90"}`} />
               </div>
             </button>
             {expanded[section.title] && (
               <div className="ml-2 border-l border-[var(--color-border-light)] pl-2 space-y-0.5">
                 {section.lessons.map((lesson) => (
-                  <div
+                  <button
                     key={lesson.id}
-                    className={`flex items-center gap-3 p-2.5 rounded-lg cursor-pointer text-sm transition-colors ${
-                      lesson.isCurrent
+                    disabled={lesson.isLocked}
+                    onClick={() => onLessonSelect(lesson)}
+                    className={`flex items-center gap-3 p-2.5 rounded-lg text-sm transition-all w-full text-left ${
+                      currentLessonId === lesson.id
                         ? "bg-[var(--color-accent)]/10 font-bold text-[var(--color-accent)]"
                         : lesson.isLocked
-                          ? "opacity-50 cursor-not-allowed"
+                          ? "opacity-40 cursor-not-allowed"
                           : "hover:bg-[var(--color-background-tertiary)] text-[var(--color-text-secondary)]"
                     }`}
                   >
-                    {lesson.completed ? (
+                    {completedIds.has(lesson.id) ? (
                       <CheckCircle size={15} className="text-[var(--color-success)] shrink-0" />
                     ) : lesson.isLocked ? (
                       <Lock size={15} className="text-[var(--color-text-tertiary)] shrink-0" />
                     ) : (
-                      <Play size={15} className="text-[var(--color-accent)] shrink-0" fill={lesson.isCurrent ? "currentColor" : "none"} />
+                      <Play size={15} className="text-[var(--color-accent)] shrink-0" fill={currentLessonId === lesson.id ? "currentColor" : "none"} />
                     )}
                     <span className="flex-1 truncate text-xs">{lesson.title}</span>
                     <span className="text-[10px] text-[var(--color-text-tertiary)] shrink-0">{lesson.duration}</span>
-                  </div>
+                  </button>
                 ))}
               </div>
             )}

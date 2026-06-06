@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useParams, useNavigate } from "react-router";
-import { BookOpen, StickyNote, MessageCircle, Download, ArrowLeft, Star, Clock, BarChart2, PlayCircle, Users, Copy, ThumbsUp, MessageSquare, Paperclip, ExternalLink, FileText } from "lucide-react";
+import { BookOpen, StickyNote, MessageCircle, Download, ArrowLeft, Star, Clock, BarChart2, PlayCircle, Users, Copy, ThumbsUp, MessageSquare, Paperclip, ExternalLink, FileText, CheckCircle } from "lucide-react";
 import VideoPlayer from "../components/VideoPlayer";
-import CurriculumSidebar from "../components/CurriculumSidebar";
+import CurriculumSidebar, { SECTIONS, Lesson } from "../components/CurriculumSidebar";
 import { MY_COURSES_DATA } from "../shared/mockData";
 
 type TabId = "overview" | "notes" | "qa" | "resources";
@@ -33,6 +33,15 @@ export default function CoursePlayerPage() {
   const courseId = Number(id);
   const course = MY_COURSES_DATA.find((c) => c.id === courseId);
 
+  const allLessons = SECTIONS.flatMap(s => s.lessons);
+  const firstUnlocked = allLessons.find(l => !l.isLocked) || allLessons[0];
+  const [currentLesson, setCurrentLesson] = useState<Lesson>(firstUnlocked);
+  const [completedIds, setCompletedIds] = useState<Set<number>>(new Set([1, 2]));
+
+  const markComplete = (lessonId: number) => {
+    setCompletedIds(prev => new Set([...prev, lessonId]));
+  };
+
   if (!course) {
     return (
       <div className="flex items-center justify-center h-64">
@@ -46,10 +55,9 @@ export default function CoursePlayerPage() {
     );
   }
 
-  const currentTime = "12:34";
   const handleAddNote = () => {
     if (!noteInput.trim()) return;
-    setNotes((prev) => [...prev, `${noteInput} — timestamp ${currentTime}`]);
+    setNotes((prev) => [...prev, `${noteInput} — at "${currentLesson.title}"`]);
     setNoteInput("");
   };
 
@@ -65,7 +73,26 @@ export default function CoursePlayerPage() {
           <span className="text-sm text-[var(--color-text-primary)] font-medium truncate">{course.title}</span>
         </div>
 
-        <VideoPlayer title={course.title} />
+        <div className="relative">
+          <VideoPlayer title={currentLesson.title} key={currentLesson.id} />
+          <div className="absolute top-4 right-4 z-10 flex items-center gap-2">
+            {!completedIds.has(currentLesson.id) && (
+              <button
+                onClick={() => markComplete(currentLesson.id)}
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[var(--color-success)]/90 text-white text-xs font-bold hover:bg-[var(--color-success)] transition-colors shadow-lg backdrop-blur-sm"
+              >
+                <CheckCircle size={14} />
+                Mark complete
+              </button>
+            )}
+            {completedIds.has(currentLesson.id) && (
+              <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/10 text-white/80 text-xs font-bold backdrop-blur-sm shadow-lg">
+                <CheckCircle size={14} className="text-[var(--color-success)]" />
+                Completed
+              </div>
+            )}
+          </div>
+        </div>
 
         <div className="border-b border-[var(--color-border-light)] bg-[var(--color-background-secondary)]/30">
           <div className="flex">
@@ -142,7 +169,7 @@ export default function CoursePlayerPage() {
                   value={noteInput}
                   onChange={(e) => setNoteInput(e.target.value)}
                   onKeyDown={(e) => e.key === "Enter" && handleAddNote()}
-                  placeholder="Add a note at {currentTime}..."
+                  placeholder={`Add a note — "${currentLesson.title}"`}
                   className="flex-1 bg-[var(--color-background-secondary)] border border-[var(--color-border-light)] focus:border-[var(--color-accent)] px-4 py-2.5 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)]/10 text-[var(--color-text-primary)] placeholder:text-[var(--color-text-tertiary)]"
                 />
                 <button onClick={handleAddNote} className="px-4 py-2.5 bg-[var(--color-accent)] text-white rounded-xl text-sm font-bold hover:brightness-110 transition-all">
@@ -220,7 +247,11 @@ export default function CoursePlayerPage() {
       </div>
 
       <aside className="w-80 border-l border-[var(--color-border-light)] overflow-y-auto shrink-0 hidden lg:block">
-        <CurriculumSidebar />
+        <CurriculumSidebar
+          currentLessonId={currentLesson.id}
+          completedIds={completedIds}
+          onLessonSelect={(lesson) => { if (!lesson.isLocked) setCurrentLesson(lesson); }}
+        />
       </aside>
     </div>
   );

@@ -31,6 +31,7 @@ const FallbackPage = lazy(() => import("../pages/FallbackPage"));
 const viewMap: Record<string, LazyExoticComponent<ComponentType<any>>> = {
   "Dashboard": lazy(() => import("../pages/DashboardPage")),
   "My Courses": lazy(() => import("../pages/MyCoursesPage")),
+  "Saved Courses": lazy(() => import("../pages/SavedCoursesPage")),
   "Discover Courses": lazy(() => import("../pages/DiscoverCoursesPage")),
   "Tasks": lazy(() => import("../pages/TasksPage")),
   "Calendar": lazy(() => import("../pages/CalendarPage")),
