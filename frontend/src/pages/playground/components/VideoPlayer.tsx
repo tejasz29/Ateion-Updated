@@ -91,7 +91,7 @@ export default function VideoPlayer({ title, duration, onComplete }: VideoPlayer
     <div
       ref={containerRef}
       className="relative w-full bg-black rounded-2xl overflow-hidden group"
-      style={{ aspectRatio: "16 / 9" }}
+      style={{ aspectRatio: "16 / 9", maxHeight: "55vh" }}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => { setHover(false); setShowSpeedMenu(false); }}
     >
