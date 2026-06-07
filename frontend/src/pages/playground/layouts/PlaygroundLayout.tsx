@@ -244,96 +244,96 @@ function PlaygroundInner() {
 
           <SidebarInset className="flex flex-1 flex-col overflow-x-hidden bg-transparent w-full">
             {!location.pathname.startsWith("/playground/course/") && (
-<header className="flex h-16 sm:h-20 items-center justify-between px-6 lg:px-10 bg-[var(--color-background-secondary)]/60 backdrop-blur-md border-b border-[var(--color-border-light)] shrink-0 overflow-visible relative z-30">
-          <div className="flex items-center gap-3">
-                <SidebarTrigger className="flex md:hidden items-center gap-2 bg-[var(--color-accent)] text-white px-3 py-2 rounded-lg text-sm font-bold shadow-sm hover:brightness-110 transition-all" />
-                <div className="flex items-center gap-2">
-                  <h1
-                    className="font-bold text-[var(--color-text-primary)] cursor-pointer hover:text-[var(--color-accent)] hover:scale-105 origin-left transition-all duration-300 active:scale-95"
-                    style={{
-                      fontFamily: "var(--font-display)",
-                      fontSize: "clamp(1.2rem, 2.5vw, 1.8rem)",
-                      letterSpacing: "-0.03em",
-                      lineHeight: "1.1"
-                    }}
-                    onClick={() => navigate("/playground")}
-                  >
-                    Playground
-                  </h1>
-                  <span className="text-[var(--color-text-tertiary)] text-sm hidden sm:inline">→</span>
-                  <span
-                    className="text-[var(--color-accent)] font-semibold hidden sm:inline cursor-default"
-                    style={{
-                      fontFamily: "var(--font-display)",
-                      fontSize: "clamp(1rem, 2vw, 1.4rem)",
-                      letterSpacing: "-0.02em",
-                    }}
-                  >
-                    {activeView}
-                  </span>
-                </div>
-              </div>
-
-              <div className="flex items-center gap-3 sm:gap-5">
-                <button
-                  onClick={() => navigate("/")}
-                  className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[var(--color-background-secondary)] border border-[var(--color-border-light)] text-xs text-[var(--color-text-tertiary)] hover:border-[var(--color-accent)]/30 hover:text-[var(--color-text-primary)] transition-colors mr-1"
-                  title="Home"
-                >
-                  <Home size={16} />
-                </button>
-                <button
-                  onClick={() => setSearchOpen(true)}
-                  className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-lg bg-[var(--color-background-secondary)] border border-[var(--color-border-light)] text-xs text-[var(--color-text-tertiary)] hover:border-[var(--color-accent)]/30 hover:text-[var(--color-text-primary)] transition-colors w-36"
-                >
-                  <Search size={14} />
-                  <span className="hidden lg:inline">Search</span>
-                  <kbd className="px-1 py-0.5 rounded bg-[var(--color-background-primary)] border border-[var(--color-border-light)] font-mono text-[10px]">⌘K</kbd>
-                </button>
-                <button
-                  onClick={() => setSearchOpen(true)}
-                  className="flex sm:hidden p-2 rounded-lg hover:bg-[var(--color-background-secondary)] transition-colors"
-                >
-                  <Search size={18} className="text-[var(--color-text-primary)]" />
-                </button>
-
-                <div className="flex items-center gap-1 px-3 py-1.5 rounded-full bg-[var(--color-background-secondary)] border border-[var(--color-border-light)] group/streak">
-                  <Flame size={14} className={`text-orange-500 ${streak > 0 ? "animate-[bounce_2s_ease-in-out_infinite]" : ""}`} />
-                  <span className="text-xs font-bold text-[var(--color-text-primary)]">{streak}</span>
-                  <span className="text-xs text-[var(--color-text-tertiary)] hidden sm:inline">day streak</span>
-                </div>
-
-                <div className="flex items-center gap-1 text-xs font-bold text-[var(--color-text-primary)]">
-                  <span className="text-[var(--color-accent)]">{xp.toLocaleString()}</span>
-                  <span className="text-[var(--color-text-tertiary)] hidden sm:inline">XP</span>
-                </div>
-
-                <NotificationDropdown />
-
-                <div className="hidden sm:flex items-center gap-2 bg-[var(--color-accent)] text-[var(--color-text-inverse)] px-4 py-1.5 rounded-full text-xs font-bold shadow-[0_2px_10px_var(--color-accent-light)] hover:shadow-[0_4px_15px_var(--color-accent)] hover:-translate-y-0.5 transition-all duration-300 cursor-default group">
-                  <User size={14} className="group-hover:animate-bounce" />
-                  <span>{userProfile.segmentText}</span>
-                </div>
-
-                <div className="flex items-center gap-3 cursor-pointer group hover:opacity-100">
-                  <div className="text-right hidden md:block">
-                    <p className="text-sm font-bold text-[var(--color-text-primary)] group-hover:text-[var(--color-accent)] transition-colors">
-                      {userProfile.fullName}
-                    </p>
-                    <p className="text-xs text-[var(--color-text-tertiary)]">
-                      {userProfile.isPremium ? "Premium Member" : "Free Member"}
-                    </p>
+              <header className="flex h-16 sm:h-20 items-center justify-between px-6 lg:px-10 bg-[var(--color-background-secondary)]/60 backdrop-blur-md border-b border-[var(--color-border-light)] shrink-0 overflow-visible relative z-30">
+                <div className="flex items-center gap-3">
+                  <SidebarTrigger className="flex md:hidden items-center gap-2 bg-[var(--color-accent)] text-white px-3 py-2 rounded-lg text-sm font-bold shadow-sm hover:brightness-110 transition-all" />
+                  <div className="flex items-center gap-2">
+                    <h1
+                      className="font-bold text-[var(--color-text-primary)] cursor-pointer hover:text-[var(--color-accent)] hover:scale-105 origin-left transition-all duration-300 active:scale-95"
+                      style={{
+                        fontFamily: "var(--font-display)",
+                        fontSize: "clamp(1.2rem, 2.5vw, 1.8rem)",
+                        letterSpacing: "-0.03em",
+                        lineHeight: "1.1"
+                      }}
+                      onClick={() => navigate("/playground")}
+                    >
+                      Playground
+                    </h1>
+                    <span className="text-[var(--color-text-tertiary)] text-sm hidden sm:inline">→</span>
+                    <span
+                      className="text-[var(--color-accent)] font-semibold hidden sm:inline cursor-default"
+                      style={{
+                        fontFamily: "var(--font-display)",
+                        fontSize: "clamp(1rem, 2vw, 1.4rem)",
+                        letterSpacing: "-0.02em",
+                      }}
+                    >
+                      {activeView}
+                    </span>
                   </div>
-                  <UserAvatar name={userProfile.firstName} className="group-hover:scale-110 group-hover:shadow-md transition-all duration-300 group-hover:border-[var(--color-accent)]/50" />
                 </div>
-              </div>
-            </header>
+
+                <div className="flex items-center gap-3 sm:gap-5">
+                  <button
+                    onClick={() => navigate("/")}
+                    className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[var(--color-background-secondary)] border border-[var(--color-border-light)] text-xs text-[var(--color-text-tertiary)] hover:border-[var(--color-accent)]/30 hover:text-[var(--color-text-primary)] transition-colors mr-1"
+                    title="Home"
+                  >
+                    <Home size={16} />
+                  </button>
+                  <button
+                    onClick={() => setSearchOpen(true)}
+                    className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-lg bg-[var(--color-background-secondary)] border border-[var(--color-border-light)] text-xs text-[var(--color-text-tertiary)] hover:border-[var(--color-accent)]/30 hover:text-[var(--color-text-primary)] transition-colors w-36"
+                  >
+                    <Search size={14} />
+                    <span className="hidden lg:inline">Search</span>
+                    <kbd className="px-1 py-0.5 rounded bg-[var(--color-background-primary)] border border-[var(--color-border-light)] font-mono text-[10px]">⌘K</kbd>
+                  </button>
+                  <button
+                    onClick={() => setSearchOpen(true)}
+                    className="flex sm:hidden p-2 rounded-lg hover:bg-[var(--color-background-secondary)] transition-colors"
+                  >
+                    <Search size={18} className="text-[var(--color-text-primary)]" />
+                  </button>
+
+                  <div className="flex items-center gap-1 px-3 py-1.5 rounded-full bg-[var(--color-background-secondary)] border border-[var(--color-border-light)] group/streak">
+                    <Flame size={14} className={`text-orange-500 ${streak > 0 ? "animate-[bounce_2s_ease-in-out_infinite]" : ""}`} />
+                    <span className="text-xs font-bold text-[var(--color-text-primary)]">{streak}</span>
+                    <span className="text-xs text-[var(--color-text-tertiary)] hidden sm:inline">day streak</span>
+                  </div>
+
+                  <div className="flex items-center gap-1 text-xs font-bold text-[var(--color-text-primary)]">
+                    <span className="text-[var(--color-accent)]">{xp.toLocaleString()}</span>
+                    <span className="text-[var(--color-text-tertiary)] hidden sm:inline">XP</span>
+                  </div>
+
+                  <NotificationDropdown />
+
+                  <div className="hidden sm:flex items-center gap-2 bg-[var(--color-accent)] text-[var(--color-text-inverse)] px-4 py-1.5 rounded-full text-xs font-bold shadow-[0_2px_10px_var(--color-accent-light)] hover:shadow-[0_4px_15px_var(--color-accent)] hover:-translate-y-0.5 transition-all duration-300 cursor-default group">
+                    <User size={14} className="group-hover:animate-bounce" />
+                    <span>{userProfile.segmentText}</span>
+                  </div>
+
+                  <div className="flex items-center gap-3 cursor-pointer group hover:opacity-100">
+                    <div className="text-right hidden md:block">
+                      <p className="text-sm font-bold text-[var(--color-text-primary)] group-hover:text-[var(--color-accent)] transition-colors">
+                        {userProfile.fullName}
+                      </p>
+                      <p className="text-xs text-[var(--color-text-tertiary)]">
+                        {userProfile.isPremium ? "Premium Member" : "Free Member"}
+                      </p>
+                    </div>
+                    <UserAvatar name={userProfile.firstName} className="group-hover:scale-110 group-hover:shadow-md transition-all duration-300 group-hover:border-[var(--color-accent)]/50" />
+                  </div>
+                </div>
+              </header>
             )}
 
             <GlobalSearch open={searchOpen} onOpenChange={setSearchOpen} />
             <Toast message={toastMessage} onDismiss={() => setToastMessage(null)} />
 
-            <main className={`flex-1 ${location.pathname.startsWith("/playground/course/") ? "p-0 overflow-hidden" : "overflow-y-auto p-6 lg:p-10"}`}>
+            <main className={`flex-1 ${location.pathname.startsWith("/playground/course/") ? "p-0 overflow-y-auto" : "overflow-y-auto p-6 lg:p-10"}`}>
               <Suspense fallback={
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                   {[...Array(6)].map((_, i) => (
