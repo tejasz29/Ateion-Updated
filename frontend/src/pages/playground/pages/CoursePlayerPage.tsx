@@ -1,25 +1,20 @@
 import { useState, useCallback, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useParams, useNavigate } from "react-router";
-import { BookOpen, StickyNote, MessageCircle, Download, ArrowLeft, Star, Clock, BarChart2, PlayCircle, Users, Copy, ThumbsUp, MessageSquare, Paperclip, ExternalLink, FileText, CheckCircle, Zap, X } from "lucide-react";
+import { BookOpen, StickyNote, MessageCircle, Download, ArrowLeft, Star, Clock, BarChart2, PlayCircle, Users, ThumbsUp, MessageSquare, Paperclip, ExternalLink, FileText, CheckCircle, Zap, X } from "lucide-react";
 import VideoPlayer from "../components/VideoPlayer";
 import CurriculumSidebar, { COURSE_SECTIONS, SECTIONS, Lesson } from "../components/CurriculumSidebar";
 import { MY_COURSES_DATA } from "../shared/mockData";
 import { usePlayground } from "../shared/PlaygroundContext";
 
 type TabId = "overview" | "notes" | "qa" | "resources";
-
-interface TabDef {
-  id: TabId;
-  label: string;
-  icon: React.ComponentType<{ size?: number }>;
-}
+interface TabDef { id: TabId; label: string; icon: React.ComponentType<{ size?: number }>; }
 
 const TABS: TabDef[] = [
-  { id: "overview", label: "Overview", icon: BookOpen },
-  { id: "notes", label: "My Notes", icon: StickyNote },
-  { id: "qa", label: "Q&A", icon: MessageCircle },
-  { id: "resources", label: "Resources", icon: Download },
+  { id: "overview",   label: "Overview",  icon: BookOpen },
+  { id: "notes",      label: "My Notes",  icon: StickyNote },
+  { id: "qa",         label: "Q&A",       icon: MessageCircle },
+  { id: "resources",  label: "Resources", icon: Download },
 ];
 
 function parseDuration(d: string): number {
@@ -27,12 +22,8 @@ function parseDuration(d: string): number {
   return m * 60 + s;
 }
 
-// ─────────────────────────────────────────────────────────────────
-// VIDEO_HEIGHT_VH: full height of the video in viewport-height units
-// COLLAPSE_PX: how many px the user scrolls before video fully hides
-// ─────────────────────────────────────────────────────────────────
-const VIDEO_HEIGHT_VH = 55;
-const COLLAPSE_PX = 200;
+// How many px the user scrolls before the video fully disappears
+const COLLAPSE_PX = 180;
 
 export default function CoursePlayerPage() {
   const { id } = useParams<{ id: string }>();
@@ -44,7 +35,6 @@ export default function CoursePlayerPage() {
   const courseId = Number(id);
   const course = MY_COURSES_DATA.find((c) => c.id === courseId);
   const sections = COURSE_SECTIONS[courseId] ?? SECTIONS;
-
   const allLessons = sections.flatMap(s => s.lessons);
   const totalLessons = allLessons.length;
   const firstUnlocked = allLessons.find(l => !l.isLocked) || allLessons[0];
@@ -52,45 +42,38 @@ export default function CoursePlayerPage() {
 
   const progressKey = `ateion_progress_${courseId}`;
   const [completedIds, setCompletedIds] = useState<Set<number>>(() => {
-    try {
-      return new Set(JSON.parse(localStorage.getItem(progressKey) || "[]"));
-    } catch {
-      return new Set<number>();
-    }
+    try { return new Set(JSON.parse(localStorage.getItem(progressKey) || "[]")); }
+    catch { return new Set<number>(); }
   });
 
   const [xpFloats, setXpFloats] = useState<{ id: number; x: number; y: number }[]>([]);
   const xpIdRef = useRef(0);
 
-  // ── Zero-rerender scroll collapse ────────────────────────────────────────
-  // We manipulate the DOM directly via refs so scroll never triggers setState
+  // ── GPU-accelerated scroll collapse ──────────────────────────────────────
+  // We use transform:scaleY + opacity — both run on the compositor (GPU),
+  // never trigger layout recalc, and cause ZERO React re-renders.
   const scrollAreaRef = useRef<HTMLDivElement>(null);
   const videoWrapRef  = useRef<HTMLDivElement>(null);
+  const videoHeightRef = useRef(0);
 
   useEffect(() => {
     const scrollEl = scrollAreaRef.current;
     const videoEl  = videoWrapRef.current;
     if (!scrollEl || !videoEl) return;
 
-    // Measure the natural video height once (in px) so we can interpolate
-    const fullHeightPx = videoEl.getBoundingClientRect().height;
+    videoHeightRef.current = videoEl.getBoundingClientRect().height;
+    videoEl.style.transformOrigin = "top center";
 
     const onScroll = () => {
-      // progress: 0 (video fully visible) → 1 (video fully gone)
-      const progress = Math.min(1, scrollEl.scrollTop / COLLAPSE_PX);
-
-      const newHeightPx = fullHeightPx * (1 - progress);
-      const newOpacity  = Math.max(0, 1 - progress * 1.5);
-
-      // Direct DOM — zero React re-renders, zero layout jank
-      videoEl.style.maxHeight = `${newHeightPx}px`;
-      videoEl.style.opacity   = String(newOpacity);
-      videoEl.style.pointerEvents = progress >= 0.99 ? "none" : "auto";
+      const p = Math.min(1, scrollEl.scrollTop / COLLAPSE_PX);
+      videoEl.style.transform    = `scaleY(${1 - p})`;
+      videoEl.style.opacity      = String(Math.max(0, 1 - p * 1.6));
+      videoEl.style.marginBottom = `${-(videoHeightRef.current * p)}px`;
     };
 
     scrollEl.addEventListener("scroll", onScroll, { passive: true });
     return () => scrollEl.removeEventListener("scroll", onScroll);
-  }, []); // runs once after mount — refs are stable
+  }, []);
 
   const derivedProgress = Math.round((completedIds.size / totalLessons) * 100);
 
@@ -99,11 +82,11 @@ export default function CoursePlayerPage() {
   }, [progressKey]);
 
   const addXpFloat = useCallback(() => {
-    const id = ++xpIdRef.current;
+    const fid = ++xpIdRef.current;
     const x = 120 + Math.random() * 40;
-    const y = 60 + Math.random() * 20;
-    setXpFloats(prev => [...prev, { id, x, y }]);
-    setTimeout(() => setXpFloats(prev => prev.filter(f => f.id !== id)), 1200);
+    const y = 60  + Math.random() * 20;
+    setXpFloats(prev => [...prev, { id: fid, x, y }]);
+    setTimeout(() => setXpFloats(prev => prev.filter(f => f.id !== fid)), 1200);
   }, []);
 
   const markComplete = (lessonId: number) => {
@@ -139,85 +122,77 @@ export default function CoursePlayerPage() {
 
   return (
     <div className="flex h-full">
-      {/* ── LEFT: breadcrumb + video + scrollable content ── */}
+
+      {/* ── LEFT COLUMN ── */}
       <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
 
-        {/* Breadcrumb — never scrolls */}
-        <div className="flex items-center gap-3 px-6 py-3 border-b border-[var(--color-border-light)] bg-[var(--color-background-secondary)]/50 shrink-0">
-          <button onClick={() => navigate("/playground/my-courses")} className="flex items-center gap-1.5 text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] transition-colors">
-            <ArrowLeft size={16} />
-            My Courses
+        {/* Breadcrumb — fixed, never scrolls */}
+        <div className="flex items-center gap-3 px-6 py-3 border-b border-[var(--color-border-light)] bg-[var(--color-background-secondary)]/50 shrink-0 z-20">
+          <button
+            onClick={() => navigate("/playground/my-courses")}
+            className="flex items-center gap-1.5 text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] transition-colors"
+          >
+            <ArrowLeft size={16} /> My Courses
           </button>
           <span className="text-sm text-[var(--color-text-tertiary)]">›</span>
           <span
             className="text-sm text-[var(--color-text-tertiary)] hover:text-[var(--color-accent)] transition-colors cursor-pointer truncate max-w-[200px]"
             onClick={() => navigate(`/playground/course/${course.id}`)}
-          >
-            {course.title}
-          </span>
+          >{course.title}</span>
           <span className="text-sm text-[var(--color-text-tertiary)]">›</span>
           <span className="text-sm text-[var(--color-text-primary)] font-medium truncate max-w-[200px]">{currentLesson.title}</span>
         </div>
 
-        {/* ── VIDEO — sticky at top, collapses via direct DOM style (no re-render) ── */}
-        <div
-          ref={videoWrapRef}
-          className="relative w-full shrink-0 sticky top-0 z-10 overflow-hidden bg-black"
-          style={{
-            maxHeight: `${VIDEO_HEIGHT_VH}vh`,
-            // will-change tells the browser to promote to its own GPU layer
-            // so height + opacity changes never repaint the rest of the page
-            willChange: "max-height, opacity",
-          }}
-        >
-          <VideoPlayer
-            title={currentLesson.title}
-            key={currentLesson.id}
-            duration={parseDuration(currentLesson.duration)}
-            onComplete={() => markComplete(currentLesson.id)}
-          />
-
-          {/* XP floats */}
-          <AnimatePresence>
-            {xpFloats.map(f => (
-              <motion.div
-                key={f.id}
-                initial={{ opacity: 1, y: 0, scale: 0.5 }}
-                animate={{ opacity: 0, y: -60, scale: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.8, ease: "easeOut" }}
-                className="absolute z-20 flex items-center gap-1 text-[var(--color-accent)] font-bold text-sm pointer-events-none drop-shadow-lg"
-                style={{ top: f.y, right: f.x }}
-              >
-                <Zap size={16} /> +50 XP
-              </motion.div>
-            ))}
-          </AnimatePresence>
-
-          {/* Mark complete / Completed badge */}
-          <div className="absolute top-4 right-4 z-10 flex items-center gap-2">
-            {!completedIds.has(currentLesson.id) ? (
-              <button
-                onClick={() => markComplete(currentLesson.id)}
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[var(--color-success)]/90 text-white text-xs font-bold hover:bg-[var(--color-success)] transition-colors shadow-lg backdrop-blur-sm"
-              >
-                <CheckCircle size={14} />
-                Mark complete
-              </button>
-            ) : (
-              <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/10 text-white/80 text-xs font-bold backdrop-blur-sm shadow-lg">
-                <CheckCircle size={14} className="text-[var(--color-success)]" />
-                Completed
-              </div>
-            )}
-          </div>
-        </div>
-
-        {/* ── SCROLLABLE AREA: tabs + content ── */}
+        {/* ── Scrollable column (video + tabs + content) ── */}
         <div ref={scrollAreaRef} className="flex-1 overflow-y-auto min-h-0">
 
+          {/* VIDEO WRAPPER — GPU layer, no layout recalc */}
+          <div
+            ref={videoWrapRef}
+            className="relative w-full shrink-0 sticky top-0 z-10 overflow-hidden bg-black"
+            style={{ willChange: "transform, opacity" }}
+          >
+            <VideoPlayer
+              title={currentLesson.title}
+              key={currentLesson.id}
+              duration={parseDuration(currentLesson.duration)}
+              onComplete={() => markComplete(currentLesson.id)}
+            />
+
+            <AnimatePresence>
+              {xpFloats.map(f => (
+                <motion.div
+                  key={f.id}
+                  initial={{ opacity: 1, y: 0, scale: 0.5 }}
+                  animate={{ opacity: 0, y: -60, scale: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.8, ease: "easeOut" }}
+                  className="absolute z-20 flex items-center gap-1 text-[var(--color-accent)] font-bold text-sm pointer-events-none drop-shadow-lg"
+                  style={{ top: f.y, right: f.x }}
+                >
+                  <Zap size={16} /> +50 XP
+                </motion.div>
+              ))}
+            </AnimatePresence>
+
+            <div className="absolute top-4 right-4 z-10 flex items-center gap-2">
+              {!completedIds.has(currentLesson.id) ? (
+                <button
+                  onClick={() => markComplete(currentLesson.id)}
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[var(--color-success)]/90 text-white text-xs font-bold hover:bg-[var(--color-success)] transition-colors shadow-lg backdrop-blur-sm"
+                >
+                  <CheckCircle size={14} /> Mark complete
+                </button>
+              ) : (
+                <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/10 text-white/80 text-xs font-bold backdrop-blur-sm shadow-lg">
+                  <CheckCircle size={14} className="text-[var(--color-success)]" /> Completed
+                </div>
+              )}
+            </div>
+          </div>
+
           {/* Tab bar */}
-          <div className="border-b border-[var(--color-border-light)] bg-[var(--color-background-secondary)]/30 sticky top-0 z-[5]">
+          <div className="border-b border-[var(--color-border-light)] bg-[var(--color-background-secondary)]/80 backdrop-blur-sm sticky top-0 z-[9]">
             <div className="flex">
               {TABS.map((tab) => {
                 const Icon = tab.icon;
@@ -244,6 +219,7 @@ export default function CoursePlayerPage() {
 
           {/* Tab content */}
           <div className="p-6">
+
             {activeTab === "overview" && (
               <div className="max-w-3xl space-y-6">
                 <div>
@@ -253,25 +229,13 @@ export default function CoursePlayerPage() {
                     you'll master key concepts through hands-on projects and real-world examples.
                   </p>
                 </div>
-
                 <div className="flex flex-wrap gap-4">
-                  <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-[var(--color-background-tertiary)] text-xs text-[var(--color-text-secondary)]">
-                    <BarChart2 size={14} /> {course.level}
-                  </div>
-                  <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-[var(--color-background-tertiary)] text-xs text-[var(--color-text-secondary)]">
-                    <Clock size={14} /> {course.duration}
-                  </div>
-                  <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-[var(--color-background-tertiary)] text-xs text-[var(--color-text-secondary)]">
-                    <PlayCircle size={14} /> {totalLessons} lessons
-                  </div>
-                  <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-[var(--color-background-tertiary)] text-xs text-[var(--color-text-secondary)]">
-                    <Users size={14} /> {course.enrollments.toLocaleString()} enrolled
-                  </div>
-                  <div className="flex items-center gap-1 px-3 py-2 rounded-lg bg-[var(--color-warning)]/10 text-xs text-[var(--color-warning)] font-bold">
-                    <Star size={14} fill="currentColor" /> {course.rating.toFixed(1)}
-                  </div>
+                  <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-[var(--color-background-tertiary)] text-xs text-[var(--color-text-secondary)]"><BarChart2 size={14} /> {course.level}</div>
+                  <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-[var(--color-background-tertiary)] text-xs text-[var(--color-text-secondary)]"><Clock size={14} /> {course.duration}</div>
+                  <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-[var(--color-background-tertiary)] text-xs text-[var(--color-text-secondary)]"><PlayCircle size={14} /> {totalLessons} lessons</div>
+                  <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-[var(--color-background-tertiary)] text-xs text-[var(--color-text-secondary)]"><Users size={14} /> {course.enrollments.toLocaleString()} enrolled</div>
+                  <div className="flex items-center gap-1 px-3 py-2 rounded-lg bg-[var(--color-warning)]/10 text-xs text-[var(--color-warning)] font-bold"><Star size={14} fill="currentColor" /> {course.rating.toFixed(1)}</div>
                 </div>
-
                 <div>
                   <h3 className="text-md font-bold text-[var(--color-text-primary)] mb-3">Your Progress</h3>
                   <div className="p-4 rounded-xl bg-[var(--color-background-secondary)] border border-[var(--color-border-light)]">
@@ -289,16 +253,13 @@ export default function CoursePlayerPage() {
                     </div>
                   </div>
                 </div>
-
                 <div>
                   <h3 className="text-md font-bold text-[var(--color-text-primary)] mb-3">Instructor</h3>
                   <div className="flex items-center gap-4 p-4 rounded-xl bg-[var(--color-background-secondary)] border border-[var(--color-border-light)]">
                     <img src={course.instructorAvatar} alt={course.instructor} className="w-14 h-14 rounded-full object-cover ring-2 ring-[var(--color-border-light)]" />
                     <div>
                       <p className="text-sm font-bold text-[var(--color-text-primary)]">{course.instructor}</p>
-                      <p className="text-xs text-[var(--color-text-secondary)] mt-0.5">
-                        Senior Developer & Educator with 10+ years of experience in building scalable applications.
-                      </p>
+                      <p className="text-xs text-[var(--color-text-secondary)] mt-0.5">Senior Developer & Educator with 10+ years of experience in building scalable applications.</p>
                     </div>
                   </div>
                 </div>
@@ -309,16 +270,13 @@ export default function CoursePlayerPage() {
               <div className="max-w-3xl space-y-4">
                 <div className="flex gap-3">
                   <input
-                    type="text"
-                    value={noteInput}
+                    type="text" value={noteInput}
                     onChange={(e) => setNoteInput(e.target.value)}
                     onKeyDown={(e) => e.key === "Enter" && handleAddNote()}
                     placeholder={`Add a note — "${currentLesson.title}"`}
                     className="flex-1 bg-[var(--color-background-secondary)] border border-[var(--color-border-light)] focus:border-[var(--color-accent)] px-4 py-2.5 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)]/10 text-[var(--color-text-primary)] placeholder:text-[var(--color-text-tertiary)]"
                   />
-                  <button onClick={handleAddNote} className="px-4 py-2.5 bg-[var(--color-accent)] text-white rounded-xl text-sm font-bold hover:brightness-110 transition-all">
-                    Add Note
-                  </button>
+                  <button onClick={handleAddNote} className="px-4 py-2.5 bg-[var(--color-accent)] text-white rounded-xl text-sm font-bold hover:brightness-110 transition-all">Add Note</button>
                 </div>
                 <div className="space-y-2">
                   {notes.filter(n => n.courseId === courseId).map(note => {
@@ -333,10 +291,7 @@ export default function CoursePlayerPage() {
                             {lessonName && <span className="text-[9px] font-medium text-[var(--color-accent)] bg-[var(--color-accent)]/10 px-1.5 py-0.5 rounded">{lessonName}</span>}
                           </div>
                         </div>
-                        <button
-                          onClick={() => deleteNote(note.id)}
-                          className="shrink-0 opacity-0 group-hover:opacity-100 transition-opacity p-1 hover:bg-red-500/10 rounded text-[var(--color-text-tertiary)] hover:text-red-500"
-                        >
+                        <button onClick={() => deleteNote(note.id)} className="shrink-0 opacity-0 group-hover:opacity-100 transition-opacity p-1 hover:bg-red-500/10 rounded text-[var(--color-text-tertiary)] hover:text-red-500">
                           <X size={14} />
                         </button>
                       </div>
@@ -376,10 +331,10 @@ export default function CoursePlayerPage() {
             {activeTab === "resources" && (
               <div className="max-w-3xl space-y-3">
                 {[
-                  { name: "Lesson Slides (PDF)", size: "2.4 MB", icon: FileText },
+                  { name: "Lesson Slides (PDF)",    size: "2.4 MB", icon: FileText },
                   { name: "Source Code - Lesson 3", size: "1.1 MB", icon: Paperclip },
-                  { name: "Cheat Sheet Reference", size: "0.8 MB", icon: BookOpen },
-                  { name: "External Reading List", size: "Link", icon: ExternalLink },
+                  { name: "Cheat Sheet Reference",  size: "0.8 MB", icon: BookOpen },
+                  { name: "External Reading List",  size: "Link",   icon: ExternalLink },
                 ].map((resource, i) => {
                   const Icon = resource.icon;
                   return (
@@ -399,6 +354,7 @@ export default function CoursePlayerPage() {
                 })}
               </div>
             )}
+
           </div>
         </div>{/* end scrollAreaRef */}
       </div>
