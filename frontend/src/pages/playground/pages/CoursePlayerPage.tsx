@@ -60,41 +60,31 @@ export default function CoursePlayerPage() {
     if (!scrollEl || !videoEl || !slotEl) return;
 
     videoEl.style.transformOrigin = "top center";
-    slotEl.style.overflow = "hidden";
 
-    const onScroll = () => {
-      // Measure lazily on first scroll so the video is fully painted
-      if (!videoHeightRef.current) {
-        const h = videoEl.getBoundingClientRect().height;
-        if (!h) return; // still not painted — skip this tick
-        videoHeightRef.current = h;
-        slotEl.style.height = `${h}px`;
-      }
-
-      const h = videoHeightRef.current;
-      const p = Math.min(1, scrollEl.scrollTop / COLLAPSE_PX);
-
-      // GPU-only: no layout recalc
-      videoEl.style.transform = `scaleY(${1 - p})`;
-      videoEl.style.opacity   = String(Math.max(0, 1 - p * 1.8));
-
-      // Slot shrinks → content slides up
-      slotEl.style.height = `${h * (1 - p)}px`;
-    };
-
-    // Measure after short delay so slot reserves space before first scroll
+    // Wait for video to paint, then lock in its height
     const timer = setTimeout(() => {
       const h = videoEl.getBoundingClientRect().height;
-      if (h) {
-        videoHeightRef.current = h;
-        slotEl.style.height = `${h}px`;
-      }
-    }, 100);
+      if (!h) return;
+      videoHeightRef.current = h;
+      slotEl.style.height   = `${h}px`;
+      slotEl.style.overflow = "hidden";
+    }, 150);
+
+    const onScroll = () => {
+      const h = videoHeightRef.current;
+      if (!h) return; // not measured yet, do nothing
+
+      const p = Math.min(1, scrollEl.scrollTop / COLLAPSE_PX);
+
+      videoEl.style.transform = `scaleY(${1 - p})`;
+      videoEl.style.opacity   = String(Math.max(0, 1 - p * 1.8));
+      slotEl.style.height     = `${h * (1 - p)}px`;
+    };
 
     scrollEl.addEventListener("scroll", onScroll, { passive: true });
     return () => {
-      scrollEl.removeEventListener("scroll", onScroll);
       clearTimeout(timer);
+      scrollEl.removeEventListener("scroll", onScroll);
     };
   }, []);
 
