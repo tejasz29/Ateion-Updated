@@ -77,10 +77,6 @@ function HeroHeaderSection() {
 ───────────────────────────────────────────── */
 const capabilityMessages = [
   {
-    title: "Because marks measure memory.",
-    highlight: "Capability measures the future.",
-  },
-  {
     title: "Degrees don't guarantee readiness.",
     highlight: "Capability does.",
   },
@@ -185,56 +181,7 @@ function PurpleCapabilityCardInner() {
   );
 }
 function PurpleCapabilityCardOuter() {
-  const videoRef = useRef<HTMLVideoElement>(null);
-
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-
-    video.muted = true;
-    video.play().catch(() => {});
-
-    const handleFirstClick = () => {
-      if (videoRef.current) {
-        videoRef.current.muted = false;
-      }
-      window.removeEventListener("click", handleFirstClick);
-    };
-
-    window.addEventListener("click", handleFirstClick);
-    return () => window.removeEventListener("click", handleFirstClick);
-  }, []);
-
-  return (
-    <div className="w-full flex flex-col items-center gap-10">
-
-      {/* ── CAPABILITY CARD + VIDEO SIDE BY SIDE ── */}
-      <div className="w-full flex justify-center px-[16px] sm:px-[24px] md:px-0">
-        <div className="w-full flex flex-col lg:flex-row gap-[24px] items-stretch">
-          <div className="flex-none lg:flex-[1] rounded-[20px] overflow-hidden" style={{ height: "clamp(440px, 55vw, 600px)" }}>
-            <PurpleCapabilityCardInner />
-          </div>
-          <div className="flex-none lg:flex-[1.5] rounded-[24px] overflow-hidden shadow-xl aspect-video w-full">
-            <video
-              ref={videoRef}
-              autoPlay
-              muted
-              loop
-              controls
-              playsInline
-              className="w-full h-full object-contain"
-              onLoadedMetadata={(e) => {
-                e.currentTarget.playbackRate = 1.5;
-              }}
-            >
-              <source src="/video.mp4" type="video/mp4" />
-            </video>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  );
+  return <PurpleCapabilityCardInner />;
 }
 
 function HeroMetricsRow() {
@@ -284,24 +231,10 @@ function HeroFeatureCardsRow() {
         </p>
         <div className="w-[60px] h-[3px] rounded-full" style={{ background: "var(--color-accent)" }} />
       </motion.div>
-      <motion.div
-        variants={{
-          hidden: { opacity: 0, y: 30 },
-          visible: { opacity: 1, y: 0 },
-        }}
-        transition={{ duration: 0.7, ease: "easeOut" }}
-      >
-        <PurpleCapabilityCardOuter />
-      </motion.div>
-      <motion.div
-        variants={{
-          hidden: { opacity: 0, y: 30 },
-          visible: { opacity: 1, y: 0 },
-        }}
-        transition={{ duration: 0.7, ease: "easeOut" }}
-      >
-        <HeroMetricsRow />
-      </motion.div>
+
+      <div className="w-full mt-8">
+        <HomePolicySection />
+      </div>
     </motion.div>
   );
 }
@@ -923,6 +856,16 @@ export default function Homepage() {
         <HeroHeaderSection />
       </motion.section>
 
+      {/* Ecosystem after Global Policy Alignment */}
+      <motion.section
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+      >
+        <EcosystemSection />
+      </motion.section>
+
       {/* 3. Education is not broken — clay card + ticker */}
       <motion.section
         initial={{ opacity: 0, y: 30 }}
@@ -943,27 +886,7 @@ export default function Homepage() {
         <GlobalPresenceMapSection />
       </motion.section>
 
-      {/* 5. Global Policy Alignment */}
-      <motion.section
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.2 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
-      >
-        <HomePolicySection />
-      </motion.section>
-
-      {/* 6. Ecosystem — redesigned */}
-      <motion.section
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.2 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
-      >
-        <EcosystemSection />
-      </motion.section>
-
-      {/* 7. FAQ */}
+      {/* 6. FAQ */}
       <motion.section
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
