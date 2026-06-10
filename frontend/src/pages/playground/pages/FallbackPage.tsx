@@ -2,6 +2,8 @@ import { Lock } from "lucide-react";
 import { useLocation } from "react-router";
 import { getActiveView } from "../shared/navigationData";
 
+const MOON_IMAGE_URL = "https://static.typingclub.com/m/tpmedia/img/moon.png";
+
 const stars = [
   { left: "6%", top: "12%", size: 2, delay: "0s", duration: "3.8s" },
   { left: "14%", top: "26%", size: 1, delay: "1.1s", duration: "4.2s" },
@@ -91,12 +93,15 @@ export default function FallbackPage() {
             ))}
 
             <div
-              className="absolute left-[7%] top-[15%] h-28 w-28 rounded-full bg-[#f8fbff] shadow-[0_0_44px_22px_rgba(215,235,255,0.38)] sm:h-36 sm:w-36"
+              className="absolute left-[7%] top-[15%] h-32 w-32 sm:h-44 sm:w-44"
               style={{ animation: "sproutlingMoonFloat 6s ease-in-out infinite" }}
             >
-              <div className="absolute left-[24%] top-[22%] h-6 w-8 rounded-full bg-[#dbeeff] opacity-70 blur-[1px]" />
-              <div className="absolute right-[18%] top-[38%] h-5 w-5 rounded-full bg-[#dbeeff] opacity-60 blur-[1px]" />
-              <div className="absolute bottom-[24%] left-[34%] h-4 w-7 rounded-full bg-[#dbeeff] opacity-50 blur-[1px]" />
+              <div className="absolute -inset-10 rounded-full bg-[#d9efff]/35 blur-2xl" />
+              <img
+                src={MOON_IMAGE_URL}
+                alt=""
+                className="relative h-full w-full object-contain drop-shadow-[0_0_32px_rgba(221,240,255,0.85)]"
+              />
             </div>
 
             <div
