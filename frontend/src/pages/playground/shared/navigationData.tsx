@@ -27,13 +27,12 @@ import {
 
 export interface NavItem {
   title: string;
-  icon: React.ComponentType<{ size?: number }>;
-  path: string;
+ icon: React.ComponentType<{ size?: number | string }>;  path: string;
 }
 
 export interface NavSection {
   title: string;
-  icon: React.ComponentType<{ size?: number }>;
+   icon: React.ComponentType<{ size?: number | string }>;
   items: NavItem[];
 }
 

@@ -7,6 +7,7 @@ interface VideoPlayerProps {
   videoId: string | null;
   error?: string | null;
   onComplete?: () => void;
+  duration?: number; 
 }
 
 const VideoPlayer = memo(function VideoPlayer({ title, videoId, error, onComplete }: VideoPlayerProps) {
