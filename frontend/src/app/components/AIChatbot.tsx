@@ -217,7 +217,7 @@ export default function AIChatBot({
         opacity: 1,
         pointerEvents: open ? "all" : "none",
         transition: "transform 0.32s cubic-bezier(0.32, 0.72, 0, 1)",
-        fontFamily: "'Inter', system-ui, sans-serif",
+        fontFamily: "var(--font-family-body)",
       }
     : {
         // Desktop: floating panel
@@ -238,7 +238,7 @@ export default function AIChatBot({
         opacity: open ? 1 : 0,
         pointerEvents: open ? "all" : "none",
         transition: "transform 0.24s cubic-bezier(0.34,1.2,0.64,1), opacity 0.18s ease",
-        fontFamily: "'Inter', system-ui, sans-serif",
+        fontFamily: "var(--font-family-body)",
       };
 
   // FAB position: slightly higher on mobile so it clears nav bars
