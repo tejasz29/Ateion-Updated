@@ -280,13 +280,7 @@ export default function HomePolicySection() {
       </div>
 
       {/* ── 3 cards ── */}
-      <div style={{
-        display: "grid",
-        gridTemplateColumns: "repeat(3, 1fr)",
-        gap: 28,
-        maxWidth: 960,
-        margin: "0 auto 52px",
-      }}>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7 max-w-[960px] mx-auto mb-[52px]">
         {featuredPolicies.slice(0, 3).map((policy, index) => (
           <MiniPolicyCard key={policy.id} policy={policy} index={index} />
         ))}
