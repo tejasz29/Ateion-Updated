@@ -5,6 +5,8 @@ export interface UserProfile {
   isPremium: boolean;
 }
 
+export type AgeGroupId = "Sproutlings (5-7)" | "Saplings (7-14)" | "Pathfinders (14-18)" | "Dreamers (18+)";
+
 export interface Task {
   id: number;
   title: string;
@@ -39,6 +41,7 @@ export interface Course {
   isFree: boolean;
   price?: string;
   originalPrice?: string;
+  ageGroups?: AgeGroupId[];
   topics: string[];
   enrollments: number;
   createdAt: number;

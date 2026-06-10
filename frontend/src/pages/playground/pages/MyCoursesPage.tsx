@@ -29,6 +29,7 @@ import { usePlayground } from "../shared/PlaygroundContext";
 import { useCourses } from "../hooks/useCourses";
 import { useNavigate } from "react-router";
 import { getTopicColor } from "../shared/topicColors";
+import { courseMatchesAgeGroup } from "../shared/courseAgeGroups";
 import CoursePreviewPopover from "../components/CoursePreviewPopover";
 
 export default function MyCoursesPage() {
@@ -39,7 +40,7 @@ export default function MyCoursesPage() {
   const filtered = allCourses.filter(c =>
     (c.title.toLowerCase().includes(courseQuery.toLowerCase()) ||
     c.instructor.toLowerCase().includes(courseQuery.toLowerCase())) &&
-    (activeAgeGroup === "All" || c.level.includes(activeAgeGroup))
+    courseMatchesAgeGroup(c, activeAgeGroup)
   );
 
   const inProgress = myCourses.filter(c => c.progress < 100);
@@ -176,9 +177,9 @@ export default function MyCoursesPage() {
         <div className="grid w-full grid-cols-5 justify-items-center gap-2 pb-4 mb-4 mt-2 border-b border-[var(--color-border-light)] sm:flex sm:justify-start sm:overflow-x-auto sm:hide-scrollbar sm:gap-4 sm:border-b-0 sm:px-1">
           {[
             { id: "All", icon: <Compass size={18} /> },
-            { id: "Sproutlings (5–7)", icon: <Sprout size={18} /> },
-            { id: "Saplings (7–14)", icon: <Sprout size={18} /> },
-            { id: "Pathfinders (14–18)", icon: <Compass size={18} /> },
+            { id: "Sproutlings (5-7)", icon: <Sprout size={18} /> },
+            { id: "Saplings (7-14)", icon: <Sprout size={18} /> },
+            { id: "Pathfinders (14-18)", icon: <Compass size={18} /> },
             { id: "Dreamers (18+)", icon: <Sparkles size={18} /> },
           ].map((segment) => (
             <button
