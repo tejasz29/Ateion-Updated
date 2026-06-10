@@ -66,15 +66,16 @@ function MiniPolicyCard({ policy, index }: { policy: PolicyEntry; index: number 
       }}
     >
       {/* Logo image */}
-      <div style={{ width: "100%", aspectRatio: "4/3", overflow: "hidden", background: "var(--color-background-secondary)", flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center" }} className="sm:aspect-[3/2]">
+      <div style={{ width: "100%", aspectRatio: "1/1", overflow: "hidden", background: "var(--color-background-secondary)", flexShrink: 0 }}>
         {img ? (
           <img
             src={img}
             alt={`${policy.country} education policy`}
             style={{
-              maxWidth: "100%",
-              maxHeight: "100%",
+              width: "100%",
+              height: "100%",
               objectFit: "contain",
+              objectPosition: "center",
               display: "block",
               transition: "transform 0.4s ease",
               transform: hovered ? "scale(1.06)" : "scale(1)",
@@ -93,12 +94,12 @@ function MiniPolicyCard({ policy, index }: { policy: PolicyEntry; index: number 
 
       {/* Bottom strip */}
       <div style={{
-        display: "flex", flexDirection: "column", alignItems: "center", gap: 4,
-        padding: "10px 12px",
+        display: "flex", alignItems: "center", gap: 8,
+        padding: "10px 13px",
         background: "var(--color-background-secondary)",
         borderTop: `3px solid ${policy.accentColor}`,
         flexShrink: 0,
-      }} className="sm:flex-row sm:gap-8 sm:items-center sm:px-[14px]">
+      }}>
         <span style={{
           fontFamily: "var(--font-body)",
           fontSize: "0.58rem", fontWeight: 800, letterSpacing: "0.06em",
@@ -107,18 +108,19 @@ function MiniPolicyCard({ policy, index }: { policy: PolicyEntry; index: number 
         }}>
           {policy.code}
         </span>
-        <div className="text-center sm:text-center sm:flex-1 sm:min-w-0">
+        <div style={{ flex: 1, minWidth: 0 }}>
           <p style={{
-            fontFamily: "var(--font-display)", fontWeight: 700,
-            color: "var(--color-text-primary)", margin: 0, lineHeight: 1.3,
-          }} className="text-[13px] sm:text-[14px] lg:text-[0.82rem]">
+            fontFamily: "var(--font-display)",
+            fontSize: "0.82rem", fontWeight: 700, color: "var(--color-text-primary)",
+            margin: 0, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis",
+          }}>
             {policy.country}
           </p>
           <p style={{
-            fontFamily: "var(--font-body)", fontWeight: 800, letterSpacing: "0.1em",
+            fontFamily: "var(--font-body)",
+            fontSize: "0.54rem", fontWeight: 800, letterSpacing: "0.1em",
             textTransform: "uppercase", color: policy.accentColor, margin: "2px 0 0",
-            whiteSpace: "nowrap",
-          }} className="text-[10px] sm:text-[0.54rem]">
+          }}>
             {policy.frameworks.length} framework{policy.frameworks.length > 1 ? "s" : ""}
           </p>
         </div>
@@ -206,6 +208,7 @@ export default function HomePolicySection() {
       background: "var(--color-background-primary)",
       padding: "0 5% 0",
       position: "relative",
+      overflow: "hidden",
     }}>
       {/* Subtle radial glow */}
       <div style={{
@@ -216,7 +219,7 @@ export default function HomePolicySection() {
       }} />
 
       {/* ── Header ── */}
-      <div style={{ textAlign: "center", marginBottom: 32 }} className="sm:mb-[52px]">
+      <div style={{ textAlign: "center", marginBottom: 52 }}>
         <motion.span
           initial={{ opacity: 0, y: 14 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -276,9 +279,15 @@ export default function HomePolicySection() {
         </motion.p>
       </div>
 
-      {/* ── 4 cards ── */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-7 max-w-[960px] mx-auto mb-6 sm:mb-8 lg:mb-[52px]">
-        {featuredPolicies.slice(0, 4).map((policy, index) => (
+      {/* ── 3 cards ── */}
+      <div style={{
+        display: "grid",
+        gridTemplateColumns: "repeat(3, 1fr)",
+        gap: 28,
+        maxWidth: 960,
+        margin: "0 auto 52px",
+      }}>
+        {featuredPolicies.slice(0, 3).map((policy, index) => (
           <MiniPolicyCard key={policy.id} policy={policy} index={index} />
         ))}
       </div>
