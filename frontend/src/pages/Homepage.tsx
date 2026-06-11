@@ -2,14 +2,14 @@
  * Homepage.tsx — Ateion Landing Page
  *
  * Sections (top to bottom):
- *  1. HeroHeaderSection       — full-bleed image slider + headline
- *  2. HeroFeatureCardsRow     — capability card + global-aligned card + red card
- *  3. HomePolicySection       — global policy alignment cards
- *  4. EcosystemSection        — "Ateion as an Ecosystem" (redesigned)
- *  5. GlobalPresenceMapSection — stats counters + dot-map
- *  6. EducationStatusWrapper  — "Education is not broken" clay card + ticker
- *  7. FAQSectionContainer     — accordion FAQ
- *  8. SharedFooter
+ * 1. HeroHeaderSection       — full-bleed image slider + headline
+ * 2. HeroFeatureCardsRow     — capability card + global-aligned card + red card
+ * 3. HomePolicySection       — global policy alignment cards
+ * 4. EcosystemSection        — "Ateion as an Ecosystem" (redesigned)
+ * 5. GlobalPresenceMapSection — stats counters + dot-map
+ * 6. EducationStatusWrapper  — "Education is not broken" clay card + ticker
+ * 7. FAQSectionContainer     — accordion FAQ
+ * 8. SharedFooter
  */
 
 import React, { useState, useEffect, useRef } from "react";
@@ -57,9 +57,6 @@ function Counter({ value, suffix = "" }: { value: number; suffix?: string }) {
 /* ─────────────────────────────────────────────
    HERO SLIDER BACKGROUND STRIPS
 ───────────────────────────────────────────── */
-
-
-
 
 function HeroHeaderSection() {
   return (
@@ -180,6 +177,7 @@ function PurpleCapabilityCardInner() {
     </div>
   );
 }
+
 function PurpleCapabilityCardOuter() {
   return <PurpleCapabilityCardInner />;
 }
@@ -188,8 +186,6 @@ function HeroMetricsRow() {
   return (
     <div className="flex flex-col items-start justify-start relative shrink-0 w-full px-[16px] sm:px-[24px] md:px-0">
       <div className="flex flex-col md:flex-row gap-[16px] sm:gap-[24px] items-stretch relative shrink-0 w-full">
-
-
       </div>
     </div>
   );
@@ -244,7 +240,7 @@ function HeroFeatureCardsRow() {
 ───────────────────────────────────────────── */
 function GlobalPresenceMapSection() {
   return (
-    <div className="w-full flex flex-col items-center justify-center relative bg-[var(--color-background-secondary)] border border-[var(--color-border-light)] pt-10 sm:pt-12 md:pt-16 pb-0 overflo[...]
+    <div className="w-full flex flex-col items-center justify-center relative bg-[var(--color-background-secondary)] border border-[var(--color-border-light)] pt-10 sm:pt-12 md:pt-16 pb-0 overflow-hidden">
       {/* Decorative top accent */}
       <div
         className="absolute top-0 left-[10%] right-[10%] h-[3px] rounded-full"
@@ -263,8 +259,7 @@ function GlobalPresenceMapSection() {
           <div className="w-[40px] sm:w-[60px] h-[2px] rounded-full" style={{ background: "var(--color-accent)" }} />
         </div>
         <h2 className="font-bold text-[var(--color-text-primary)] mb-4 tracking-[-0.03em] leading-[1.1]" style={{ fontFamily: "var(--font-display)", fontSize: "clamp(32px, 5vw, 52px)" }}>
-          Our{" "}
-          <span style={{ color: "var(--color-accent)" }}>Global</span> Reach
+          Our <span style={{ color: "var(--color-accent)" }}>Global</span> Reach
         </h2>
         <p className="text-[var(--color-text-muted)] max-w-2xl mx-auto text-[15px] sm:text-[17px] font-medium leading-relaxed" style={{ fontFamily: "var(--font-body)" }}>
           Connecting capability-based education ecosystems across multiple continents.
@@ -304,7 +299,9 @@ function GlobalPresenceMapSection() {
       </div>
     </div>
   );
-}/* ─────────────────────────────────────────────
+}
+
+/* ─────────────────────────────────────────────
    EDUCATION STATUS GRID
 ───────────────────────────────────────────── */
 
@@ -368,7 +365,6 @@ function VerticalTicker() {
     return () => clearInterval(timer);
   }, []);
 
-  // The active word lives at position `tickerWords.length + idx` so it sits in the middle of the visible window
   const activePos = tickerWords.length + idx;
   const offsetY = activePos * WORD_H;
   const centerOffset = ((VISIBLE - 1) * WORD_H) / 2;
@@ -607,7 +603,7 @@ export function EducationStatusWrapper() {
             />
             <div>
               <span className="text-[28px] sm:text-[32px] leading-[0] align-top mr-1" style={{ color: cardAccents[i] }}>&ldquo;</span>
-              <p className="inline text-[20px] sm:text-[22px] md:text-[26px] font-medium text-[var(--color-text-primary)] leading-[1.15] group-hover:text-[var(--color-accent)] transition-colors d[...]
+              <p className="inline text-[20px] sm:text-[22px] md:text-[26px] font-medium text-[var(--color-text-primary)] leading-[1.15] group-hover:text-[var(--color-accent)] transition-colors duration-200">
                 {item.title}
               </p>
               <span className="text-[28px] sm:text-[32px] leading-[0] align-bottom ml-1" style={{ color: cardAccents[i] }}>&rdquo;</span>
@@ -634,27 +630,27 @@ export function EducationStatusWrapper() {
 const faqData = [
   {
     question: "What is Ateion?",
-    answer: "Ateion is a pioneering education technology ecosystem dedicated to bridging the gap between traditional rote learning and real-world capability. We focus on AI literacy, innovation, [...]
+    answer: "Ateion is a pioneering education technology ecosystem dedicated to bridging the gap between traditional rote learning and real-world capability. We focus on AI literacy, innovation, and skills development."
   },
   {
     question: "How is Ateion different from traditional education systems?",
-    answer: "Unlike traditional systems that often prioritize memorization and standardized testing, Ateion emphasizes 'Capability-First' education. We integrate advanced AI tools, project-based [...]
+    answer: "Unlike traditional systems that often prioritize memorization and standardized testing, Ateion emphasizes 'Capability-First' education. We integrate advanced AI tools and project-based learning."
   },
   {
     question: "Who can partner with Ateion?",
-    answer: "We partner with forward-thinking K-12 schools, universities, educational institutions, and corporate organizations globally. If you are committed to future-proofing education and emp[...]
+    answer: "We partner with forward-thinking K-12 schools, universities, educational institutions, and corporate organizations globally. If you are committed to future-proofing education, get in touch."
   },
   {
     question: "What is the Global Capability Olympiad (GCO)?",
-    answer: "The GCO is our flagship global competition that evaluates students based on their real-world problem-solving abilities and AI proficiency rather than academic recall. It serves as a [...]
+    answer: "The GCO is our flagship global competition that evaluates students based on their real-world problem-solving abilities and AI proficiency rather than academic recall. It serves as a true benchmark."
   },
   {
     question: "How are capabilities measured?",
-    answer: "Capabilities are measured through our proprietary assessment framework that tracks innovation, problem-solving, digital literacy, and collaborative skills. We use real-time data and [...]
+    answer: "Capabilities are measured through our proprietary assessment framework that tracks innovation, problem-solving, digital literacy, and collaborative skills. We use real-time data metrics."
   },
   {
     question: "How can institutions get connected?",
-    answer: "Institutions can get connected by visiting our 'Get Connected' section or reaching out via email at destiny@ateion.com. Our team will guide you through the partnership process, from [...]
+    answer: "Institutions can get connected by visiting our 'Get Connected' section or reaching out via email at destiny@ateion.com. Our team will guide you through the entire partnership process."
   },
 ];
 
@@ -689,7 +685,7 @@ function FAQItem({ question, answer, isOpen, toggle }: { question: string; answe
         aria-controls={answerId}
         className="w-full content-stretch flex items-center justify-between px-[20px] sm:px-[32px] py-[20px] sm:py-[28px] relative text-left group"
       >
-        <span className="flex-[1_0_0] font-semibold leading-[1.35] max-w-[700px] not-italic relative text-[var(--color-text-primary)] text-[17px] sm:text-[19px] md:text-[21px] transition-colors g[...]
+        <span className="flex-[1_0_0] font-semibold leading-[1.35] max-w-[700px] not-italic relative text-[var(--color-text-primary)] text-[17px] sm:text-[19px] md:text-[21px] transition-colors duration-200">
           {question}
         </span>
         <motion.div
@@ -757,7 +753,7 @@ function FAQSectionContainer() {
           }}
           transition={{ duration: 0.6, ease: "easeOut" }}
         >
-          <p className="font-bold leading-[0.95] tracking-[-0.05em] text-[28px] sm:text-[36px] md:text-[44px] text-[var(--color-text-primary)] text-center" style={{ fontFamily: "var(--font-displa[...]
+          <p className="font-bold leading-[0.95] tracking-[-0.05em] text-[28px] sm:text-[36px] md:text-[44px] text-[var(--color-text-primary)] text-center" style={{ fontFamily: "var(--font-display)" }}>
             Your Common Questions Answered
           </p>
         </motion.div>
