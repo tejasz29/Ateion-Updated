@@ -207,6 +207,7 @@ export default function HomePolicySection() {
     <section style={{
       padding: "0 5% 0",
       position: "relative",
+      overflowX: "hidden",
     }}>
       {/* Subtle radial glow */}
       <div style={{
