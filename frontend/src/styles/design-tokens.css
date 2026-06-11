@@ -516,6 +516,74 @@ html[data-theme="dark"] body {
   background-attachment: fixed;
 }
 
+/* ==========================================================================
+   METALLIC BRAND BACKGROUND
+   ========================================================================== */
+.ateion-metallic-bg {
+  position: relative;
+  isolation: isolate;
+  color: var(--color-text-primary);
+  background: #fff;
+}
+
+html[data-theme="dark"] .ateion-metallic-bg {
+  --color-background-primary: rgba(8, 8, 14, 0.52);
+  --color-background-secondary: rgba(248, 248, 244, 0.08);
+  --color-background-tertiary: rgba(248, 248, 244, 0.12);
+  --color-border-light: rgba(248, 248, 244, 0.12);
+  --color-border-medium: rgba(248, 248, 244, 0.18);
+  --color-border-dark: rgba(248, 248, 244, 0.28);
+  --color-text-primary: #f8f8f4;
+  --color-text-secondary: rgba(248, 248, 244, 0.74);
+  --color-text-tertiary: rgba(248, 248, 244, 0.52);
+  --color-text-muted: rgba(248, 248, 244, 0.58);
+  --color-text-subtle: rgba(248, 248, 244, 0.38);
+  --color-text-inverse: #111018;
+
+  color: var(--color-text-primary);
+  background:
+    radial-gradient(ellipse 74% 46% at 50% 44%, rgba(64, 58, 128, 0.72) 0%, rgba(31, 29, 72, 0.58) 36%, rgba(15, 16, 28, 0.18) 70%, transparent 100%),
+    radial-gradient(ellipse 38% 22% at 52% 48%, rgba(232, 133, 106, 0.08) 0%, transparent 68%),
+    linear-gradient(180deg, #111114 0%, #11131c 20%, #171840 52%, #0b0c12 100%);
+  background-attachment: fixed;
+}
+
+html[data-theme="dark"] .ateion-metallic-bg::before,
+html[data-theme="dark"] .ateion-metallic-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+html[data-theme="dark"] .ateion-metallic-bg::before {
+  background:
+    linear-gradient(118deg, transparent 0%, transparent 31%, rgba(255, 255, 255, 0.08) 42%, transparent 54%, transparent 100%),
+    radial-gradient(ellipse 62% 30% at 50% 50%, rgba(255, 255, 255, 0.06), transparent 72%);
+  mix-blend-mode: screen;
+  opacity: 0.86;
+}
+
+html[data-theme="dark"] .ateion-metallic-bg::after {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.05), transparent 28%, rgba(0, 0, 0, 0.24) 100%),
+    repeating-linear-gradient(115deg, rgba(255, 255, 255, 0.024) 0 1px, transparent 1px 18px);
+  opacity: 0.68;
+}
+
+.ateion-metallic-bg > * {
+  position: relative;
+  z-index: 1;
+}
+
+html[data-theme="dark"] .ateion-metallic-bg .clay-card,
+html[data-theme="dark"] .ateion-metallic-bg .clay-faq,
+html[data-theme="dark"] .ateion-metallic-bg .bg-\[var\(--color-background-secondary\)\] {
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
 /* Exclude elements that should not animate */
 html[data-theme] video,
 html[data-theme] canvas,

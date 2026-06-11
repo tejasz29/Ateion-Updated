@@ -796,7 +796,7 @@ function FAQSectionContainer() {
 
 export default function Homepage() {
   return (
-    <div className="bg-[var(--color-background-primary)] w-full min-h-screen flex flex-col gap-[24px] sm:gap-[32px] md:gap-[60px]" data-name="Homepage">
+    <div className="ateion-metallic-bg w-full min-h-screen flex flex-col gap-[24px] sm:gap-[32px] md:gap-[60px]" data-name="Homepage">
       <Helmet>
         <title>Ateion — Reimagining Education with Capability-Based Learning</title>
         <meta name="description" content="Ateion is a capability-based education ecosystem that replaces memory-based assessment with real-world measurable skills." />
