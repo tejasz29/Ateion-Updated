@@ -43,7 +43,6 @@ import strengthsPurple from "../../assets/hero/strengths-purple.jpeg";
 import viewskyPeach from "../../assets/hero/viewsky-peach.jpeg";
 import wateringPurple from "../../assets/hero/watering-purple.jpeg";
 import yogaPurple from "../../assets/hero/yoga-purple.jpeg";
-import certificate from "../../assets/hero/certificate.jpg";
 import SharedNavbar from "./SharedNavbar";
 import NavbarSpacer from "./NavbarSpacer";
 
@@ -112,7 +111,6 @@ export function Frame66() {
       <Item src={viewskyPeach} alt="" width="w-[380px]" />
       <Item src={wateringPurple} alt="" width="w-[420px]" />
       <Item src={yogaPurple} alt="" width="w-[350px]" />
-      <Item src={certificate} alt="" width="w-[340px]" />
     </MarqueeTrack>
   );
 }
