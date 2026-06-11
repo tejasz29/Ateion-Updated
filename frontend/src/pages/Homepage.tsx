@@ -2,14 +2,14 @@
  * Homepage.tsx — Ateion Landing Page
  *
  * Sections (top to bottom):
- *  1. HeroHeaderSection       — full-bleed image slider + headline
- *  2. HeroFeatureCardsRow     — capability card + global-aligned card + red card
- *  3. EducationStatusWrapper  — "Education is not broken" clay card + ticker
- *  4. GlobalPresenceMapSection — stats counters + dot-map
- *  5. HomePolicySection       — global policy alignment cards
- *  6. EcosystemSection        — "Ateion as an Ecosystem" (redesigned)
- *  7. FAQSectionContainer     — accordion FAQ
- *  8. SharedFooter
+ * 1. HeroHeaderSection       — full-bleed image slider + headline
+ * 2. HeroFeatureCardsRow     — capability card + global-aligned card + red card
+ * 3. HomePolicySection       — global policy alignment cards
+ * 4. EcosystemSection        — "Ateion as an Ecosystem" (redesigned)
+ * 5. GlobalPresenceMapSection — stats counters + dot-map
+ * 6. EducationStatusWrapper  — "Education is not broken" clay card + ticker
+ * 7. FAQSectionContainer     — accordion FAQ
+ * 8. SharedFooter
  */
 
 import React, { useState, useEffect, useRef } from "react";
@@ -57,9 +57,6 @@ function Counter({ value, suffix = "" }: { value: number; suffix?: string }) {
 /* ─────────────────────────────────────────────
    HERO SLIDER BACKGROUND STRIPS
 ───────────────────────────────────────────── */
-
-
-
 
 function HeroHeaderSection() {
   return (
@@ -180,6 +177,7 @@ function PurpleCapabilityCardInner() {
     </div>
   );
 }
+
 function PurpleCapabilityCardOuter() {
   return <PurpleCapabilityCardInner />;
 }
@@ -188,8 +186,6 @@ function HeroMetricsRow() {
   return (
     <div className="flex flex-col items-start justify-start relative shrink-0 w-full px-[16px] sm:px-[24px] md:px-0">
       <div className="flex flex-col md:flex-row gap-[16px] sm:gap-[24px] items-stretch relative shrink-0 w-full">
-
-
       </div>
     </div>
   );
@@ -205,7 +201,7 @@ function HeroFeatureCardsRow() {
         hidden: {},
         visible: { transition: { staggerChildren: 0.25 } },
       }}
-      className="content-stretch flex flex-col gap-[24px] items-start relative shrink-0 w-full"
+      className="content-stretch flex flex-col gap-[16px] sm:gap-[24px] items-start relative shrink-0 w-full"
     >
       {/* Section heading */}
       <motion.div
@@ -214,7 +210,7 @@ function HeroFeatureCardsRow() {
           visible: { opacity: 1, y: 0 },
         }}
         transition={{ duration: 0.7, ease: "easeOut" }}
-        className="w-full flex flex-col items-center gap-3 pt-8 sm:pt-12"
+        className="w-full flex flex-col items-center gap-3 pt-4 sm:pt-6 lg:pt-12"
       >
         <p
           className="font-bold leading-[0.95] tracking-[-0.04em] text-center"
@@ -229,10 +225,10 @@ function HeroFeatureCardsRow() {
         >
           Reimagining Education
         </p>
-        <div className="w-[60px] h-[3px] rounded-full" style={{ background: "var(--color-accent)" }} />
+        <div className="w-[180px] h-[4px] rounded-full mx-auto" style={{ background: "linear-gradient(90deg, #6B46C1 0%, #F6AD55 100%)" }} />
       </motion.div>
 
-      <div className="w-full mt-8">
+      <div className="w-full mt-4 sm:mt-6 lg:mt-8">
         <HomePolicySection />
       </div>
     </motion.div>
@@ -244,7 +240,7 @@ function HeroFeatureCardsRow() {
 ───────────────────────────────────────────── */
 function GlobalPresenceMapSection() {
   return (
-    <div className="w-full flex flex-col items-center justify-center relative bg-[var(--color-background-secondary)] border border-[var(--color-border-light)] pt-10 sm:pt-12 md:pt-16 pb-0 overflow-hidden rounded-[24px] sm:rounded-[32px] mx-[16px] sm:mx-[24px] md:mx-[64px] max-w-[calc(100%-32px)] md:max-w-[calc(100%-128px)] my-8 sm:my-10 md:my-12 shadow-sm">
+    <div className="w-full flex flex-col items-center justify-center relative bg-[var(--color-background-secondary)] border border-[var(--color-border-light)] pt-10 sm:pt-12 md:pt-16 pb-0 overflow-hidden">
       {/* Decorative top accent */}
       <div
         className="absolute top-0 left-[10%] right-[10%] h-[3px] rounded-full"
@@ -263,8 +259,7 @@ function GlobalPresenceMapSection() {
           <div className="w-[40px] sm:w-[60px] h-[2px] rounded-full" style={{ background: "var(--color-accent)" }} />
         </div>
         <h2 className="font-bold text-[var(--color-text-primary)] mb-4 tracking-[-0.03em] leading-[1.1]" style={{ fontFamily: "var(--font-display)", fontSize: "clamp(32px, 5vw, 52px)" }}>
-          Our{" "}
-          <span style={{ color: "var(--color-accent)" }}>Global</span> Reach
+          Our <span style={{ color: "var(--color-accent)" }}>Global</span> Reach
         </h2>
         <p className="text-[var(--color-text-muted)] max-w-2xl mx-auto text-[15px] sm:text-[17px] font-medium leading-relaxed" style={{ fontFamily: "var(--font-body)" }}>
           Connecting capability-based education ecosystems across multiple continents.
@@ -275,7 +270,7 @@ function GlobalPresenceMapSection() {
       <div className="flex flex-wrap items-center justify-center gap-x-6 sm:gap-x-8 md:gap-x-12 gap-y-4 sm:gap-y-6 mb-8 sm:mb-10 md:mb-14 px-4 w-full max-w-[var(--max-width)]">
         <div className="flex flex-col items-center gap-1">
           <span className="font-bold tracking-[-0.02em] text-[clamp(28px,4vw,40px)]" style={{ fontFamily: "var(--font-display)", color: "var(--color-text-primary)" }}>
-            <Counter value={193} suffix="+" />
+            <Counter value={12} suffix="+" />
           </span>
           <span className="text-[13px] sm:text-[14px] font-medium" style={{ fontFamily: "var(--font-body)", color: "var(--color-text-muted)" }}>Countries</span>
         </div>
@@ -304,7 +299,9 @@ function GlobalPresenceMapSection() {
       </div>
     </div>
   );
-}/* ─────────────────────────────────────────────
+}
+
+/* ─────────────────────────────────────────────
    EDUCATION STATUS GRID
 ───────────────────────────────────────────── */
 
@@ -368,7 +365,6 @@ function VerticalTicker() {
     return () => clearInterval(timer);
   }, []);
 
-  // The active word lives at position `tickerWords.length + idx` so it sits in the middle of the visible window
   const activePos = tickerWords.length + idx;
   const offsetY = activePos * WORD_H;
   const centerOffset = ((VISIBLE - 1) * WORD_H) / 2;
@@ -459,19 +455,6 @@ export function EducationStatusWrapper() {
             borderRadius: "0 3px 3px 0",
           }}
         />
-
-        {/* Top-right decorative pill */}
-        <div
-          className="hidden sm:flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider absolute top-4 right-4"
-          style={{
-            backgroundColor: "rgba(232,133,106,0.08)",
-            border: "1px solid rgba(232,133,106,0.12)",
-            color: "var(--color-accent)",
-          }}
-        >
-          <span style={{ display: "inline-block", width: 5, height: 5, borderRadius: "50%", backgroundColor: "var(--color-accent)" }} />
-          Real-time
-        </div>
 
         {/* Subtle corner glow */}
         <div
@@ -620,7 +603,7 @@ export function EducationStatusWrapper() {
             />
             <div>
               <span className="text-[28px] sm:text-[32px] leading-[0] align-top mr-1" style={{ color: cardAccents[i] }}>&ldquo;</span>
-              <p className="inline text-[20px] sm:text-[22px] md:text-[26px] font-medium text-[var(--color-text-primary)] leading-[1.15] group-hover:text-[var(--color-accent)] transition-colors duration-300" style={{ fontFamily: "var(--font-display)", letterSpacing: "-0.01em" }}>
+              <p className="inline text-[20px] sm:text-[22px] md:text-[26px] font-medium text-[var(--color-text-primary)] leading-[1.15] group-hover:text-[var(--color-accent)] transition-colors duration-200">
                 {item.title}
               </p>
               <span className="text-[28px] sm:text-[32px] leading-[0] align-bottom ml-1" style={{ color: cardAccents[i] }}>&rdquo;</span>
@@ -647,27 +630,27 @@ export function EducationStatusWrapper() {
 const faqData = [
   {
     question: "What is Ateion?",
-    answer: "Ateion is a pioneering education technology ecosystem dedicated to bridging the gap between traditional rote learning and real-world capability. We focus on AI literacy, innovation, and measurable readiness, providing students with the tools they need to thrive in a rapidly evolving global landscape.",
+    answer: "Ateion is a pioneering education technology ecosystem dedicated to bridging the gap between traditional rote learning and real-world capability. We focus on AI literacy, innovation, and skills development."
   },
   {
     question: "How is Ateion different from traditional education systems?",
-    answer: "Unlike traditional systems that often prioritize memorization and standardized testing, Ateion emphasizes 'Capability-First' education. We integrate advanced AI tools, project-based learning, and global competency frameworks to ensure students are not just learning facts, but developing actionable skills.",
+    answer: "Unlike traditional systems that often prioritize memorization and standardized testing, Ateion emphasizes 'Capability-First' education. We integrate advanced AI tools and project-based learning."
   },
   {
     question: "Who can partner with Ateion?",
-    answer: "We partner with forward-thinking K-12 schools, universities, educational institutions, and corporate organizations globally. If you are committed to future-proofing education and empowering the next generation with AI-driven capabilities, we invite you to connect with us.",
+    answer: "We partner with forward-thinking K-12 schools, universities, educational institutions, and corporate organizations globally. If you are committed to future-proofing education, get in touch."
   },
   {
     question: "What is the Global Capability Olympiad (GCO)?",
-    answer: "The GCO is our flagship global competition that evaluates students based on their real-world problem-solving abilities and AI proficiency rather than academic recall. It serves as a benchmark for world-class capability and innovation among students worldwide.",
+    answer: "The GCO is our flagship global competition that evaluates students based on their real-world problem-solving abilities and AI proficiency rather than academic recall. It serves as a true benchmark."
   },
   {
     question: "How are capabilities measured?",
-    answer: "Capabilities are measured through our proprietary assessment framework that tracks innovation, problem-solving, digital literacy, and collaborative skills. We use real-time data and AI-driven insights to provide a comprehensive profile of a student's readiness for the future.",
+    answer: "Capabilities are measured through our proprietary assessment framework that tracks innovation, problem-solving, digital literacy, and collaborative skills. We use real-time data metrics."
   },
   {
     question: "How can institutions get connected?",
-    answer: "Institutions can get connected by visiting our 'Get Connected' section or reaching out via email at destiny@ateion.com. Our team will guide you through the partnership process, from initial workshops to full ecosystem integration.",
+    answer: "Institutions can get connected by visiting our 'Get Connected' section or reaching out via email at destiny@ateion.com. Our team will guide you through the entire partnership process."
   },
 ];
 
@@ -702,7 +685,7 @@ function FAQItem({ question, answer, isOpen, toggle }: { question: string; answe
         aria-controls={answerId}
         className="w-full content-stretch flex items-center justify-between px-[20px] sm:px-[32px] py-[20px] sm:py-[28px] relative text-left group"
       >
-        <span className="flex-[1_0_0] font-semibold leading-[1.35] max-w-[700px] not-italic relative text-[var(--color-text-primary)] text-[17px] sm:text-[19px] md:text-[21px] transition-colors group-hover:text-[var(--color-accent)]" style={{ fontFamily: "var(--font-alt)" }}>
+        <span className="flex-[1_0_0] font-semibold leading-[1.35] max-w-[700px] not-italic relative text-[var(--color-text-primary)] text-[17px] sm:text-[19px] md:text-[21px] transition-colors duration-200">
           {question}
         </span>
         <motion.div
@@ -813,7 +796,7 @@ function FAQSectionContainer() {
 
 export default function Homepage() {
   return (
-    <div className="ateion-metallic-bg w-full min-h-screen flex flex-col gap-[40px] sm:gap-[60px] md:gap-[80px]" data-name="Homepage">
+    <div className="ateion-metallic-bg w-full min-h-screen flex flex-col gap-[24px] sm:gap-[32px] md:gap-[60px]" data-name="Homepage">
       <Helmet>
         <title>Ateion — Reimagining Education with Capability-Based Learning</title>
         <meta name="description" content="Ateion is a capability-based education ecosystem that replaces memory-based assessment with real-world measurable skills." />
@@ -866,17 +849,7 @@ export default function Homepage() {
         <EcosystemSection />
       </motion.section>
 
-      {/* 3. Education is not broken — clay card + ticker */}
-      <motion.section
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.2 }}
-        transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
-      >
-        <EducationStatusWrapper />
-      </motion.section>
-
-      {/* 4. Global Presence Map */}
+      {/* 5. Global Presence Map */}
       <motion.section
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -886,7 +859,17 @@ export default function Homepage() {
         <GlobalPresenceMapSection />
       </motion.section>
 
-      {/* 6. FAQ */}
+      {/* 6. Education is not broken — clay card + ticker */}
+      <motion.section
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
+      >
+        <EducationStatusWrapper />
+      </motion.section>
+
+      {/* 7. FAQ */}
       <motion.section
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -896,7 +879,7 @@ export default function Homepage() {
         <FAQSectionContainer />
       </motion.section>
 
-      {/* 7. Footer */}
+      {/* 8. Footer */}
       <SharedFooter />
     </div>
   );
