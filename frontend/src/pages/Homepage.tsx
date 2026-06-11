@@ -229,7 +229,7 @@ function HeroFeatureCardsRow() {
         >
           Reimagining Education
         </p>
-        <div className="w-[60px] h-[3px] rounded-full" style={{ background: "var(--color-accent)" }} />
+        <div className="w-[180px] h-[4px] rounded-full mx-auto" style={{ background: "linear-gradient(90deg, #6B46C1 0%, #F6AD55 100%)" }} />
       </motion.div>
 
       <div className="w-full mt-4 sm:mt-6 lg:mt-8">
