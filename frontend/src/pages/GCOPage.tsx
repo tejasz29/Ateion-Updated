@@ -35,7 +35,7 @@ const GCOPage = () => {
       <NavbarSpacer />
       <div
         id="gco-root"
-        className="bg-[var(--color-background-primary)] w-full relative"
+        className="ateion-metallic-bg min-h-screen w-full relative"
       >
         <main>
 

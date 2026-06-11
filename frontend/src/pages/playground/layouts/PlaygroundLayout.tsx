@@ -112,7 +112,7 @@ function PlaygroundInner() {
       </Helmet>
       <SidebarProvider>
         <div
-          className="flex w-full min-w-0 overflow-hidden bg-[var(--color-background-primary)]"
+          className="ateion-metallic-bg flex w-full min-w-0 overflow-hidden"
           style={{
             height: `calc(100dvh - ${navbarHeight}px)`,
             marginTop: navbarHeight,
