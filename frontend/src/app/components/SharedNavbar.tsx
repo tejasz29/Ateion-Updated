@@ -225,12 +225,17 @@ function HomeBtn({ onClick }: { onClick?: () => void }) {
     <NavButton
       variant="default"
       isActive={isActive}
+      style={{
+        background: "linear-gradient(135deg, #2b244f 0%, #d66f55 58%, #ff9b82 100%)",
+        border: "none",
+        color: "#fff",
+      }}
       onClick={() => {
         if (onClick) onClick();
         navigate("/");
       }}
     >
-      <span className={`${navTextClass}`}>Home</span>
+      <span className={`${navTextClass}`} style={{ color: "#fff" }}>Home</span>
     </NavButton>
   );
 }
