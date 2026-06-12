@@ -210,11 +210,14 @@ export default function HomePolicySection() {
     }}>
       {/* Subtle radial glow */}
       <div style={{
-        position: "absolute", top: -80, right: -80,
-        width: 300, height: 300, borderRadius: "50%",
-        background: "radial-gradient(circle, var(--color-accent-light) 0%, transparent 70%)",
-        pointerEvents: "none",
-      }} />
+        position: "absolute", inset: 0, overflow: "hidden", pointerEvents: "none",
+      }}>
+        <div style={{
+          position: "absolute", top: -80, right: -80,
+          width: 300, height: 300, borderRadius: "50%",
+          background: "radial-gradient(circle, var(--color-accent-light) 0%, transparent 70%)",
+        }} />
+      </div>
 
       {/* ── Header ── */}
       <div style={{ textAlign: "center", marginBottom: 52 }}>
