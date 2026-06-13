@@ -9,7 +9,23 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate, Link, useLocation } from "react-router";
-import { Sun, Moon, LogOut, User as UserIcon, Settings, ChevronDown } from "lucide-react";
+import {
+  ArrowRight,
+  ChevronDown,
+  ClipboardCheck,
+  Gamepad2,
+  Home,
+  LayoutDashboard,
+  LogIn,
+  LogOut,
+  Moon,
+  Settings,
+  Sun,
+  Trophy,
+  User as UserIcon,
+  UserPlus,
+  Users,
+} from "lucide-react";
 import { useTheme } from "./ThemeProvider";
 
 import logo from "../../assets/logo.webp";
@@ -333,6 +349,14 @@ const NAV_BUTTONS = [
   ResourcesBtn,
 ] as const;
 
+const MOBILE_NAV_LINKS = [
+  { label: "Home", path: "/", icon: Home },
+  { label: "Dashboard", path: "/dashboard", icon: LayoutDashboard },
+  { label: "Global Olympiad", path: "/gco", icon: Trophy },
+  { label: "Psychometric Test", path: "/psychometric-assessment", icon: ClipboardCheck },
+  { label: "PlayGround", path: "/playground", icon: Gamepad2 },
+] as const;
+
 function NavLinks({ onCloseMobile }: { onCloseMobile?: () => void }) {
   const location = useLocation();
   const containerRef = useRef<HTMLDivElement>(null);
@@ -487,17 +511,26 @@ function MobileMenuIcon({
   onClick: () => void;
   isWhite: boolean;
 }) {
+  const lineClass = isOpen
+    ? "bg-[var(--color-text-primary)]"
+    : isWhite
+      ? "bg-white"
+      : "bg-[var(--color-text-primary)]";
+
   return (
     <button
       type="button"
       onClick={onClick}
-      className="lg:hidden flex flex-col justify-center items-center w-[40px] h-[40px] cursor-pointer z-[150] relative"
+      className={`lg:hidden flex flex-col justify-center items-center w-[44px] h-[44px] cursor-pointer z-[150] relative rounded-2xl border transition-all duration-200 ${
+        isOpen
+          ? "bg-[var(--color-background-primary)] border-[var(--color-border-medium)] shadow-lg"
+          : "bg-[var(--color-background-secondary)]/75 border-[var(--color-border-light)] backdrop-blur-md"
+      }`}
       aria-label="Toggle menu"
+      aria-expanded={isOpen}
     >
       <motion.div
-        className={`w-[24px] h-[2px] rounded-full origin-center transition-colors duration-300 ${
-          isWhite ? "bg-white" : "bg-[var(--color-text-primary)]"
-        }`}
+        className={`w-[22px] h-[2px] rounded-full origin-center transition-colors duration-300 ${lineClass}`}
         animate={{
           rotate: isOpen ? 45 : 0,
           y: isOpen ? 6 : 0,
@@ -506,9 +539,7 @@ function MobileMenuIcon({
       />
 
       <motion.div
-        className={`w-[24px] h-[2px] rounded-full my-[4px] transition-colors duration-300 ${
-          isWhite ? "bg-white" : "bg-[var(--color-text-primary)]"
-        }`}
+        className={`w-[22px] h-[2px] rounded-full my-[4px] transition-colors duration-300 ${lineClass}`}
         animate={{
           opacity: isOpen ? 0 : 1,
         }}
@@ -516,9 +547,7 @@ function MobileMenuIcon({
       />
 
       <motion.div
-        className={`w-[24px] h-[2px] rounded-full origin-center transition-colors duration-300 ${
-          isWhite ? "bg-white" : "bg-[var(--color-text-primary)]"
-        }`}
+        className={`w-[22px] h-[2px] rounded-full origin-center transition-colors duration-300 ${lineClass}`}
         animate={{
           rotate: isOpen ? -45 : 0,
           y: isOpen ? -6 : 0,
@@ -580,6 +609,7 @@ export default function SharedNavbar() {
 
   const isNavbarOnDark = useNavbarOnDark();
   const navigate = useNavigate();
+  const location = useLocation();
   const menuRef = useRef<HTMLDivElement>(null);
 
   // Check auth state
@@ -649,6 +679,18 @@ export default function SharedNavbar() {
     navigate(path);
   };
 
+  const isMobileNavActive = (path: string) => {
+    if (path === "/") return location.pathname === "/";
+    if (path === "/gco") {
+      return (
+        location.pathname.startsWith("/gco") ||
+        location.pathname.startsWith("/policy") ||
+        location.pathname.startsWith("/policies")
+      );
+    }
+    return location.pathname.startsWith(path);
+  };
+
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-300 ${
@@ -700,23 +742,70 @@ export default function SharedNavbar() {
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3 }}
-            className="lg:hidden bg-[var(--color-background-primary)] border-t border-[var(--color-border-light)] overflow-y-auto absolute w-full shadow-lg max-h-[80vh]"
+            initial={{ opacity: 0, y: -10, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -8, scale: 0.98 }}
+            transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
+            className="mobile-nav-panel lg:hidden absolute left-3 right-3 top-full mt-2 overflow-hidden rounded-[26px] border border-[var(--color-border-light)] bg-[var(--color-background-primary)] shadow-[0_24px_80px_rgba(0,0,0,0.35)]"
           >
-            <div className="flex flex-col gap-[12px] px-[24px] py-[24px]">
+            <div className="max-h-[calc(100vh-96px)] overflow-y-auto p-3">
+              <div className="flex items-center justify-between px-2 pb-3">
+                <div>
+                  <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[var(--color-text-tertiary)]">
+                    Navigation
+                  </p>
+                  <p className="text-sm font-semibold text-[var(--color-text-secondary)]">
+                    Choose where to go next
+                  </p>
+                </div>
+                <div className="mobile-nav-surface h-9 w-9 rounded-2xl bg-[var(--color-background-secondary)] border border-[var(--color-border-light)] flex items-center justify-center text-[var(--color-accent)]">
+                  <Gamepad2 size={17} />
+                </div>
+              </div>
 
-              {NAV_BUTTONS.map((Btn, i) => (
-                <Btn key={i} onClick={() => setIsMobileMenuOpen(false)} />
-              ))}
+              <div className="grid gap-2">
+                {MOBILE_NAV_LINKS.map(({ label, path, icon: Icon }) => {
+                  const active = isMobileNavActive(path);
 
-              <div className="h-[1px] bg-[var(--color-border-light)] my-[4px]" />
+                  return (
+                    <button
+                      key={path}
+                      type="button"
+                      onClick={() => handleNavClick(path)}
+                      className={`mobile-nav-row group flex min-h-[48px] w-full items-center gap-3 rounded-2xl border px-3 text-left transition-all duration-200 ${
+                        active
+                          ? "mobile-nav-row-active border-transparent bg-[var(--color-accent)] text-[#ffffff] shadow-[0_10px_28px_rgba(232,133,106,0.28)]"
+                          : "border-[var(--color-border-light)] bg-[var(--color-background-secondary)] text-[var(--color-text-primary)] hover:border-[var(--color-accent)]/40 hover:bg-[var(--color-background-tertiary)]"
+                      }`}
+                    >
+                      <span
+                        className={`mobile-nav-icon flex h-9 w-9 shrink-0 items-center justify-center rounded-xl ${
+                          active
+                            ? "mobile-nav-icon-active bg-white/22 text-white"
+                            : "bg-[var(--color-background-primary)] text-[var(--color-accent)]"
+                        }`}
+                      >
+                        <Icon size={18} />
+                      </span>
+                      <span className="min-w-0 flex-1 text-[15px] font-bold leading-none">
+                        {label}
+                      </span>
+                      <ArrowRight
+                        size={16}
+                        className={`shrink-0 transition-transform group-hover:translate-x-0.5 ${
+                          active ? "text-white/85" : "text-[var(--color-text-tertiary)]"
+                        }`}
+                      />
+                    </button>
+                  );
+                })}
+              </div>
+
+              <div className="h-[1px] bg-[var(--color-border-light)] my-3" />
 
               {isAuthenticated && user ? (
                 <div className="flex flex-col gap-3">
-                  <div className="flex items-center gap-3 px-4 py-3 rounded-2xl bg-[var(--color-background-secondary)] border border-[var(--color-border-light)]">
+                  <div className="mobile-nav-surface flex items-center gap-3 px-4 py-3 rounded-2xl bg-[var(--color-background-secondary)] border border-[var(--color-border-light)]">
                     <div className="w-10 h-10 rounded-full bg-[var(--color-accent)] flex items-center justify-center text-white font-bold">
                       {user.firstName ? user.firstName[0] : user.fullName[0]}
                     </div>
@@ -725,21 +814,71 @@ export default function SharedNavbar() {
                       <p className="text-xs text-[var(--color-text-tertiary)]">{user.email}</p>
                     </div>
                   </div>
-                  <NavButton variant="default" onClick={() => handleNavClick("/profile")}>Profile</NavButton>
-                  <NavButton variant="default" onClick={() => handleNavClick("/dashboard")}>Dashboard</NavButton>
-                  <NavButton variant="outline-dark" onClick={handleLogout}>Logout</NavButton>
+                  <button
+                    type="button"
+                    onClick={() => handleNavClick("/profile")}
+                    className="mobile-nav-surface min-h-[46px] rounded-2xl border border-[var(--color-border-light)] bg-[var(--color-background-secondary)] px-4 text-sm font-bold text-[var(--color-text-primary)]"
+                  >
+                    Profile
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => handleNavClick("/dashboard")}
+                    className="mobile-nav-surface min-h-[46px] rounded-2xl border border-[var(--color-border-light)] bg-[var(--color-background-secondary)] px-4 text-sm font-bold text-[var(--color-text-primary)]"
+                  >
+                    Dashboard
+                  </button>
+                  <button
+                    type="button"
+                    onClick={handleLogout}
+                    className="mobile-nav-surface min-h-[46px] rounded-2xl border border-[var(--color-border-light)] bg-[var(--color-background-secondary)] px-4 text-sm font-bold text-[var(--color-error)]"
+                  >
+                    Logout
+                  </button>
                 </div>
               ) : (
-                <>
-                  <GetConnectedBtn onClick={() => handleNavClick("/contact")} />
-                  <div className="h-[1px] bg-[var(--color-border-light)] my-[4px]" />
-                  <SignInBtn onClick={() => { setIsMobileMenuOpen(false); window.dispatchEvent(new CustomEvent("open-login")); }} />
-                  <SignUpBtn onClick={() => { setIsMobileMenuOpen(false); window.dispatchEvent(new CustomEvent("open-register")); }} />
-                </>
+                <div className="grid gap-2">
+                  <button
+                    type="button"
+                    onClick={() => handleNavClick("/contact")}
+                    className="flex min-h-[50px] w-full items-center justify-center gap-2 rounded-2xl bg-[var(--color-primary)] px-4 text-sm font-bold text-white shadow-[0_10px_28px_rgba(26,24,51,0.22)] transition-transform active:scale-[0.98]"
+                  >
+                    <Users size={17} />
+                    Get Connected
+                  </button>
+
+                  <div className="grid grid-cols-2 gap-2">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setIsMobileMenuOpen(false);
+                        window.dispatchEvent(new CustomEvent("open-login"));
+                      }}
+                      className="mobile-nav-surface flex min-h-[48px] items-center justify-center gap-2 rounded-2xl border border-[var(--color-border-light)] bg-[var(--color-background-secondary)] px-3 text-sm font-bold text-[var(--color-text-primary)] transition-colors hover:bg-[var(--color-background-tertiary)]"
+                    >
+                      <LogIn size={16} />
+                      Sign In
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setIsMobileMenuOpen(false);
+                        window.dispatchEvent(new CustomEvent("open-register"));
+                      }}
+                      className="flex min-h-[48px] items-center justify-center gap-2 rounded-2xl bg-[var(--color-accent)] px-3 text-sm font-bold text-white transition-transform active:scale-[0.98]"
+                    >
+                      <UserPlus size={16} />
+                      Sign Up
+                    </button>
+                  </div>
+                </div>
               )}
 
-              <div className="h-[1px] bg-[var(--color-border-light)] my-[4px]" />
-              <div className="flex justify-center">
+              <div className="mobile-nav-surface mt-3 flex items-center justify-between rounded-2xl border border-[var(--color-border-light)] bg-[var(--color-background-secondary)] px-4 py-3">
+                <div>
+                  <p className="text-sm font-bold text-[var(--color-text-primary)]">Appearance</p>
+                  <p className="text-xs text-[var(--color-text-tertiary)]">Switch light or dark mode</p>
+                </div>
                 <ThemeToggleBtn />
               </div>
             </div>

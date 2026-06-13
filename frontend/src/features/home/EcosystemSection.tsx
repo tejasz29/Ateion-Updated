@@ -151,6 +151,8 @@ function EcosystemBubble({
   gradientId,
   descSize = "12px",
   staticTextColor,
+  hoverTextColor,
+  hoverDescColor,
   onClick,
 }: {
   ml: string;
@@ -166,6 +168,8 @@ function EcosystemBubble({
   gradientId?: string;
   descSize?: string;
   staticTextColor?: string;
+  hoverTextColor?: string;
+  hoverDescColor?: string;
   onClick?: () => void;
 }) {
   const [isHovered, setIsHovered] = useState(false);
@@ -183,7 +187,6 @@ function EcosystemBubble({
         animate={{
           y: isHovered ? -4 : 0,
           rotate: isHovered ? 1 : 0,
-          scale: isHovered ? 1.12 : 1,
         }}
         transition={{
           type: "spring",
@@ -191,7 +194,7 @@ function EcosystemBubble({
           damping: 25,
         }}
         style={{
-          filter: isHovered ? "drop-shadow(0 0 15px var(--color-accent_light))" : "none",
+          filter: isHovered ? "drop-shadow(0 6px 14px rgba(248,248,244,0.14))" : "none",
         }}
       >
         <svg
@@ -207,10 +210,10 @@ function EcosystemBubble({
                 cy="50"
                 r="54"
                 initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 0.35, scale: 1.15 }}
+                animate={{ opacity: 0.08, scale: 1.04 }}
                 exit={{ opacity: 0, scale: 0.9 }}
                 fill={hoverColor}
-                style={{ filter: "blur(15px)" }}
+                style={{ filter: "blur(8px)" }}
                 transition={{ duration: 0.5 }}
               />
             )}
@@ -227,7 +230,8 @@ function EcosystemBubble({
                 : defaultColor !== "transparent"
                   ? defaultColor
                   : "var(--color-border-medium)",
-              strokeWidth: isHovered ? 3 : 0.8,
+              strokeWidth: isHovered ? 1.2 : 0.8,
+              scale: isHovered ? 1.04 : 1,
             }}
             transition={{ type: "spring", stiffness: 400, damping: 25 }}
           />
@@ -241,15 +245,19 @@ function EcosystemBubble({
             fontFamily: "var(--font-display)",
             fontSize: titleSize,
             color:
-              isHovered && isDark ? "white" : staticTextColor || "var(--color-text-primary)",
+              isHovered && hoverTextColor
+                ? hoverTextColor
+                : isHovered && isDark
+                  ? "white"
+                  : staticTextColor || "var(--color-text-primary)",
             textShadow:
               isHovered && isDark
-                ? "0 0 8px rgba(255,255,255,0.4)"
+                ? "0 1px 8px rgba(0,0,0,0.18)"
                 : "none",
           }}
           animate={{
-            y: isHovered ? -4 : 0,
-            scale: isHovered ? 1.1 : 1,
+            y: isHovered ? -3 : 0,
+            scale: isHovered ? 1.04 : 1,
           }}
         >
           {title}
@@ -259,15 +267,17 @@ function EcosystemBubble({
           className="font-['Manrope',sans-serif] leading-snug not-italic"
           style={{
             fontSize: descSize,
-            maxWidth: "80%",
+            maxWidth: "84%",
             color:
-              isHovered && isDark
+              isHovered && hoverDescColor
+                ? hoverDescColor
+                : isHovered && isDark
                 ? "rgba(255,255,255,0.9)"
                 : staticTextColor || "var(--color-text-muted)",
           }}
           animate={{
             opacity: isHovered ? 1 : 0.6,
-            y: isHovered ? -2 : 0,
+            y: isHovered ? -1 : 0,
           }}
         >
           {description}
@@ -380,13 +390,16 @@ function EcosystemCluster({
         mt="137.18px"
         size="272.92px"
         defaultColor="var(--color-primary)"
-        staticTextColor="var(--color-text-inverse)"
+        staticTextColor="var(--ecosystem-light-bubble-text)"
         hoverColor="var(--color-primary-hover)"
-        isDark={false}
+        hoverTextColor="var(--ecosystem-bubble-hover-title)"
+        hoverDescColor="var(--ecosystem-bubble-hover-description)"
+        isDark={true}
         gradientId="ateionGrad"
         title="Ateion"
         description="Ateion is building the infrastructure for a capability-based future by integrating early AI PlayGround with standard-setting competitions."
-        titleSize="24px"
+        titleSize="31px"
+        descSize="15px"
         titleClass="font-['Outfit:Semi_Bold',sans-serif]"
         onClick={() => {
           onBubbleClick("ateion");
@@ -405,7 +418,8 @@ function EcosystemCluster({
         gradientId="gcoGrad"
         title="GCO"
         description="From early AI PlayGround to the Global Capability Olympiad, and emerging initiatives like VOUCH."
-        titleSize="32px"
+        titleSize="38px"
+        descSize="14px"
         onClick={() => {
           onBubbleClick("gco");
           navigate("/gco");
@@ -418,13 +432,16 @@ function EcosystemCluster({
         mt="369.61px"
         size="248.27px"
         defaultColor="var(--color-text-secondary)"
-        staticTextColor="white"
+        staticTextColor="var(--ecosystem-light-bubble-text)"
         hoverColor="var(--color-primary-hover)"
+        hoverTextColor="var(--ecosystem-bubble-hover-title)"
+        hoverDescColor="var(--ecosystem-bubble-hover-description)"
         isDark={true}
         gradientId="ateionGrad"
         title="Vouch"
         description="A way to get trusted proof of what you’ve accomplished."
-        titleSize="22px"
+        titleSize="29px"
+        descSize="14px"
         onClick={() => {
           onBubbleClick("vouch");
           navigate("/contact");
@@ -432,17 +449,18 @@ function EcosystemCluster({
       />
 
       <EcosystemBubble
-        ml="590px"
+        ml="601.32px"
         mt="57.94px"
-        size="328px"
-        defaultColor="var(--color-gray-300)"
+        size="333.67px"
+        defaultColor="var(--ecosystem-playground-bubble)"
         staticTextColor="var(--color-text-primary)"
-        hoverColor="var(--color-gray-400)"
+        hoverColor="var(--ecosystem-playground-bubble-hover)"
         isDark={false}
         gradientId="gcoGrad"
         title="PlayGround"
         description="Engaging, hands-on learning experiences designed to bridge theory with practical AI execution."
-        titleSize="20px"
+        titleSize="25px"
+        descSize="14px"
         onClick={() => {
           onBubbleClick("playground");
           navigate("/playground");
@@ -489,7 +507,7 @@ function MobileEcosystemCluster({
       title: "PlayGround",
       description:
         "Engaging, hands-on learning experiences designed to bridge theory with practical AI execution.",
-      circleColor: "var(--color-gray-300)",
+      circleColor: "var(--ecosystem-playground-bubble)",
       textColor: "var(--color-text-primary)",
     },
   ];
@@ -547,22 +565,30 @@ function MobileEcosystemCluster({
 }
 
 export default function EcosystemSection() {
-  const [activeId, setActiveId] = useState("gco");
-  const [desktopScale, setDesktopScale] = useState(1);
+  const DESKTOP_BADGE_WIDTH = 392;
+  const DESKTOP_GAP = 64;
+  const DESKTOP_CONTENT_WIDTH = DESKTOP_BADGE_WIDTH + DESKTOP_GAP + CANVAS_WIDTH;
+  const DESKTOP_MAX_SCALE = 0.78;
+  const DESKTOP_MIN_SCALE = 0.64;
 
-  const CANVAS_WIDTH_PX = 935;
-  const DESKTOP_CONTENT_WIDTH = 64 + 392 + 64 + CANVAS_WIDTH_PX + 64;
+  const [activeId, setActiveId] = useState("gco");
+  const [desktopScale, setDesktopScale] = useState(DESKTOP_MAX_SCALE);
 
   useEffect(() => {
     const updateScales = () => {
-      const dw = window.innerWidth - 64;
-      setDesktopScale(Math.min(1, Math.max(0.7, dw / DESKTOP_CONTENT_WIDTH)));
+      const availableWidth = window.innerWidth - 96;
+      setDesktopScale(
+        Math.min(
+          DESKTOP_MAX_SCALE,
+          Math.max(DESKTOP_MIN_SCALE, availableWidth / DESKTOP_CONTENT_WIDTH),
+        ),
+      );
     };
 
     updateScales();
     window.addEventListener("resize", updateScales);
     return () => window.removeEventListener("resize", updateScales);
-  }, [DESKTOP_CONTENT_WIDTH]);
+  }, [DESKTOP_CONTENT_WIDTH, DESKTOP_MAX_SCALE, DESKTOP_MIN_SCALE]);
 
   const ecosystemData = {
     gco: {
@@ -611,9 +637,9 @@ export default function EcosystemSection() {
   return (
     // `relative` + `w-full` + explicit padding ensures the section occupies
     // real document space so the next sibling renders below it — no overlap.
-    <section className="relative w-full bg-[var(--color-background-primary)]">
+    <section className="relative w-full overflow-x-hidden overflow-y-visible bg-[var(--color-background-primary)] px-4 py-12 sm:py-14 lg:py-16">
       {/* Section title */}
-      <div className="flex flex-col items-center w-full mb-[24px] sm:mb-[32px] md:mb-[40px] px-4">
+      <div className="flex flex-col items-center w-full mb-[24px] sm:mb-[32px] lg:mb-[36px]">
         <p className="font-bold text-[36px] sm:text-[48px] md:text-[58px] text-[var(--color-text-primary)] text-center tracking-[-0.05em] leading-[0.95]" style={{ fontFamily: "var(--font-display)" }}>
           Ateion as an Ecosystem
         </p>
@@ -635,23 +661,28 @@ export default function EcosystemSection() {
       */}
 
       {/* Mobile: stacked */}
-      <div className="md:hidden flex flex-col items-start gap-[40px] px-6">
+      <div className="lg:hidden mx-auto flex w-full max-w-[720px] flex-col items-start gap-[40px] px-2 sm:px-6">
         <GcoFeatureBadge activeData={activeData} />
 
         <MobileEcosystemCluster onBubbleClick={setActiveId} />
       </div>
 
-      {/* Desktop: side-by-side, no horizontal scrollbar; content scales to fit viewport */}
+      {/* Desktop: side-by-side, scaled visually and sized physically so it never clips. */}
       <div
-        className="hidden md:block w-full overflow-visible px-8 lg:px-16"
-        style={{ WebkitOverflowScrolling: "touch" }}
+        className="hidden lg:flex w-full justify-center overflow-visible"
       >
-        <div className="flex justify-center">
+        <div
+          className="relative"
+          style={{
+            width: DESKTOP_CONTENT_WIDTH * desktopScale,
+            height: CANVAS_HEIGHT * desktopScale,
+          }}
+        >
           <div
-            className="flex flex-row items-center gap-[64px]"
+            className="absolute left-0 top-0 flex flex-row items-center gap-[64px]"
             style={{
               width: DESKTOP_CONTENT_WIDTH,
-              maxWidth: "100%",
+              height: CANVAS_HEIGHT,
               transform: `scale(${desktopScale})`,
               transformOrigin: "top left",
             }}
