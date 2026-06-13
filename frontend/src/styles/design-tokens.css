@@ -77,6 +77,13 @@
   --color-text-link: #1A1833;
   --color-text-link-hover: #2E2C40;
 
+  /* Homepage ecosystem bubble refinements */
+  --ecosystem-bubble-hover-title: #ffffff;
+  --ecosystem-bubble-hover-description: rgba(255, 255, 255, 0.9);
+  --ecosystem-light-bubble-text: #ffffff;
+  --ecosystem-playground-bubble: #ffffff;
+  --ecosystem-playground-bubble-hover: #f8f8f4;
+
   /* Border Colors */
   --color-border-light: rgba(26, 24, 51, 0.1);
   --color-border-medium: rgba(26, 24, 51, 0.2);
@@ -442,6 +449,13 @@
 
   --color-text-link: #CBD5E1;
   --color-text-link-hover: #F8FAFC;
+
+  /* Homepage ecosystem bubble refinements */
+  --ecosystem-bubble-hover-title: #1a1833;
+  --ecosystem-bubble-hover-description: rgba(26, 24, 51, 0.76);
+  --ecosystem-light-bubble-text: #1a1833;
+  --ecosystem-playground-bubble: #475569;
+  --ecosystem-playground-bubble-hover: #64748b;
 
   /* Border Colors */
   --color-border-light: rgba(226, 232, 240, 0.08);
