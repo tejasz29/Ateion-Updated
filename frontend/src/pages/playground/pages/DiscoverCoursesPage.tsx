@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { Compass, Sprout, Sparkles, Search } from "lucide-react";
+import { Compass, Sprout, Sparkles, Search, Bot, Code, Languages, Cat, DollarSign, Palette, Award, Heart } from "lucide-react";
 import type { AgeGroupId } from "../shared/types";
 import { slideInItem } from "../shared/types";
 import { courseMatchesAgeGroup, normalizeAgeGroupId } from "../shared/courseAgeGroups";
@@ -98,7 +98,16 @@ const AGE_GROUP_THEMES: Record<AgeGroupFilterId, {
   },
 };
 
-const CATEGORIES = ["AI", "Coding", "Languages", "Curious Kitty", "Finance", "Art", "Advanced Skills", "Mental Health"];
+const CATEGORIES = [
+  { name: "AI", icon: Bot },
+  { name: "Coding", icon: Code },
+  { name: "Languages", icon: Languages },
+  { name: "Curious Kitty", icon: Cat },
+  { name: "Finance", icon: DollarSign },
+  { name: "Art", icon: Palette },
+  { name: "Advanced Skills", icon: Award },
+  { name: "Mental Health", icon: Heart },
+];
 
 const SORTS: { id: SortOption; label: string }[] = [
   { id: "popular", label: "Most popular" },
@@ -180,19 +189,23 @@ export default function DiscoverCoursesPage() {
 
         {/* 2. Category Quick Filters */}
         <div className="flex flex-wrap gap-2">
-          {CATEGORIES.map((cat) => (
-            <button
-              key={cat}
-              onClick={() => toggleArray(setSelectedTopics, cat)}
-              className={`px-3 py-1.5 rounded-full border text-xs font-bold transition-all cursor-pointer ${
-                selectedTopics.includes(cat)
-                  ? "bg-[var(--color-accent)] text-white border-[var(--color-accent)]"
-                  : "bg-[var(--color-background-secondary)] text-[var(--color-text-secondary)] border-[var(--color-border-light)] hover:border-[var(--color-accent)] hover:text-[var(--color-accent)]"
-              }`}
-            >
-              {cat}
-            </button>
-          ))}
+          {CATEGORIES.map((cat) => {
+            const Icon = cat.icon;
+            return (
+              <button
+                key={cat.name}
+                onClick={() => toggleArray(setSelectedTopics, cat.name)}
+                className={`px-3 py-1.5 rounded-full border text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
+                  selectedTopics.includes(cat.name)
+                    ? "bg-[var(--color-accent)] text-white border-[var(--color-accent)]"
+                    : "bg-[var(--color-background-secondary)] text-[var(--color-text-secondary)] border-[var(--color-border-light)] hover:border-[var(--color-accent)] hover:text-[var(--color-accent)]"
+                }`}
+              >
+                <Icon size={14} className="animate-pulse" />
+                {cat.name}
+              </button>
+            );
+          })}
         </div>
 
         {/* 3. Age Group Quick Filters */}
