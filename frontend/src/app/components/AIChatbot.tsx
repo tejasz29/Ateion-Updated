@@ -7,6 +7,7 @@ import {
   type TouchEvent,
   type CSSProperties,
 } from "react";
+import { useTheme } from "./ThemeProvider";
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 interface Message {
@@ -30,22 +31,6 @@ interface AIChatBotProps {
   userInitial?: string;
   onSendMessage?: (message: string, history: Message[]) => Promise<string>;
 }
-
-// ── Theme tokens (map to Ateion CSS vars) ─────────────────────────────────────
-const T = {
-  bg: "var(--color-background-primary)",
-  panel: "var(--color-background-secondary)",
-  panelDark: "#1a1a2e",
-  accent: "var(--color-accent)",
-  accentLight: "#f0d9d1",
-  navy: "var(--color-text-primary)",
-  navyMid: "#2d2d4e",
-  textMuted: "var(--color-text-tertiary)",
-  border: "var(--color-border-light)",
-  userBubble: "var(--color-primary)",
-  botBubble: "var(--color-background-secondary)",
-  inputBg: "var(--color-background-primary)",
-} as const;
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 const defaultAIHandler = async (
@@ -87,7 +72,6 @@ const fmtDate = (d: Date) => {
   return d.toLocaleDateString([], { month: "short", day: "numeric" });
 };
 
-// Very simple markdown → spans: **bold**, `code`, newlines
 function renderMarkdown(text: string) {
   const parts: (string | JSX.Element)[] = [];
   const lines = text.split("\n");
@@ -101,7 +85,7 @@ function renderMarkdown(text: string) {
           <code
             key={`${li}-${si}`}
             style={{
-              background: "rgba(0,0,0,0.08)",
+              background: "var(--color-border-light)",
               borderRadius: "4px",
               padding: "1px 5px",
               fontSize: "0.9em",
@@ -222,8 +206,34 @@ export default function AIChatBot({
   const touchDeltaY = useRef(0);
   const isDragging = useRef(false);
 
+  const { theme } = useTheme();
   const isMobile = useIsMobile();
   const vph = useViewportHeight();
+
+  const isDark = theme === "dark";
+  const T = {
+    bg: "var(--color-background-primary)",
+    panel: "var(--color-background-secondary)",
+    panelDark: "var(--color-background-dark)",
+    heroBg: isDark
+      ? "linear-gradient(135deg, #080C16 0%, #1A1833 100%)"
+      : "linear-gradient(135deg, var(--color-background-deep) 0%, var(--color-background-dark) 100%)",
+    accent: "var(--color-accent)",
+    accentLight: "var(--color-accent_light)",
+    navy: "var(--color-text-primary)",
+    textMuted: "var(--color-text-tertiary)",
+    textSecondary: "var(--color-text-secondary)",
+    border: "var(--color-border-light)",
+    userBubble: isDark ? "#1E293B" : "var(--color-background-dark)",
+    botBubble: "var(--color-background-secondary)",
+    inputBg: isDark ? "rgba(15,23,42,0.6)" : "var(--color-background-primary)",
+    cardBg: isDark ? "#334155" : "#FFFFFF",
+    cardBorder: isDark ? "rgba(148,163,184,0.12)" : "var(--color-border-medium)",
+    shadow: isDark ? "0 4px 24px rgba(0,0,0,0.3)" : "var(--shadow-card)",
+    surfaceHover: "var(--color-gray-100)",
+    glassBg: isDark ? "rgba(30,41,59,0.7)" : "rgba(248,248,244,0.7)",
+    glassBorder: isDark ? "rgba(148,163,184,0.08)" : "rgba(0,0,0,0.06)",
+  } as const;
 
   // ── Auto-scroll to latest message ──────────────────────────────────────────
   useEffect(() => {
@@ -429,14 +439,17 @@ export default function AIChatBot({
         width: "368px",
         height: "560px",
         borderRadius: "20px",
-        background: T.panel,
-        boxShadow:
-          "0 20px 60px rgba(26,26,46,0.18), 0 4px 16px rgba(26,26,46,0.1)",
+        background: isDark ? "rgba(30,41,59,0.92)" : T.panel,
+        backdropFilter: isDark ? "blur(16px)" : "none",
+        WebkitBackdropFilter: isDark ? "blur(16px)" : "none",
+        boxShadow: isDark
+          ? "0 8px 40px rgba(0,0,0,0.5), 0 0 0 1px rgba(148,163,184,0.06)"
+          : "var(--shadow-modal)",
         display: "flex",
         flexDirection: "column",
         overflow: "hidden",
         zIndex: 9998,
-        border: `1px solid ${T.border}`,
+        border: `1px solid ${isDark ? "rgba(148,163,184,0.08)" : T.border}`,
         transform: open ? "translateY(0) scale(1)" : "translateY(16px) scale(0.97)",
         opacity: open ? 1 : 0,
         pointerEvents: open ? "all" : "none",
@@ -458,7 +471,7 @@ export default function AIChatBot({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    boxShadow: "0 6px 24px rgba(201,98,63,0.4)",
+    boxShadow: "var(--shadow-button)",
     transition: "transform 0.2s, box-shadow 0.2s",
     zIndex: 9999,
     WebkitTapHighlightColor: "transparent",
@@ -495,27 +508,28 @@ export default function AIChatBot({
   }) => (
     <button
       onClick={() => openPastConv(conv)}
+      className="chat-conv-row"
       style={{
         width: "100%",
-        background: "#fff",
-        border: `1px solid ${T.border}`,
-        borderRadius: "12px",
-        padding: isMobile ? "14px" : "12px 14px",
+        background: isDark ? "rgba(51,65,85,0.5)" : T.cardBg,
+        border: `1px solid ${isDark ? "rgba(148,163,184,0.06)" : T.cardBorder}`,
+        borderRadius: "10px",
+        padding: isMobile ? "10px 12px" : "8px 10px",
         cursor: "pointer",
-        marginBottom: "8px",
+        marginBottom: "6px",
         display: "flex",
         alignItems: "center",
-        gap: "12px",
+        gap: "10px",
         WebkitTapHighlightColor: "transparent",
         touchAction: "manipulation",
       }}
     >
       <div
         style={{
-          width: "34px",
-          height: "34px",
-          borderRadius: "10px",
-          background: T.bg,
+          width: "28px",
+          height: "28px",
+          borderRadius: "8px",
+          background: isDark ? "rgba(232,133,106,0.1)" : T.bg,
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
@@ -523,8 +537,8 @@ export default function AIChatBot({
         }}
       >
         <svg
-          width="16"
-          height="16"
+          width="13"
+          height="13"
           viewBox="0 0 24 24"
           fill="none"
           stroke={T.accent}
@@ -549,15 +563,15 @@ export default function AIChatBot({
         >
           {conv.title}
         </p>
-        <p style={{ color: T.textMuted, fontSize: "11px", margin: "2px 0 0" }}>
+        <p style={{ color: T.textMuted, fontSize: "11px", margin: "1px 0 0" }}>
           {showMeta
             ? `${conv.messages.length} messages · ${fmt(conv.lastUpdated)}`
             : fmtDate(conv.lastUpdated)}
         </p>
       </div>
       <svg
-        width="14"
-        height="14"
+        width="12"
+        height="12"
         viewBox="0 0 24 24"
         fill="none"
         stroke={T.textMuted}
@@ -668,7 +682,7 @@ export default function AIChatBot({
         <div
           style={{
             background: T.panelDark,
-            padding: isMobile ? "10px 16px 12px" : "14px 18px",
+            padding: isMobile ? "10px 16px 12px" : "12px 18px",
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
@@ -681,22 +695,24 @@ export default function AIChatBot({
                 onClick={() => setView("home")}
                 aria-label="Back"
                 style={{
-                  background: "none",
+                  background: "rgba(255,255,255,0.08)",
                   border: "none",
+                  borderRadius: "8px",
                   cursor: "pointer",
-                  color: "rgba(255,255,255,0.55)",
+                  color: "rgba(255,255,255,0.7)",
                   display: "flex",
                   alignItems: "center",
-                  padding: "4px",
-                  minWidth: "36px",
-                  minHeight: "36px",
+                  padding: "6px",
+                  minWidth: "32px",
+                  minHeight: "32px",
                   justifyContent: "center",
                   WebkitTapHighlightColor: "transparent",
+                  transition: "background 0.15s",
                 }}
               >
                 <svg
-                  width="18"
-                  height="18"
+                  width="16"
+                  height="16"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
@@ -761,7 +777,6 @@ export default function AIChatBot({
           </div>
 
           <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-            {/* User initial avatar */}
             <div
               style={{
                 width: "30px",
@@ -826,13 +841,30 @@ export default function AIChatBot({
               WebkitOverflowScrolling: "touch",
             }}
           >
-            {/* Hero gradient */}
+            {/* Hero */}
             <div
               style={{
-                background: `linear-gradient(135deg, ${T.navyMid} 0%, ${T.panelDark} 100%)`,
+                background: T.heroBg,
                 padding: isMobile ? "20px 20px 24px" : "24px 20px 28px",
+                position: "relative",
+                overflow: "hidden",
               }}
             >
+              {isDark && (
+                <div
+                  style={{
+                    position: "absolute",
+                    top: "-40px",
+                    right: "-40px",
+                    width: "160px",
+                    height: "160px",
+                    borderRadius: "50%",
+                    background:
+                      "radial-gradient(circle, rgba(232,133,106,0.12) 0%, transparent 70%)",
+                    pointerEvents: "none",
+                  }}
+                />
+              )}
               <p
                 style={{
                   color: "#fff",
@@ -840,6 +872,8 @@ export default function AIChatBot({
                   fontWeight: 700,
                   margin: 0,
                   lineHeight: 1.3,
+                  position: "relative",
+                  zIndex: 1,
                 }}
               >
                 {greeting}
@@ -849,54 +883,39 @@ export default function AIChatBot({
                   color: "rgba(255,255,255,0.5)",
                   fontSize: isMobile ? "18px" : "16px",
                   fontWeight: 500,
-                  margin: "4px 0 0",
+                  margin: "6px 0 0",
+                  position: "relative",
+                  zIndex: 1,
                 }}
               >
                 {subHeading}
               </p>
             </div>
 
-            {/* Curved transition */}
             <div
               style={{
-                height: "20px",
-                background: T.panelDark,
-                position: "relative",
-              }}
-            >
-              <div
-                style={{
-                  position: "absolute",
-                  bottom: 0,
-                  left: 0,
-                  right: 0,
-                  height: "20px",
-                  background: T.panel,
-                  borderRadius: "20px 20px 0 0",
-                }}
-              />
-            </div>
-
-            <div
-              style={{
-                padding: isMobile ? "4px 16px 32px" : "4px 16px 16px",
+                padding: isMobile ? "16px 16px 32px" : "16px 16px 16px",
                 flex: 1,
+                background: isDark
+                  ? "linear-gradient(180deg, rgba(15,23,42,0.4) 0%, transparent 40px)"
+                  : "none",
               }}
             >
               {/* New chat CTA */}
               <button
                 onClick={startNewChat}
+                className="chat-cta-btn"
                 style={{
                   width: "100%",
-                  background: "#fff",
-                  border: `1px solid ${T.border}`,
-                  borderRadius: "14px",
-                  padding: isMobile ? "16px" : "14px 16px",
+                  background: isDark ? T.cardBg : T.cardBg,
+                  border: `1px solid ${isDark ? "rgba(148,163,184,0.1)" : T.cardBorder}`,
+                  borderRadius: "12px",
+                  padding: isMobile ? "11px" : "10px 12px",
                   cursor: "pointer",
                   display: "flex",
                   alignItems: "center",
-                  gap: "14px",
-                  boxShadow: "0 2px 8px rgba(26,26,46,0.06)",
+                  gap: "10px",
+                  boxShadow: isDark ? "0 2px 12px rgba(0,0,0,0.2)" : T.shadow,
                   marginBottom: "16px",
                   WebkitTapHighlightColor: "transparent",
                   touchAction: "manipulation",
@@ -904,9 +923,9 @@ export default function AIChatBot({
               >
                 <div
                   style={{
-                    width: "40px",
-                    height: "40px",
-                    borderRadius: "12px",
+                    width: "30px",
+                    height: "30px",
+                    borderRadius: "10px",
                     background: T.accentLight,
                     display: "flex",
                     alignItems: "center",
@@ -915,8 +934,8 @@ export default function AIChatBot({
                   }}
                 >
                   <svg
-                    width="20"
-                    height="20"
+                    width="15"
+                    height="15"
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke={T.accent}
@@ -931,7 +950,7 @@ export default function AIChatBot({
                   <p
                     style={{
                       color: T.navy,
-                      fontSize: isMobile ? "15px" : "14px",
+                      fontSize: isMobile ? "14px" : "13px",
                       fontWeight: 600,
                       margin: 0,
                     }}
@@ -942,15 +961,15 @@ export default function AIChatBot({
                     style={{
                       color: T.textMuted,
                       fontSize: "12px",
-                      margin: "2px 0 0",
+                      margin: "1px 0 0",
                     }}
                   >
                     Ask me anything…
                   </p>
                 </div>
                 <svg
-                  width="16"
-                  height="16"
+                  width="13"
+                  height="13"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke={T.textMuted}
@@ -969,31 +988,33 @@ export default function AIChatBot({
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "space-between",
-                      marginBottom: "10px",
+                      marginBottom: "8px",
+                      padding: "0 2px",
                     }}
                   >
-                    <p
-                      style={{
-                        color: T.textMuted,
-                        fontSize: "11px",
-                        fontWeight: 600,
-                        textTransform: "uppercase",
-                        letterSpacing: "0.07em",
-                        margin: 0,
-                      }}
-                    >
-                      Recent conversations
+                  <p
+                    style={{
+                      color: T.textMuted,
+                      fontSize: "11px",
+                      fontWeight: 600,
+                      textTransform: "uppercase",
+                      letterSpacing: "0.08em",
+                      margin: 0,
+                    }}
+                  >
+                    Recent conversations
                     </p>
                     <button
                       onClick={() => setView("history")}
                       style={{
-                        background: "none",
+                        background: isDark ? "rgba(232,133,106,0.1)" : "none",
                         border: "none",
+                        borderRadius: "6px",
                         cursor: "pointer",
                         color: T.accent,
                         fontSize: "12px",
                         fontWeight: 600,
-                        padding: "4px 0",
+                        padding: "4px 8px",
                         WebkitTapHighlightColor: "transparent",
                       }}
                     >
@@ -1101,7 +1122,9 @@ export default function AIChatBot({
                 display: "flex",
                 flexDirection: "column",
                 gap: "12px",
-                background: T.bg,
+                background: isDark ? "rgba(15,23,42,0.85)" : T.bg,
+                backdropFilter: isDark ? "blur(4px)" : "none",
+                WebkitBackdropFilter: isDark ? "blur(4px)" : "none",
                 WebkitOverflowScrolling: "touch",
               }}
             >
@@ -1137,7 +1160,6 @@ export default function AIChatBot({
                   >
                     Start a conversation…
                   </p>
-                  {/* Quick suggestions */}
                   <div
                     style={{
                       marginTop: "20px",
@@ -1154,6 +1176,7 @@ export default function AIChatBot({
                     ].map((suggestion) => (
                       <button
                         key={suggestion}
+                        className="chat-suggestion"
                         onClick={() => {
                           setInput(suggestion);
                           setTimeout(
@@ -1162,10 +1185,10 @@ export default function AIChatBot({
                           );
                         }}
                         style={{
-                          background: "#fff",
-                          border: `1px solid ${T.border}`,
-                          borderRadius: "10px",
-                          padding: "10px 14px",
+                          background: isDark ? "rgba(51,65,85,0.4)" : T.cardBg,
+                          border: `1px solid ${isDark ? "rgba(148,163,184,0.06)" : T.cardBorder}`,
+                          borderRadius: "8px",
+                          padding: "8px 12px",
                           color: T.navy,
                           fontSize: "13px",
                           cursor: "pointer",
@@ -1205,7 +1228,7 @@ export default function AIChatBot({
                         padding: isMobile ? "11px 15px" : "10px 14px",
                         fontSize: isMobile ? "14px" : "13px",
                         lineHeight: 1.55,
-                        boxShadow: "0 2px 6px rgba(26,26,46,0.08)",
+                        boxShadow: "var(--shadow-xs)",
                         border:
                           msg.role === "assistant"
                             ? `1px solid ${T.border}`
@@ -1298,11 +1321,13 @@ export default function AIChatBot({
                 paddingBottom: isMobile
                   ? "max(10px, env(safe-area-inset-bottom, 10px))"
                   : "10px",
-                borderTop: `1px solid ${T.border}`,
+                borderTop: `1px solid ${isDark ? "rgba(148,163,184,0.08)" : T.border}`,
                 display: "flex",
                 gap: "8px",
                 alignItems: "flex-end",
-                background: T.panel,
+                background: isDark ? "rgba(30,41,59,0.95)" : T.panel,
+                backdropFilter: isDark ? "blur(12px)" : "none",
+                WebkitBackdropFilter: isDark ? "blur(12px)" : "none",
                 flexShrink: 0,
               }}
             >
@@ -1312,6 +1337,7 @@ export default function AIChatBot({
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={handleKeyDown}
                 placeholder="Type a message…"
+                className="chat-textarea"
                 rows={1}
                 style={{
                   flex: 1,
@@ -1320,12 +1346,12 @@ export default function AIChatBot({
                   borderRadius: "20px",
                   padding: isMobile ? "11px 16px" : "9px 16px",
                   color: T.navy,
-                  fontSize: "16px",
+                  fontSize: "14px",
                   fontFamily: "inherit",
                   outline: "none",
                   resize: "none",
                   overflow: "hidden",
-                  boxShadow: "inset 0 1px 3px rgba(26,26,46,0.06)",
+                  boxShadow: "var(--shadow-inner)",
                   lineHeight: 1.45,
                   maxHeight: "120px",
                   display: "block",
@@ -1335,6 +1361,7 @@ export default function AIChatBot({
                 onClick={handleSend}
                 disabled={!input.trim() || loading}
                 aria-label="Send"
+                className="chat-send-btn"
                 style={{
                   width: isMobile ? "44px" : "40px",
                   height: isMobile ? "44px" : "40px",
@@ -1350,7 +1377,7 @@ export default function AIChatBot({
                   alignItems: "center",
                   justifyContent: "center",
                   flexShrink: 0,
-                  transition: "background 0.15s",
+                  transition: "background 0.15s, transform 0.15s",
                   WebkitTapHighlightColor: "transparent",
                   touchAction: "manipulation",
                   alignSelf: "flex-end",
@@ -1381,8 +1408,8 @@ export default function AIChatBot({
                   bottom: isMobile ? "80px" : "72px",
                   left: "12px",
                   right: "12px",
-                  background: "#FEECEC",
-                  border: "1px solid #F9C0C0",
+                  background: "var(--color-error_light)",
+                  border: "1px solid var(--color-error)",
                   borderRadius: "10px",
                   padding: "10px 14px",
                   display: "flex",
@@ -1394,7 +1421,7 @@ export default function AIChatBot({
               >
                 <p
                   style={{
-                    color: "#A32D2D",
+                    color: "var(--color-error)",
                     fontSize: "12px",
                     margin: 0,
                     flex: 1,
@@ -1408,7 +1435,7 @@ export default function AIChatBot({
                     background: "none",
                     border: "none",
                     cursor: "pointer",
-                    color: "#A32D2D",
+                    color: "var(--color-error)",
                     fontSize: "16px",
                     padding: "0 2px",
                     lineHeight: 1,
@@ -1429,6 +1456,51 @@ export default function AIChatBot({
         }
         @keyframes fadeIn {
           from { opacity: 0; } to { opacity: 1; }
+        }
+        .chat-textarea::placeholder {
+          color: var(--color-text-muted) !important;
+          opacity: 1;
+        }
+        .chat-textarea:focus {
+          border-color: var(--color-accent) !important;
+          box-shadow: 0 0 0 2px rgba(232,133,106,0.15) !important;
+        }
+        .chat-conv-row,
+        .chat-cta-btn,
+        .chat-suggestion {
+          transition: background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
+        }
+        .chat-conv-row:hover {
+          background: rgba(232,133,106,0.06) !important;
+          border-color: rgba(232,133,106,0.2) !important;
+          transform: translateX(2px);
+        }
+        .chat-cta-btn:hover {
+          background: rgba(232,133,106,0.04) !important;
+          border-color: rgba(232,133,106,0.15) !important;
+        }
+        .chat-suggestion:hover {
+          background: rgba(232,133,106,0.06) !important;
+          border-color: rgba(232,133,106,0.15) !important;
+        }
+        .chat-send-btn:not(:disabled):hover {
+          filter: brightness(1.15);
+          transform: scale(1.05);
+        }
+        .chat-send-btn:not(:disabled):active {
+          transform: scale(0.92);
+        }
+        [data-theme="dark"] .chat-conv-row:hover {
+          background: rgba(232,133,106,0.08) !important;
+          border-color: rgba(232,133,106,0.25) !important;
+        }
+        [data-theme="dark"] .chat-cta-btn:hover {
+          background: rgba(232,133,106,0.06) !important;
+          border-color: rgba(232,133,106,0.2) !important;
+        }
+        [data-theme="dark"] .chat-suggestion:hover {
+          background: rgba(232,133,106,0.08) !important;
+          border-color: rgba(232,133,106,0.2) !important;
         }
       `}</style>
     </>

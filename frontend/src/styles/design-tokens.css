@@ -37,6 +37,7 @@
   --color-accent: #E8856A;
   --color-accent-hover: #D97A60;
   --color-accent_light: rgba(232, 133, 106, 0.15);
+  --color-accent-light: var(--color-accent_light);
 
   /* Neutral Grays */
   --color-white: #F8F8F4;
@@ -411,6 +412,7 @@
   --color-accent: #E8856A;
   --color-accent-hover: #F0957C;
   --color-accent_light: rgba(232, 133, 106, 0.15);
+  --color-accent-light: var(--color-accent_light);
 
   /* Neutral Grays - Clean slate scale (higher number = lighter) */
   --color-white: #0F172A;
