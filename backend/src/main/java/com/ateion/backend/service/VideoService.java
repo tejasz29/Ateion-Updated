@@ -32,6 +32,20 @@ public class VideoService {
         return toDTO(video);
     }
 
+    /**
+     * Public method: returns all videos belonging to a module, ordered by videoOrder.
+     * Does NOT require authentication — called by the public preview endpoint.
+     */
+    public List<VideoDTO> getVideosByModule(Long moduleId) {
+        if (!moduleRepository.existsById(moduleId)) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Module not found: " + moduleId);
+        }
+        return videoRepository.findByModuleIdOrderByVideoOrderAsc(moduleId)
+                .stream()
+                .map(this::toDTO)
+                .collect(Collectors.toList());
+    }
+
     public VideoDTO createVideo(VideoDTO dto) {
         Module module = moduleRepository.findById(dto.getModuleId())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Module not found: " + dto.getModuleId()));

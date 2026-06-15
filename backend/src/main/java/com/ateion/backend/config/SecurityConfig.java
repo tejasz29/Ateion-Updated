@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -43,8 +44,11 @@ public class SecurityConfig {
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                        // ADDED: "/api/admin/**" to the whitelist to permit the YouTube preview endpoint
+                        // Existing public routes
                         .requestMatchers("/api/auth/**", "/api/contact/**", "/api/admin/**").permitAll()
+                        // NEW: only GET /api/videos/public/** is public.
+                        // All other /api/videos/** routes remain authenticated.
+                        .requestMatchers(HttpMethod.GET, "/api/videos/public/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtAuthFilter(), UsernamePasswordAuthenticationFilter.class);
@@ -82,13 +86,12 @@ public class SecurityConfig {
                     try {
                         String email = jwtUtil.extractEmail(token);
                         if (email != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-                            // Authenticate the user context if the token is valid
                             UsernamePasswordAuthenticationToken authToken =
                                     new UsernamePasswordAuthenticationToken(email, null, Collections.emptyList());
                             SecurityContextHolder.getContext().setAuthentication(authToken);
                         }
                     } catch (Exception e) {
-                        // Invalid or expired token; ignore and let Spring Security handle the rejection
+                        // Invalid or expired token; let Spring Security decide based on the route rules.
                     }
                 }
                 filterChain.doFilter(request, response);
