@@ -52,7 +52,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/api/content/courses").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/videos/public/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/videos/**").permitAll()
-                        .requestMatchers("/api/chat").permitAll()
+                        .requestMatchers("/api/chat", "/api/chat/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtAuthFilter(), UsernamePasswordAuthenticationFilter.class);

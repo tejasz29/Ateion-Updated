@@ -13,3 +13,6 @@ target/
 .classpath
 .factorypath
 bin/
+
+#run bacekend script with .\run-backend.ps1
+run-backend.ps1
