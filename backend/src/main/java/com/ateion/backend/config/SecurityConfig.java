@@ -47,19 +47,12 @@ public class SecurityConfig {
                 )
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-
-                        // Existing public routes. Admin and teacher behavior is intentionally unchanged.
                         .requestMatchers("/api/auth/**", "/api/contact/**", "/api/admin/**").permitAll()
-
-                        // Public readiness endpoint for local checks and Render health checks.
                         .requestMatchers(HttpMethod.GET, "/api/ping").permitAll()
-
-                        // Guests may browse only the course catalogue.
                         .requestMatchers(HttpMethod.GET, "/api/content/courses").permitAll()
-
-                        // Guests may access only the dedicated public video-preview routes.
                         .requestMatchers(HttpMethod.GET, "/api/videos/public/**").permitAll()
-
+                        .requestMatchers(HttpMethod.GET, "/api/videos/**").permitAll()
+                        .requestMatchers("/api/chat").permitAll()
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtAuthFilter(), UsernamePasswordAuthenticationFilter.class);
