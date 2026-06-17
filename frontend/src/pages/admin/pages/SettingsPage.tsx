@@ -39,11 +39,11 @@ export default function SettingsPage() {
 
   return (
     <>
-        <Helmet>
-          <title>Ateion Admin — Settings</title>
-          <meta name="description" content="Manage Ateion platform settings, billing, and security preferences." />
-        </Helmet>
-        <motion.div
+      <Helmet>
+        <title>Ateion Admin — Settings</title>
+        <meta name="description" content="Manage Ateion platform settings, billing, and security preferences." />
+      </Helmet>
+      <motion.div
         className="pb-20"
         variants={containerVariants}
         initial="hidden"
@@ -58,10 +58,10 @@ export default function SettingsPage() {
               className="w-12 h-[3px] rounded-full bg-[var(--color-accent)] mb-4"
               style={{ transformOrigin: "left" }}
             />
-            <h2 className="text-3xl font-bold font-['OV_Soge'] mb-2">
+            <h2 className="text-3xl font-bold font-['OV_Soge'] mb-2 text-[var(--color-text-primary)]">
               Platform Settings
             </h2>
-            <p className="text-[var(--color-text-secondary)]">
+            <p className="text-sm text-[var(--color-text-secondary)]">
               Configure global ecosystem parameters, security, and notifications.
             </p>
           </div>
@@ -78,10 +78,12 @@ export default function SettingsPage() {
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <motion.div className="lg:col-span-1 space-y-6" variants={itemVariants}>
-            <div className="clay-card bg-[var(--color-background-secondary)] rounded-2xl p-6 border border-[var(--color-border-light)]">
+            <div className="clay-card bg-[var(--color-background-secondary)] rounded-2xl p-6 border border-[var(--color-border-light)] shadow-[var(--shadow-md)] hover:shadow-[var(--shadow-lg)] transition-all duration-300">
               <div className="flex items-center gap-3 mb-6 pb-4 border-b border-[var(--color-border-light)]">
-                <Shield className="text-blue-500" size={24} />
-                <h3 className="font-bold text-lg">Security & Access</h3>
+                <div className="w-10 h-10 rounded-xl bg-blue-500/10 flex items-center justify-center text-blue-500 dark:text-blue-400">
+                  <Shield size={20} />
+                </div>
+                <h3 className="font-bold text-lg text-[var(--color-text-primary)]">Security & Access</h3>
               </div>
               <div className="space-y-5">
                 <Toggle
@@ -106,10 +108,12 @@ export default function SettingsPage() {
               </div>
             </div>
 
-            <div className="clay-card bg-[var(--color-background-secondary)] rounded-2xl p-6 border border-[var(--color-border-light)]">
+            <div className="clay-card bg-[var(--color-background-secondary)] rounded-2xl p-6 border border-[var(--color-border-light)] shadow-[var(--shadow-md)] hover:shadow-[var(--shadow-lg)] transition-all duration-300">
               <div className="flex items-center gap-3 mb-6 pb-4 border-b border-[var(--color-border-light)]">
-                <Bell className="text-amber-500" size={24} />
-                <h3 className="font-bold text-lg">Notifications</h3>
+                <div className="w-10 h-10 rounded-xl bg-amber-500/10 flex items-center justify-center text-amber-500 dark:text-amber-400">
+                  <Bell size={20} />
+                </div>
+                <h3 className="font-bold text-lg text-[var(--color-text-primary)]">Notifications</h3>
               </div>
               <div className="space-y-5">
                 <Toggle
@@ -123,37 +127,41 @@ export default function SettingsPage() {
           </motion.div>
 
           <motion.div className="lg:col-span-2 space-y-6" variants={itemVariants}>
-            <div className="clay-card bg-[var(--color-background-secondary)] rounded-2xl p-6 border border-[var(--color-border-light)]">
+            <div className="clay-card bg-[var(--color-background-secondary)] rounded-2xl p-6 border border-[var(--color-border-light)] shadow-[var(--shadow-md)] hover:shadow-[var(--shadow-lg)] transition-all duration-300">
               <div className="flex items-center gap-3 mb-6 pb-4 border-b border-[var(--color-border-light)]">
-                <Globe className="text-emerald-500" size={24} />
-                <h3 className="font-bold text-lg">General Configuration</h3>
+                <div className="w-10 h-10 rounded-xl bg-emerald-500/10 flex items-center justify-center text-emerald-500 dark:text-emerald-400">
+                  <Globe size={20} />
+                </div>
+                <h3 className="font-bold text-lg text-[var(--color-text-primary)]">General Configuration</h3>
               </div>
               <div className="space-y-5">
                 <motion.div variants={itemVariants}>
-                  <label className="block text-sm font-medium text-[var(--color-text-secondary)] mb-1">Platform Name</label>
+                  <label className="block text-sm font-medium text-[var(--color-text-secondary)] mb-1.5">Platform Name</label>
                   <input
                     type="text"
                     value={settings.siteName}
                     onChange={(e) => setSettings({ ...settings, siteName: e.target.value })}
-                    className="w-full px-4 py-2.5 rounded-xl border border-[var(--color-border-medium)] bg-[var(--color-background-primary)] text-[var(--color-text-primary)] outline-none transition-all duration-250 focus:border-[var(--color-accent)] focus:shadow-[0_0_0_3px_rgba(232,133,106,0.15)]"
+                    className="w-full px-4 py-2.5 rounded-xl border border-[var(--color-border-light)] hover:border-[var(--color-border-medium)] bg-[var(--color-background-primary)]/40 backdrop-blur-sm text-[var(--color-text-primary)] outline-none transition-all duration-200 focus:border-[var(--color-accent)] focus:hover:border-[var(--color-accent)] focus:shadow-[0_0_0_3px_rgba(232,133,106,0.12)]"
                   />
                 </motion.div>
                 <motion.div variants={itemVariants}>
-                  <label className="block text-sm font-medium text-[var(--color-text-secondary)] mb-1">Support Email</label>
+                  <label className="block text-sm font-medium text-[var(--color-text-secondary)] mb-1.5">Support Email</label>
                   <input
                     type="email"
                     value={settings.supportEmail}
                     onChange={(e) => setSettings({ ...settings, supportEmail: e.target.value })}
-                    className="w-full px-4 py-2.5 rounded-xl border border-[var(--color-border-medium)] bg-[var(--color-background-primary)] text-[var(--color-text-primary)] outline-none transition-all duration-250 focus:border-[var(--color-accent)] focus:shadow-[0_0_0_3px_rgba(232,133,106,0.15)]"
+                    className="w-full px-4 py-2.5 rounded-xl border border-[var(--color-border-light)] hover:border-[var(--color-border-medium)] bg-[var(--color-background-primary)]/40 backdrop-blur-sm text-[var(--color-text-primary)] outline-none transition-all duration-200 focus:border-[var(--color-accent)] focus:hover:border-[var(--color-accent)] focus:shadow-[0_0_0_3px_rgba(232,133,106,0.12)]"
                   />
                 </motion.div>
               </div>
             </div>
 
-            <div className="clay-card bg-[var(--color-background-secondary)] rounded-2xl p-6 border border-[var(--color-border-light)]">
+            <div className="clay-card bg-[var(--color-background-secondary)] rounded-2xl p-6 border border-[var(--color-border-light)] shadow-[var(--shadow-md)] hover:shadow-[var(--shadow-lg)] transition-all duration-300">
               <div className="flex items-center gap-3 mb-6 pb-4 border-b border-[var(--color-border-light)]">
-                <CreditCard className="text-purple-500" size={24} />
-                <h3 className="font-bold text-lg">Billing & Payments</h3>
+                <div className="w-10 h-10 rounded-xl bg-purple-500/10 flex items-center justify-center text-purple-500 dark:text-purple-400">
+                  <CreditCard size={20} />
+                </div>
+                <h3 className="font-bold text-lg text-[var(--color-text-primary)]">Billing & Payments</h3>
               </div>
               <div className="space-y-5">
                 <Toggle
@@ -163,16 +171,16 @@ export default function SettingsPage() {
                   onChange={() => handleToggle("enableStripe")}
                 />
                 <div
-                  className={`transition-all duration-300 ${settings.enableStripe ? "opacity-100" : "opacity-50 pointer-events-none"}`}
+                  className={`transition-all duration-300 ${settings.enableStripe ? "opacity-100" : "opacity-40 pointer-events-none"}`}
                 >
-                  <label className="block text-sm font-medium text-[var(--color-text-secondary)] mb-1">
+                  <label className="block text-sm font-medium text-[var(--color-text-secondary)] mb-1.5">
                     Stripe Secret Key (Test)
                   </label>
                   <div className="relative">
                     <input
                       type={showStripeKey ? "text" : "password"}
                       defaultValue="sk_test_51NxXXXXXXXXXXXXXXXXXXXXXXXX"
-                      className="w-full px-4 py-2.5 rounded-xl border border-[var(--color-border-medium)] bg-[var(--color-background-primary)] text-[var(--color-text-primary)] outline-none transition-all duration-250 focus:border-[var(--color-accent)] focus:shadow-[0_0_0_3px_rgba(232,133,106,0.15)] pr-12"
+                      className="w-full px-4 py-2.5 rounded-xl border border-[var(--color-border-light)] hover:border-[var(--color-border-medium)] bg-[var(--color-background-primary)]/40 backdrop-blur-sm text-[var(--color-text-primary)] outline-none transition-all duration-200 focus:border-[var(--color-accent)] focus:hover:border-[var(--color-accent)] focus:shadow-[0_0_0_3px_rgba(232,133,106,0.12)] pr-12"
                     />
                     <button
                       type="button"

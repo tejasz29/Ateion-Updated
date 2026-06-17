@@ -1,0 +1,55 @@
+import { motion } from "framer-motion";
+import CourseUploadViewYoutube from "../components/CourseUploadView";
+import CourseUploadViewForm from "../components/courses/CourseUploadView";
+
+export default function AdminUploadPage() {
+  return (
+    <motion.div
+      className="pb-20"
+      initial={{ opacity: 0, y: 15 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+    >
+      {/* Hidden Radio Inputs for Tab State */}
+      <input
+        type="radio"
+        id="method-manual"
+        name="upload-method"
+        className="hidden"
+        defaultChecked
+      />
+      <input
+        type="radio"
+        id="method-youtube"
+        name="upload-method"
+        className="hidden"
+      />
+
+      {/* Tab Switcher Bar */}
+      <div className="tab-container flex p-1 bg-[var(--color-background-secondary)] rounded-xl border border-[var(--color-border-light)] w-max mb-8 shadow-sm">
+        <label
+          htmlFor="method-manual"
+          className="manual-label px-5 py-2.5 rounded-lg text-sm font-semibold text-[var(--color-text-secondary)] cursor-pointer select-none transition-all duration-200 hover:text-[var(--color-text-primary)]"
+        >
+          Manual Course Builder
+        </label>
+        <label
+          htmlFor="method-youtube"
+          className="youtube-label px-5 py-2.5 rounded-lg text-sm font-semibold text-[var(--color-text-secondary)] cursor-pointer select-none transition-all duration-200 hover:text-[var(--color-text-primary)]"
+        >
+          YouTube Playlist Importer
+        </label>
+      </div>
+
+      {/* Manual Course Builder Content */}
+      <div className="content-manual hidden">
+        <CourseUploadViewForm onUploadSuccess={() => {}} />
+      </div>
+
+      {/* YouTube Importer Content */}
+      <div className="content-youtube hidden">
+        <CourseUploadViewYoutube onUploadSuccess={() => {}} />
+      </div>
+    </motion.div>
+  );
+}

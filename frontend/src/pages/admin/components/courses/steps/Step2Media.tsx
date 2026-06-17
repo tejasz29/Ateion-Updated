@@ -14,15 +14,15 @@ export default function Step2Media() {
         {mediaItems.map(({ Icon, title, desc }) => (
           <motion.div
             key={title}
-            className="border-2 border-dashed border-[var(--color-border-medium)] rounded-2xl p-6 flex flex-col items-center justify-center text-center cursor-pointer hover:bg-[var(--color-background-tertiary)] hover:border-[var(--color-accent)] transition-all group"
+            className="border-2 border-dashed border-[var(--color-border-light)] rounded-2xl p-6 flex flex-col items-center justify-center text-center cursor-pointer hover:bg-[var(--color-background-tertiary)]/20 hover:border-[var(--color-accent)] transition-all duration-200 group"
             whileHover={{ y: -2 }}
           >
-            <div className="w-12 h-12 rounded-full bg-[var(--color-background-primary)] flex items-center justify-center mb-4 border border-[var(--color-border-light)] group-hover:scale-110 transition-transform">
-              <Icon size={24} className="text-[var(--color-text-secondary)] group-hover:text-[var(--color-accent)]" />
+            <div className="w-12 h-12 rounded-full bg-[var(--color-background-primary)] flex items-center justify-center mb-4 border border-[var(--color-border-light)]/40 group-hover:scale-110 transition-transform">
+              <Icon size={24} className="text-[var(--color-text-secondary)] group-hover:text-[var(--color-accent)] transition-colors duration-200" />
             </div>
-            <h4 className="font-semibold text-base mb-1">{title}</h4>
-            <p className="text-xs text-[var(--color-text-tertiary)] mb-4 whitespace-pre-line">{desc}</p>
-            <button className="px-4 py-2 bg-[var(--color-background-primary)] border border-[var(--color-border-medium)] rounded-full text-xs font-semibold group-hover:border-[var(--color-accent)] transition-colors cursor-pointer">
+            <h4 className="font-semibold text-base mb-1 text-[var(--color-text-primary)]">{title}</h4>
+            <p className="text-xs text-[var(--color-text-tertiary)] mb-4 whitespace-pre-line leading-relaxed">{desc}</p>
+            <button className="px-4 py-2 bg-[var(--color-background-secondary)] border border-[var(--color-border-light)] text-[var(--color-text-secondary)] rounded-full text-xs font-semibold hover:bg-[var(--color-background-tertiary)]/40 hover:text-[var(--color-text-primary)] transition-all cursor-pointer group-hover:border-[var(--color-accent)]/50 group-hover:text-[var(--color-accent)]">
               Browse Files
             </button>
           </motion.div>

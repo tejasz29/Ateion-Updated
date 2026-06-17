@@ -42,7 +42,7 @@ export default function Step1BasicInfo({
         <label className="block text-sm font-semibold mb-2">Course Title</label>
         <input
           type="text"
-          className="w-full p-3 rounded-xl bg-[var(--color-background-primary)] border border-[var(--color-border-medium)] text-[var(--color-text-primary)] outline-none transition-all duration-250 focus:border-[var(--color-accent)] focus:shadow-[0_0_0_3px_rgba(232,133,106,0.15)]"
+          className="w-full p-3 rounded-xl bg-[var(--color-background-primary)] border border-[var(--color-border-light)] hover:border-[var(--color-border-medium)] text-[var(--color-text-primary)] outline-none transition-all duration-200 focus:border-[var(--color-accent)] focus:hover:border-[var(--color-accent)] focus:shadow-[0_0_0_3px_rgba(232,133,106,0.12)]"
           placeholder="e.g. Advanced System Design"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
@@ -52,7 +52,7 @@ export default function Step1BasicInfo({
       <div>
         <label className="block text-sm font-semibold mb-2">Subtitle / Short Description</label>
         <textarea
-          className="w-full p-3 rounded-xl bg-[var(--color-background-primary)] border border-[var(--color-border-medium)] text-[var(--color-text-primary)] outline-none transition-all duration-250 focus:border-[var(--color-accent)] focus:shadow-[0_0_0_3px_rgba(232,133,106,0.15)] min-h-[100px]"
+          className="w-full p-3 rounded-xl bg-[var(--color-background-primary)] border border-[var(--color-border-light)] hover:border-[var(--color-border-medium)] text-[var(--color-text-primary)] outline-none transition-all duration-200 focus:border-[var(--color-accent)] focus:hover:border-[var(--color-accent)] focus:shadow-[0_0_0_3px_rgba(232,133,106,0.12)] min-h-[100px]"
           placeholder="A brief overview of what students will learn..."
           value={subtitle}
           onChange={(e) => setSubtitle(e.target.value)}
@@ -81,7 +81,7 @@ export default function Step1BasicInfo({
           ) : (
             <div className="flex items-center gap-2">
               <select
-                className="flex-1 p-3 rounded-xl bg-[var(--color-background-primary)] border border-[var(--color-border-medium)] text-[var(--color-text-primary)] outline-none transition-all duration-250 focus:border-[var(--color-accent)] focus:shadow-[0_0_0_3px_rgba(232,133,106,0.15)] cursor-pointer"
+                className="flex-1 p-3 rounded-xl bg-[var(--color-background-primary)] border border-[var(--color-border-light)] hover:border-[var(--color-border-medium)] text-[var(--color-text-primary)] outline-none transition-all duration-200 focus:border-[var(--color-accent)] focus:hover:border-[var(--color-accent)] focus:shadow-[0_0_0_3px_rgba(232,133,106,0.12)] cursor-pointer"
                 value={selectedCategory}
                 onChange={(e) => setSelectedCategory(e.target.value)}
               >
@@ -89,20 +89,20 @@ export default function Step1BasicInfo({
                   <option key={cat.id} value={cat.id}>{cat.name}</option>
                 ))}
               </select>
-              <button onClick={() => { setCategoryInputValue(categories.find(c => c.id === selectedCategory)?.name || ""); setIsAddingCategory(false); setIsEditingCategory(true); }} className="p-3 bg-[var(--color-background-tertiary)] text-[var(--color-text-secondary)] rounded-xl border border-[var(--color-border-medium)] hover:text-blue-500 transition-colors cursor-pointer" title="Edit Category">
+              <button onClick={() => { setCategoryInputValue(categories.find(c => c.id === selectedCategory)?.name || ""); setIsAddingCategory(false); setIsEditingCategory(true); }} className="p-3 bg-[var(--color-background-secondary)] text-[var(--color-text-secondary)] rounded-xl border border-[var(--color-border-light)] hover:bg-[var(--color-background-tertiary)]/30 hover:text-blue-600 dark:hover:text-blue-400 transition-colors cursor-pointer" title="Edit Category">
                 <Edit2 size={18} />
               </button>
-              <button onClick={() => { setCategoryInputValue(""); setIsEditingCategory(false); setIsAddingCategory(true); }} className="p-3 bg-[var(--color-background-tertiary)] text-[var(--color-text-secondary)] rounded-xl border border-[var(--color-border-medium)] hover:text-emerald-500 transition-colors cursor-pointer" title="Add New Category">
+              <button onClick={() => { setCategoryInputValue(""); setIsEditingCategory(false); setIsAddingCategory(true); }} className="p-3 bg-[var(--color-background-secondary)] text-[var(--color-text-secondary)] rounded-xl border border-[var(--color-border-light)] hover:bg-[var(--color-background-tertiary)]/30 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors cursor-pointer" title="Add New Category">
                 <Plus size={18} />
               </button>
             </div>
           )}
         </div>
         <div>
-          <label className="block text-sm font-semibold mb-2">Price (USD)</label>
+          <label className="block text-sm font-semibold mb-2">Price (INR)</label>
           <input
             type="number"
-            className="w-full p-3 rounded-xl bg-[var(--color-background-primary)] border border-[var(--color-border-medium)] text-[var(--color-text-primary)] outline-none transition-all duration-250 focus:border-[var(--color-accent)] focus:shadow-[0_0_0_3px_rgba(232,133,106,0.15)]"
+            className="w-full p-3 rounded-xl bg-[var(--color-background-primary)] border border-[var(--color-border-light)] hover:border-[var(--color-border-medium)] text-[var(--color-text-primary)] outline-none transition-all duration-200 focus:border-[var(--color-accent)] focus:hover:border-[var(--color-accent)] focus:shadow-[0_0_0_3px_rgba(232,133,106,0.12)]"
             placeholder="0 for free"
             value={price}
             onChange={(e) => setPrice(e.target.value)}

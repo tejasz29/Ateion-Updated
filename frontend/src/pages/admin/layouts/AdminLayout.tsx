@@ -6,14 +6,15 @@ import AdminSidebar from "./AdminSidebar";
 import AdminHeader from "./AdminHeader";
 import CommandPalette from "../components/CommandPalette";
 import ToastContainer from "../components/ui/Toast";
+import "../styles/adminstyle.css";
 
 const ADMIN_THEME_KEY = "ateion-admin-theme";
 const MAIN_THEME_KEY = "ateion-theme";
 
 const pageVariants = {
-  initial: { opacity: 0, y: 12 },
-  animate: { opacity: 1, y: 0, transition: { duration: 0.25, ease: "easeOut" } },
-  exit: { opacity: 0, y: -8, transition: { duration: 0.15, ease: "easeIn" } },
+  initial: { opacity: 0, y: 12, scale: 0.99 },
+  animate: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] } },
+  exit: { opacity: 0, y: -8, scale: 0.99, transition: { duration: 0.18, ease: "easeIn" } },
 };
 
 export default function AdminLayout() {
@@ -68,7 +69,10 @@ export default function AdminLayout() {
   }
 
   return (
-    <div className="min-h-screen bg-[var(--color-background-primary)] text-[var(--color-text-primary)] flex">
+    <div 
+      className="min-h-screen bg-[var(--color-background-primary)] text-[var(--color-text-primary)] flex"
+      style={{ fontFamily: "var(--font-body)" }}
+    >
       <AdminSidebar />
       <main className="flex-1 flex flex-col min-h-screen overflow-x-hidden">
         <AdminHeader />

@@ -88,8 +88,8 @@ export default function Step3Curriculum({ modules, setModules }: Step3Props) {
         </Reorder.Group>
       ) : (
         <div className="flex flex-col items-center justify-center py-16 text-center">
-          <div className="w-16 h-16 rounded-2xl bg-[var(--color-background-tertiary)] flex items-center justify-center mb-4 border border-[var(--color-border-light)]">
-            <BookOpen size={28} className="text-[var(--color-text-tertiary)]" />
+          <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[var(--color-accent)]/20 to-[var(--color-accent)]/5 flex items-center justify-center mb-4 border border-[var(--color-accent)]/20 text-[var(--color-accent)]">
+            <BookOpen size={28} className="opacity-90" />
           </div>
           <p className="text-lg font-semibold text-[var(--color-text-primary)] mb-1">No modules yet</p>
           <p className="text-sm text-[var(--color-text-tertiary)] mb-6">Start building your course by adding a module.</p>
@@ -143,7 +143,7 @@ function ModuleItem({
     <Reorder.Item
       value={mod}
       id={mod.id}
-      className="rounded-2xl bg-[var(--color-background-primary)] border border-[var(--color-border-medium)] overflow-hidden"
+      className="rounded-2xl bg-[var(--color-background-primary)] border border-[var(--color-border-light)] overflow-hidden shadow-sm"
     >
       <div className="flex items-center justify-between px-6 py-4 bg-[var(--color-background-secondary)] border-b border-[var(--color-border-light)]">
         <div className="flex items-center gap-3 flex-1">
@@ -166,7 +166,7 @@ function ModuleItem({
         </div>
         <motion.button
           onClick={() => onRemove(mod.id)}
-          className="text-red-400 hover:text-red-500 p-2 hover:bg-red-500/10 rounded-lg transition-colors cursor-pointer"
+          className="text-red-500 hover:text-red-600 dark:text-red-400 dark:hover:text-red-300 p-2 hover:bg-red-500/10 rounded-lg transition-colors cursor-pointer"
           title="Delete Module"
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
@@ -198,13 +198,13 @@ function ModuleItem({
                 <input
                   type="text"
                   placeholder="Lesson Name"
-                  className="flex-1 bg-transparent border border-[var(--color-border-light)] rounded-lg px-3 py-2 text-sm outline-none transition-all duration-250 focus:border-[var(--color-accent)] focus:shadow-[0_0_0_2px_rgba(232,133,106,0.1)]"
+                  className="flex-1 bg-[var(--color-background-secondary)]/40 border border-[var(--color-border-light)] hover:border-[var(--color-border-medium)] rounded-lg px-3 py-2 text-sm outline-none transition-all duration-200 focus:border-[var(--color-accent)] focus:hover:border-[var(--color-accent)] focus:shadow-[0_0_0_2px_rgba(232,133,106,0.1)] text-[var(--color-text-primary)] placeholder-[var(--color-text-tertiary)]/60"
                   value={lesson}
                   onChange={(e) => onLessonChange(mod.id, lIndex, e.target.value)}
                 />
                 <button
                   onClick={() => onRemoveLesson(mod.id, lIndex)}
-                  className="opacity-0 group-hover:opacity-100 p-1 rounded-lg text-red-400 hover:text-red-500 hover:bg-red-500/10 transition-all cursor-pointer"
+                  className="opacity-0 group-hover:opacity-100 p-1 rounded-lg text-red-500 hover:text-red-600 dark:text-red-400 dark:hover:text-red-300 hover:bg-red-500/10 transition-all cursor-pointer"
                   title="Remove Lesson"
                 >
                   <Trash2 size={12} />

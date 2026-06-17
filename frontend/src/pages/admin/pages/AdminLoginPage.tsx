@@ -33,14 +33,16 @@ export default function AdminLoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 relative overflow-hidden animated-gradient bg-[var(--color-background-primary)]">
+    <div 
+      className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 relative overflow-hidden animated-gradient bg-[var(--color-background-primary)]"
+      style={{ fontFamily: "var(--font-body)" }}
+    >
       <motion.button
         type="button"
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
         onClick={toggleTheme}
-        className="absolute top-6 right-6 z-20 flex h-10 w-10 items-center justify-center rounded-full bg-[var(--color-background-secondary)] border border-[var(--color-border-medium)] text-[var(--color-text-primary)] cursor-pointer"
-        style={{ backdropFilter: "blur(12px)" }}
+        className="absolute top-6 right-6 z-20 flex h-10 w-10 items-center justify-center rounded-full bg-[var(--color-background-secondary)]/80 backdrop-blur-md border border-[var(--color-border-medium)] text-[var(--color-text-primary)] cursor-pointer hover:border-[var(--color-accent)]/40 transition-colors"
         aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
         title={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
       >
@@ -76,17 +78,22 @@ export default function AdminLoginPage() {
         style={{ background: "var(--color-background-tertiary)", opacity: 0.2, filter: "blur(120px)" }}
       />
 
-      <div className="admin-glass-card w-full max-w-md md:max-w-lg z-10 relative">
-        <div className="flex justify-center mb-4">
-          <div className="admin-glass-icon p-4 rounded-full">
-            <ShieldCheck size={42} className="text-[var(--color-text-primary)]" />
+      <motion.div 
+        className="admin-glass-card w-full max-w-md md:max-w-lg z-10 relative !p-8 sm:!p-10"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+      >
+        <div className="flex justify-center mb-5">
+          <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[var(--color-accent)]/20 to-[var(--color-accent)]/5 flex items-center justify-center border border-[var(--color-accent)]/20">
+            <ShieldCheck size={32} className="text-[var(--color-accent)]" />
           </div>
         </div>
 
-        <h1 className="text-center text-3xl sm:text-4xl font-bold text-[var(--color-text-primary)] mb-1">
+        <h1 className="text-center text-3xl sm:text-4xl font-bold font-['OV_Soge'] text-[var(--color-text-primary)] mb-1 tracking-tight">
           Ateion
         </h1>
-        <p className="text-center text-[var(--color-text-secondary)] mt-0 mb-8 text-sm">
+        <p className="text-center text-[var(--color-text-secondary)] mt-1 mb-8 text-sm font-medium">
           Master Admin Portal
         </p>
 
@@ -98,7 +105,7 @@ export default function AdminLoginPage() {
             <input
               type="email"
               placeholder="admin@ateion.com"
-              className="w-full px-4 py-3 rounded-xl outline-none transition-all text-[var(--color-text-primary)] placeholder-[var(--color-text-muted)] focus:border-[var(--color-primary)] focus:ring-1 focus:ring-[var(--color-primary)] admin-input"
+              className="w-full px-4 py-3 rounded-xl outline-none transition-all duration-200 text-[var(--color-text-primary)] placeholder-[var(--color-text-tertiary)]/60 bg-[var(--color-background-primary)]/40 border border-[var(--color-border-light)] hover:border-[var(--color-border-medium)] focus:border-[var(--color-accent)] focus:hover:border-[var(--color-accent)] focus:shadow-[0_0_0_3px_rgba(232,133,106,0.12)] backdrop-blur-sm"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
@@ -113,7 +120,7 @@ export default function AdminLoginPage() {
             <input
               type="password"
               placeholder="••••••••"
-              className="w-full px-4 py-3 rounded-xl outline-none transition-all text-[var(--color-text-primary)] placeholder-[var(--color-text-muted)] focus:border-[var(--color-primary)] focus:ring-1 focus:ring-[var(--color-primary)] admin-input"
+              className="w-full px-4 py-3 rounded-xl outline-none transition-all duration-200 text-[var(--color-text-primary)] placeholder-[var(--color-text-tertiary)]/60 bg-[var(--color-background-primary)]/40 border border-[var(--color-border-light)] hover:border-[var(--color-border-medium)] focus:border-[var(--color-accent)] focus:hover:border-[var(--color-accent)] focus:shadow-[0_0_0_3px_rgba(232,133,106,0.12)] backdrop-blur-sm"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
@@ -133,7 +140,7 @@ export default function AdminLoginPage() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-3 rounded-xl text-[var(--color-text-inverse)] font-semibold transition-all duration-300 hover:scale-[1.02] admin-btn flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed cursor-pointer"
+            className="w-full py-3 rounded-xl bg-[var(--color-accent)] text-white font-semibold transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer shadow-[var(--shadow-accent)] hover:shadow-[var(--shadow-accent-hover)]"
           >
             {loading && <Loader2 size={18} className="animate-spin" />}
             {loading ? "Signing in..." : "Login"}
@@ -143,7 +150,7 @@ export default function AdminLoginPage() {
         <p className="mt-6 text-center text-xs text-[var(--color-text-muted)]">
           Authorized Personnel Only
         </p>
-      </div>
+      </motion.div>
     </div>
   );
 }

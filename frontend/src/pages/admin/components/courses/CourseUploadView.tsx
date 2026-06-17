@@ -91,19 +91,19 @@ export default function CourseUploadView({
         <motion.div
           initial={{ scaleX: 0 }}
           animate={{ scaleX: 1 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-          className="w-12 h-[3px] rounded-full bg-[var(--color-accent)] mb-4"
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          className="w-16 h-[2px] rounded-full bg-[var(--color-accent)] mb-4"
           style={{ transformOrigin: "left" }}
         />
-        <div className="flex justify-between items-end">
+        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-end gap-4">
           <div>
-            <h2 className="text-3xl font-bold font-['OV_Soge'] mb-2">Create New Course</h2>
-            <p className="text-[var(--color-text-secondary)]">Fill in the details to publish a new course to the ecosystem.</p>
+            <h2 className="text-3xl font-bold font-['OV_Soge'] mb-2 tracking-tight text-[var(--color-text-primary)]">Create New Course</h2>
+            <p className="text-sm text-[var(--color-text-secondary)]">Fill in the details to publish a new course to the ecosystem.</p>
           </div>
           <div className="flex gap-3">
             <motion.button
               onClick={handleSaveDraft}
-              className="px-5 py-2.5 rounded-xl border border-[var(--color-border-medium)] text-[var(--color-text-primary)] bg-[var(--color-background-tertiary)] font-medium flex items-center gap-2 hover:bg-[var(--color-background-primary)] transition-all duration-200 cursor-pointer"
+              className="px-5 py-2.5 rounded-xl border border-[var(--color-border-light)] text-[var(--color-text-secondary)] bg-[var(--color-background-secondary)] font-medium flex items-center gap-2 hover:bg-[var(--color-background-tertiary)]/30 hover:text-[var(--color-text-primary)] transition-all duration-200 cursor-pointer"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
@@ -132,7 +132,7 @@ export default function CourseUploadView({
                   (s.num === 1 && hasTitle) ||
                   (s.num === 3 && hasModules)
                     ? "bg-[var(--color-accent)] text-white"
-                    : "bg-[var(--color-background-tertiary)] text-[var(--color-text-tertiary)]"
+                    : "bg-[var(--color-background-tertiary)]/50 text-[var(--color-text-tertiary)]"
                 }`}
               >
                 {s.num === 1 && hasTitle || s.num === 3 && hasModules ? (
@@ -154,7 +154,7 @@ export default function CourseUploadView({
 
       <motion.div className="clay-card bg-[var(--color-background-secondary)] rounded-2xl border border-[var(--color-border-light)] mb-8 overflow-hidden" variants={itemVariants}>
         <div className="flex items-center gap-3 px-8 pt-6 pb-4 border-b border-[var(--color-border-light)]">
-          <div className="w-8 h-8 rounded-lg bg-[var(--color-accent)] text-white flex items-center justify-center text-sm font-bold">1</div>
+          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[var(--color-accent)] to-[var(--color-accent)]/80 text-white flex items-center justify-center text-sm font-bold shadow-sm">1</div>
           <h3 className="text-xl font-bold">Basic Information</h3>
         </div>
         <Step1BasicInfo
@@ -168,7 +168,7 @@ export default function CourseUploadView({
 
       <motion.div className="clay-card bg-[var(--color-background-secondary)] rounded-2xl border border-[var(--color-border-light)] mb-8 overflow-hidden" variants={itemVariants}>
         <div className="flex items-center gap-3 px-8 pt-6 pb-4 border-b border-[var(--color-border-light)]">
-          <div className="w-8 h-8 rounded-lg bg-[var(--color-accent)] text-white flex items-center justify-center text-sm font-bold">2</div>
+          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[var(--color-accent)] to-[var(--color-accent)]/80 text-white flex items-center justify-center text-sm font-bold shadow-sm">2</div>
           <h3 className="text-xl font-bold">Course Media</h3>
         </div>
         <Step2Media />
@@ -177,7 +177,7 @@ export default function CourseUploadView({
       <motion.div className="clay-card bg-[var(--color-background-secondary)] rounded-2xl border border-[var(--color-border-light)] overflow-hidden" variants={itemVariants}>
         <div className="flex items-center justify-between px-8 pt-6 pb-4 border-b border-[var(--color-border-light)]">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-lg bg-[var(--color-accent)] text-white flex items-center justify-center text-sm font-bold">3</div>
+            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[var(--color-accent)] to-[var(--color-accent)]/80 text-white flex items-center justify-center text-sm font-bold shadow-sm">3</div>
             <h3 className="text-xl font-bold">Curriculum Builder</h3>
           </div>
         </div>
