@@ -57,16 +57,6 @@ export const navigationSections: NavSection[] = [
       { title: "Notes", icon: FileText, path: "/playground/notes" },
     ],
   },
-  {
-    title: "Age Groups",
-    icon: Milestone,
-    items: [
-      { title: "Sproutlings (5-7 age)", icon: Sprout, path: "/playground/sproutlings" },
-      { title: "Saplings (7-14 age)", icon: Sprout, path: "/playground/saplings" },
-      { title: "Pathfinders (14-18 age)", icon: Compass, path: "/playground/pathfinders" },
-      { title: "Dreamers (18+ age)", icon: Sparkles, path: "/playground/dreamers" },
-    ],
-  },
 ];
 
 const pathToTitle: Record<string, string> = {};
